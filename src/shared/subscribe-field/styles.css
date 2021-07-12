@@ -1,0 +1,97 @@
+.subscribe-field {
+  --subscribe-field-border-aplha: .25;
+  --subscribe-field-placeholder-aplha: .25;
+  --subscribe-field-background-color: white;
+
+  position: relative;
+  display: grid;
+  row-gap: 5px;
+
+  &:hover {
+    --subscribe-field-border-aplha: .5;
+  }
+}
+
+.subscribe-field_invalid {
+  --subscribe-field-background-color: rgba(var(--invalid-rgb), .1);
+}
+
+/* label */
+
+.subscribe-field__label {
+  font: 12px/15px var(--font-bold);
+  text-transform: uppercase;
+  color: var(--dark-color);
+}
+
+/* input-wrap */
+
+.subscribe-field__input-wrap {
+  display: flex;
+}
+
+/* input */
+
+.subscribe-field__input {
+  flex: 1;
+  height: 44px;
+  padding: 0 44px 0 15px;
+  font: 14px/18px var(--font-regular);
+  color: rgba(var(--dark-rgb), .75);
+  border: 1px solid rgba(var(--dark-rgb), var(--subscribe-field-border-aplha));
+  border-radius: 4px;
+  background-color: var(--subscribe-field-background-color);
+  transition: border-color .1s ease-in-out, background-color .1s ease-in-out;
+
+  &:focus, &:hover {
+    --subscribe-field-placeholder-aplha: .75;
+    --subscribe-field-border-aplha: .5;
+  }
+
+  &:focus {
+    outline: var(--outline);
+    outline-offset: 2px;
+  }
+
+  &::placeholder {
+    color: rgba(var(--dark-rgb), var(--subscribe-field-placeholder-aplha));
+    transition: color .1s ease-in-out;
+  }
+}
+
+/* submit btn */
+
+.subscribe-field__submit-btn {
+  position: absolute;
+  right: 6px;
+  align-self: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: opacity .1s ease-in-out;
+
+  &:focus-visible {
+    --subscribe-field-border-aplha: .5;
+
+    opacity: .6;
+    outline: var(--outline);
+    outline-offset: 2px;
+  }
+
+  &:hover {
+    opacity: .6;
+  }
+
+  &:disabled, &:active {
+    opacity: .38;
+  }
+}
+
+/* submit btn label */
+
+.subscribe-field__submit-btn-label {
+  @apply --visually-hidden;
+}

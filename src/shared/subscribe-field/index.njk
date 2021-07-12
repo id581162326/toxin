@@ -1,0 +1,21 @@
+{% from 'shared/icons/index.njk' import arrow_forward %}
+
+{% macro subscribe_field(label) %}
+  <div class="subscribe-field js-subscribe-field" role="form">
+    {% if label %}<label class="subscribe-field__label" for="id-subscribe-field-input">{{ label }}</label>{% endif %}
+
+    <div class="subscribe-field__input-wrap">
+      <input
+        id="id-subscribe-field-input"
+        class="subscribe-field__input js-subscribe-field__input"
+        name="subscribe-email"
+        type="email"
+        placeholder="Email"
+      >
+      <button class="subscribe-field__submit-btn js-subscribe-field__submit-btn" type="submit">
+        <span class="subscribe-field__submit-btn-label">Отправить</span>
+        {{ arrow_forward(gradient=true, width=18, height=18) }}
+      </button>
+    </div>
+  </div>
+{% endmacro %}

@@ -1,0 +1,104 @@
+{% from 'shared/counter/index.njk' import counter %}
+{% from 'shared/button/index.njk' import button %}
+{% from 'shared/icons/index.njk' import arrow_expand %}
+
+{% macro counters_dropdown(placeholder=' ', autoapply, disabled, label, expanded, counters=[]) %}
+  <div class="counters-dropdown js-counters-dropdown {% if expanded %}counters-dropdown_expanded{% endif %}">
+    <label class="counters-dropdown__field">
+      {% if label %}<span class="counters-dropdown__label">{{ label }}</span>{% endif %}
+
+      <span class="counters-dropdown__input-wrap">
+        <input
+          class="counters-dropdown__input js-counters-dropdown__input"
+          type="button"
+          value="{{ placeholder }}"
+          data-placeholder="{{ placeholder }}"
+          {% if disabled %}disabled{% endif %}
+        >
+       {{ arrow_expand(class='counters-dropdown__icon', width=12, height=8) }}
+      </span>
+    </label>
+
+    <div class="counters-dropdown__list-viewport">
+      <div class="counters-dropdown__list-wrap">
+        <ul class="counters-dropdown__list">
+          {% for item in counters %}
+            <li
+              class="counters-dropdown__item js-counters-dropdown__item"
+              data-name="{{ item.name }}"
+              data-plurals="{{ item.plurals | jsonStringify }}"
+              data-value="{{ item.value }}"
+              data-min="{{ item.min }}"
+            >
+              {{ counter(name=item.name, label=item.label, value=item.value, min=item.min, max=item.max) }}
+            </li>
+          {% endfor %}
+        </ul>
+
+        {% if not autoapply %}
+          <div class="counters-dropdown__controls">
+            <div class="counters-dropdown__control-btn js-counters-dropdown__clear-btn">
+              {{ button(label='Очистить', appearance='link') }}
+            </div>
+
+            <div class="counters-dropdown__control-btn js-counters-dropdown__apply-btn">
+              {{ button(label='Применить', appearance='link') }}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro appartment_dropdown(label, disabled, expanded, values={bedrooms: 1, beds: 0, bathrooms: 0}) %}
+  {{ counters_dropdown(autoapply=true, label=label, disabled=disabled, expanded=expanded, counters=[
+    {
+      name: 'bedrooms',
+      label: 'Спальни',
+      value: values.bedrooms,
+      min: 1,
+      plurals: {one: 'Спальня', few: 'Спалени', many: 'Спален'}
+    },
+    {
+      name: 'beds',
+      label: 'Кровати',
+      min: 0,
+      value: values.beds,
+      plurals: {one: 'Кровать', few: 'Кровати', many: 'Кроватей'}
+    },
+    {
+      name: 'bathrooms',
+      label: 'Ванные комнаты',
+      min: 0,
+      value: values.bathrooms,
+      plurals: {one: 'Ванная комната', few: 'Ванных комнаты', many: 'Ванных комнат'}
+    }
+  ]) }}
+{% endmacro %}
+
+{% macro guests_dropdown(label, disabled, expanded, values={adults: 0, childrens: 0, babies: 0}) %}
+  {{ counters_dropdown(placeholder='Сколько гостей', label=label, expanded=expanded, disabled=disabled, counters=[
+    {
+      name: 'adults',
+      label: 'Взрослые',
+      min: 0,
+      value: values.adults,
+      plurals: {one: 'Гость', few: 'Гостя', many: 'Гостей'}
+    },
+    {
+      name: 'childrens',
+      label: 'Дети',
+      min: 0,
+      value: values.childrens,
+      plurals: {one: 'Гость', few: 'Гостя', many: 'Гостей'}
+    },
+    {
+      name: 'babies',
+      label: 'Младенцы',
+      min: 0,
+      value: values.babies,
+      plurals: {one: 'Младенец', few: 'Младенца', many: 'Mладенцев'}
+    }
+  ]) }}
+{% endmacro %}

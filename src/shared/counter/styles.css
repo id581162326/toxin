@@ -1,0 +1,63 @@
+.counter {
+  display: grid;
+  grid-template-columns: 1fr repeat(3, max-content);
+  align-items: center;
+}
+
+.counter__label {
+  font: 12px/15px var(--font-bold);
+  text-transform: uppercase;
+  color: var(--dark-color);
+}
+
+.counter__control-btn {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  font: 18px/22px var(--font-regular);
+  color: rgba(var(--dark-rgb), .5);
+  border: 1px solid rgba(var(--dark-rgb), .25);
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  transition: opacity .1s ease-in-out;
+
+  &:hover {
+    opacity: .6;
+  }
+
+  &:active, &:disabled {
+    opacity: .38;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.counter__input {
+  width: 32px;
+  height: 100%;
+  padding: 0;
+  font: 12px/18px var(--font-bold);
+  text-align: center;
+  color: var(--dark-color);
+  border: none;
+  -moz-appearance: textfield;
+
+  &:focus {
+    outline: var(--outline);
+    outline-offset: 2px;
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+  }
+
+  &::selection {
+    background-color: rgba(var(--dark-rgb), .1);
+  }
+}

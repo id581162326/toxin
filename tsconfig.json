@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ES5",
+    "allowJs": false,
+    "checkJs": false,
+    "strict": true,
+    "alwaysStrict": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    "declaration": false,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./src",
+    "paths": {
+      "*": ["*"],
+      "globals/*": ["globals/*"],
+      "shared/*": ["shared/*"],
+      "components/*": ["components/*"]
+    }
+  },
+  "include": ["src/**/*", "@types/*"],
+  "exclude": ["node_modules"]
+}

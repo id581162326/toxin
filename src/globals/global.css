@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --dark-rgb: 31, 32, 65;
+  --primary-rgb: 188, 156, 255;
+  --secondary-rgb: 111, 207, 151;
+  --invalid-rgb: 	159, 57, 56;
+
+  --dark-color: rgb(var(--dark-rgb));
+  --primary-color: rgb(var(--primary-rgb));
+  --secondary-color: rgb(var(--secondary-rgb));
+  --invalid-color: rgb(var(--invalid-rgb));
+
+  --primary-gradient: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
+  --secondary-gradient: linear-gradient(180deg, #6FCF97 0%, #66D2EA 100%);
+
+  --outline: 1px dotted rgba(var(--dark-rgb), .4);
+
+  --font-regular: "montserrat-regular", sans-serif;
+  --font-bold: "montserrat-bold", sans-serif;
+}

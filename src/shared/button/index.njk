@@ -1,0 +1,6 @@
+{% macro button(type='button', label, appearance, disabled) %}
+  <button class="button js-button button_appearance_{{ appearance }}" type="{{ type }}">
+    {% if appearance !== 'link' %}<span class="button__overlay"></span>{% endif %}
+    <span class="button__label js-button__label">{{ label }}</span>
+  </button>
+{% endmacro %}

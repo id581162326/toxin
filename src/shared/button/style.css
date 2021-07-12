@@ -1,0 +1,72 @@
+.button {
+  --button-overlay-background-color: transparent;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 19px 0 21px;
+  border: none;
+  border-radius: 22px;
+  background: var(--primary-gradient);
+  cursor: pointer;
+  transition: opacity .1s ease-in-out;
+
+  &:focus-visible {
+    outline: var(--outline);
+    outline-offset: 2px;
+  }
+
+  &:hover, &:focus-visible {
+    opacity: .75;
+  }
+
+  &:active, &:disabled {
+    opacity: .5;
+  }
+}
+
+.button_appearance_primary {
+  --button-text-color: white;
+}
+
+.button_appearance_secondary {
+  --button-text-color: var(--primary-color);
+  --button-overlay-background-color: white;
+}
+
+.button_appearance_link {
+  --button-text-color: var(--primary-color);
+
+  height: auto;
+  padding: 0;
+  background: none;
+
+  &:hover, &:focus-visible, &:active, &:disabled {
+    --button-text-color: var(--dark-color);
+  }
+}
+
+/* overlay  */
+
+.button__overlay {
+  position: absolute;
+  z-index: 0;
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+  left: 2px;
+  border-radius: 22px;
+  background-color: var(--button-overlay-background-color);
+}
+
+/* label */
+
+.button__label {
+  position: relative;
+  z-index: 0;
+  font: 12px/15px var(--font-bold);
+  text-transform: uppercase;
+  color: var(--button-text-color);
+  transition: color .1s ease-in-out;
+}

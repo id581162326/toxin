@@ -1,7 +1,8 @@
-import Namespace from './namespace';
 import {pipe} from 'fp-ts/function';
 import * as H from 'globals/helpers';
 import * as O from 'fp-ts/Option';
+
+import Namespace from './namespace';
 
 class LikeButton {
   constructor(private readonly container: HTMLElement, private readonly props: Namespace.Props) {

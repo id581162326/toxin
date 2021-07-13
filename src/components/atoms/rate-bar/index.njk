@@ -1,0 +1,42 @@
+{% from 'assets/icons/index.njk' import star_filled, star_shaped %}
+
+{% macro rate_bar(rate=1, disabled) %}
+  {% set stars = [
+    { value: 1, active: rate===1, label: 'Одна звезда' },
+    { value: 2, active: rate===2, label: 'Две звезды' },
+    { value: 3, active: rate===3, label: 'Три звезды' },
+    { value: 4, active: rate===4, label: 'Четыре звезды' },
+    { value: 5, active: rate===5, label: 'Пять звёзд' }
+  ] %}
+
+  {% set name = 'radio' | uniqid %}
+  {% set inputInputId = 'rate-bar__input' | uniqid %}
+
+  <span
+    class="rate-bar"
+    aria-label=""
+    {% if disabled!==true %}role="radiogroup"{% endif %}
+  >
+    {% if disabled %}<span class="rate-bar__title">Рейтинг: {{ stars[rate - 1].label }} из пяти</span>{% endif %}
+    {% for item in stars %}
+      <input
+        class="rate-bar__input js-rate-bar__input"
+        type="radio"
+        id="{{ inputInputId }}-{{ item.value }}"
+        name="{{ name }}"
+        value="{{ item.value }}"
+        {% if rate===item.value %}checked{% endif %}
+        {% if disabled %}disabled{% endif %}
+        {% if disabled %}aria-hidden="true"{% endif %}
+      >
+      <label
+        class="rate-bar__mark" for="{{ inputInputId }}-{{ item.value }}"
+        {% if disabled %}aria-hidden="true"{% endif %}
+      >
+        <span class="rate-bar__label">{{ item.label }}</span>
+        {{ star_filled(class='rate-bar__icon-filled', width=20, height=18, gradient=true) }}
+        {{ star_shaped(class='rate-bar__icon-shaped', width=20, height=18, gradient=true) }}
+      </label>
+    {% endfor %}
+  </span>
+{% endmacro %}

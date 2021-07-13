@@ -1,0 +1,69 @@
+.rate-bar {
+  display: flex;
+  width: max-content;
+}
+
+.rate-bar__title, .rate-bar__label {
+  @apply --visually-hidden;
+}
+
+.rate-bar__input {
+  @apply --visually-hidden;
+
+  &:focus-visible + * {
+    @apply --outline;
+  }
+
+  &:not(:disabled):hover ~ * {
+    --rate-bar-icon-filled-opacity: 0;
+    --rate-bar-icon-shaped-opacity: 1;
+  }
+
+  &:not(:disabled):hover + * {
+    --rate-bar-icon-filled-opacity: 1;
+    --rate-bar-icon-shaped-opacity: 0;
+  }
+
+  &:disabled + * {
+    cursor: auto;
+  }
+}
+
+.rate-bar:not(:hover) .rate-bar__input {
+  &:checked ~ * {
+    --rate-bar-icon-filled-opacity: 0;
+    --rate-bar-icon-shaped-opacity: 1;
+  }
+
+  &:checked + * {
+    --rate-bar-icon-filled-opacity: 1;
+    --rate-bar-icon-shaped-opacity: 0;
+  }
+}
+
+.rate-bar__mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.rate-bar__icon-filled {
+  position: absolute;
+  opacity: var(--rate-bar-icon-filled-opacity, 1);
+}
+
+.loaded .rate-bar__icon-filled {
+  transition: opacity .1s ease-in-out;
+}
+
+.rate-bar__icon-shaped {
+  position: absolute;
+  opacity: var(--rate-bar-icon-shaped-opacity, 0);
+}
+
+.loaded .rate-bar__icon-shaped {
+  transition: opacity .1s ease-in-out;
+}

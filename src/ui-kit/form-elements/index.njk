@@ -9,6 +9,7 @@
 {% from "atoms/checkbox/index.njk" import checkbox %}
 {% from "atoms/radio-group/index.njk" import radio_group %}
 {% from "atoms/like-button/index.njk" import like_button %}
+{% from "atoms/rate-bar/index.njk" import rate_bar %}
 {% from "molecules/counters-dropdown/index.njk" import appartment_dropdown, guests_dropdown %}
 
 {% block content %}
@@ -107,6 +108,14 @@
 
       <div class="ui-kit__like-button js-ui-kit__like-button">
         {{ like_button(count=13, active=true) }}
+      </div>
+
+      <div class="ui-kit__rate-bar js-ui-kit__rate-bar">
+        {{ rate_bar(rate=5, disabled=true) }}
+      </div>
+
+      <div class="ui-kit__rate-bar js-ui-kit__rate-bar">
+        {{ rate_bar(rate=3) }}
       </div>
     </div>
   </div>

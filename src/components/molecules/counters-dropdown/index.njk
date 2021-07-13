@@ -3,6 +3,8 @@
 {% from 'assets/icons/index.njk' import arrow_expand %}
 
 {% macro counters_dropdown(placeholder=' ', autoapply, disabled, label, expanded, counters=[]) %}
+  {% set listWrapId = 'counters-dropdown__list-wrap' | uniqid %}
+
   <div class="counters-dropdown js-counters-dropdown {% if expanded %}counters-dropdown_expanded{% endif %}">
     <label class="counters-dropdown__field">
       {% if label %}<span class="counters-dropdown__label">{{ label }}</span>{% endif %}
@@ -12,6 +14,8 @@
           class="counters-dropdown__input js-counters-dropdown__input"
           type="button"
           value="{{ placeholder }}"
+          aria-expanded="{% if expanded %}true{% else %}false{% endif %}"
+          aria-controls="{{ listWrapId }}"
           data-placeholder="{{ placeholder }}"
           {% if disabled %}disabled{% endif %}
         >
@@ -20,7 +24,12 @@
     </label>
 
     <div class="counters-dropdown__list-viewport">
-      <div class="counters-dropdown__list-wrap">
+      <div
+        class="counters-dropdown__list-wrap"
+        id="{{ listWrapId }}"
+        role="region"
+        aria-label="{{ placeholder }}"
+      >
         <ul class="counters-dropdown__list">
           {% for item in counters %}
             <li
@@ -52,7 +61,7 @@
 {% endmacro %}
 
 {% macro appartment_dropdown(label, disabled, expanded, values={bedrooms: 1, beds: 0, bathrooms: 0}) %}
-  {{ counters_dropdown(autoapply=true, label=label, disabled=disabled, expanded=expanded, counters=[
+  {{ counters_dropdown(placeholder='Конфигурация номера', autoapply=true, label=label, disabled=disabled, expanded=expanded, counters=[
     {
       name: 'bedrooms',
       label: 'Спальни',

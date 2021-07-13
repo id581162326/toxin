@@ -1,0 +1,80 @@
+.like-button {
+  display: block;
+  width: max-content;
+}
+
+.like-button__input {
+  @apply --visually-hidden;
+
+  &:checked + * {
+    --like-button-icon-filled-opacity: 1;
+    --like-button-icon-shaped-opacity: 0;
+    --like-button-border-color: var(--primary-color);
+    --like-button-count-color: var(--primary-color);
+  }
+
+  &:focus-visible + *, &:hover + * {
+    --like-button-border-color: var(--primary-color);
+    --like-button-icon-shaped-color: var(--primary-color);
+    --like-button-count-color: var(--primary-color);
+  }
+
+  &:focus-visible + * {
+    @apply --outline;
+  }
+}
+
+.like-button__mark {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 40px;
+  height: 20px;
+  border: 1px solid var(--like-button-border-color, rgba(var(--dark-rgb), .25));
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.loaded .like-button__mark {
+  transition: border-color .1s ease-in-out;
+}
+
+.like-button__icon-filled {
+  left: 4px;
+  position: absolute;
+  opacity: var(--like-button-icon-filled-opacity, 0);
+}
+
+.loaded .like-button__icon-filled {
+  transition: opacity .1s ease-in-out;
+}
+
+.like-button__icon-shaped {
+  left: 4px;
+  position: absolute;
+  color: var(--like-button-icon-shaped-color, rgba(var(--dark-rgb), .25));
+  opacity: var(--like-button-icon-shaped-opacity, 1);
+}
+
+.loaded .like-button__icon-shaped {
+  transition: color .1s ease-in-out, opacity .1s ease-in-out;
+}
+
+.like-button__count {
+  width: 30px;
+  text-align: center;
+  font: 10px/12px var(--font-regular);
+  color: var(--like-button-count-color, rgba(var(--dark-rgb), .25));
+  pointer-events: none;
+  user-select: none;
+  -moz-user-select: none;
+}
+
+.like-button__count {
+  transition: color .1s ease-in-out;
+}
+
+.like-button__label {
+  @apply --visually-hidden;
+}

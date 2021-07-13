@@ -2,7 +2,6 @@ import {pipe} from 'fp-ts/function';
 import * as H from 'globals/helpers';
 import * as A from 'fp-ts/Array';
 
-import './style.css';
 import Namespace from './namespace';
 
 class RadioGroup implements Namespace.Interface {

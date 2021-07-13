@@ -3,7 +3,6 @@ import {flow, pipe} from 'fp-ts/function';
 import * as H from 'globals/helpers';
 import * as O from 'fp-ts/Option';
 
-import './styles.css';
 import Namespace from './namespace';
 
 class SubscribeField {

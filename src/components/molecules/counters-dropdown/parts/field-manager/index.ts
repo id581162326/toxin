@@ -23,7 +23,7 @@ class FieldManager implements Namespace.Interface {
   };
 
   constructor(private readonly container: HTMLElement) {
-    this.setFieldTitle(this.placeholder);
+    this.initFieldTitleSideEffect();
   }
 
   private readonly field = pipe(this.container, H.querySelector<HTMLInputElement>('.js-counters-dropdown__input'));
@@ -31,6 +31,10 @@ class FieldManager implements Namespace.Interface {
   private readonly placeholder = pipe(this.field, O.chain(
     flow(H.prop('dataset'), H.prop('placeholder'), O.fromNullable)
   ), O.getOrElse(() => ' '));
+
+  private readonly initFieldTitleSideEffect = () => pipe(window, H.addEventListener('load', this.handleWindowLoad));
+
+  private readonly handleWindowLoad = () => pipe(this.field, O.map(flow(H.prop('value'), this.setFieldTitle)));
 
   private readonly getFieldSizeInChar = () => pipe(
     this.field,

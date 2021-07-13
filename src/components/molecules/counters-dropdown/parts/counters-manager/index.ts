@@ -10,7 +10,7 @@ import Button from 'atoms/button';
 import Namespace from './namespace';
 
 class CountersManager {
-  constructor(private readonly container: HTMLElement, private readonly props: Namespace.Props = {}) {
+  constructor(private readonly container: HTMLElement, private readonly props: Namespace.Props) {
     this.counters = this.initCounters();
     this.initApplyBtn();
     this.initClearBtn();
@@ -42,7 +42,7 @@ class CountersManager {
     onChange: this.handleCounterChange(item)
   }))));
 
-  private readonly sendCountersData = () => pipe(this.props.onChange, O.fromNullable, O.map(H.call(this.countersData)));
+  private readonly sendCountersData = () => this.props.onChange(this.countersData);
 
   private readonly resetCountersData = () => {
     pipe(this.counters, A.map(H.method('reset')));

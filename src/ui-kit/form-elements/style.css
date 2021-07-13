@@ -25,9 +25,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  font-family: var(--font-regular);
-  font-size: 12px;
-  line-height: 15px;
+  font: 12px/15px var(--font-regular);
   text-transform: uppercase;
   color: rgba(var(--dark-rgb), .5);
 }

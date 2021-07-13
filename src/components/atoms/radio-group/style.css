@@ -1,8 +1,4 @@
 .radio-group {
-  --radio-group-inner-circle-opacity: 0;
-  --radio-group-mark-border-color: rgba(var(--dark-rgb), .25);
-  --radio-group-label-alpha: .5;
-
   display: flex;
   column-gap: 20px;
 }
@@ -39,9 +35,12 @@
   place-items: center;
   width: 20px;
   height: 20px;
-  border: 1px solid var(--radio-group-mark-border-color);
+  border: 1px solid var(--radio-group-mark-border-color, rgba(var(--dark-rgb), .25));
   border-radius: 50%;
   cursor: pointer;
+}
+
+.loaded .radio-group__mark {
   transition: border-color .1s ease-in-out;
 }
 
@@ -50,12 +49,18 @@
   height: 12px;
   border-radius: 50%;
   background: var(--primary-gradient);
-  opacity: var(--radio-group-inner-circle-opacity);
+  opacity: var(--radio-group-inner-circle-opacity, 0);
+}
+
+.loaded .radio-group__inner-circle {
   transition: opacity .1s ease-in-out;
 }
 
 .radio-group__label {
   font: 14px/24px var(--font-regular);
-  color: rgba(var(--dark-rgb), var(--radio-group-label-alpha));
+  color: rgba(var(--dark-rgb), var(--radio-group-label-alpha, .5));
+}
+
+.loaded .radio-group__label {
   transition: color .1s ease-in-out;
 }

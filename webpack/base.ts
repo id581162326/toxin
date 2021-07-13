@@ -13,17 +13,17 @@ import HtmlWebpackHardDiskPlugin from 'html-webpack-harddisk-plugin';
 
 type BuildType = 'dev' | 'prod';
 
-const toHtmlWebpackPlugin = (buildType: BuildType) => (filename: string) => new HtmlWebpackPlugin({
+const toHtmlWebpackPluginFrom = (buildType: BuildType, folder: string) => (filename: string) => new HtmlWebpackPlugin({
   filename: `${filename}.html`,
-  template: `./pages/${filename}/index.njk`,
+  template: `./${folder}/${filename}/index.njk`,
   inject: 'body',
   ...(buildType === 'prod' ? {alwaysWriteToDisk: true} : {})
 });
 
-const getHtmlWebpackPlugins = (buildType: BuildType) => pipe(
-  path.resolve(__dirname, '..', 'src', 'pages'),
+const getHtmlWebpackPluginsFrom = (buildType: BuildType, folder: string) => pipe(
+  path.resolve(__dirname, '..', 'src', folder),
   (x) => fs.readdirSync(x),
-  pipe(buildType, toHtmlWebpackPlugin, A.map)
+  pipe(toHtmlWebpackPluginFrom(buildType, folder), A.map)
 );
 
 const getTypeDependingPlugins = (buildType: BuildType): webpack.WebpackPluginInstance[] => {
@@ -31,13 +31,13 @@ const getTypeDependingPlugins = (buildType: BuildType): webpack.WebpackPluginIns
     case 'dev': {
       return ([
         new webpack.HotModuleReplacementPlugin(),
-        ...getHtmlWebpackPlugins(buildType)
+        ...getHtmlWebpackPluginsFrom(buildType, 'ui-kit')
       ]);
     }
 
     case 'prod': {
       return ([
-        ...getHtmlWebpackPlugins(buildType),
+        ...getHtmlWebpackPluginsFrom(buildType, 'pages'),
         new HtmlWebpackHardDiskPlugin(),
         new MiniCssExtractPlugin({filename: 'css/[name].css'})
       ]);

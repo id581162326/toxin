@@ -5,7 +5,7 @@ namespace CountersDropdown {
   }>;
 
   export interface Props {
-    onChange?: (countersData: CountersData) => void
+    onChange: (countersData: CountersData) => void
   }
 }
 

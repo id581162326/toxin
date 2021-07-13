@@ -1,6 +1,7 @@
 namespace TextField {
   export interface Props {
-    onChange: (value: string) => void
+    onChange: (value: string) => void,
+    dateMask?: true
   }
 
   export interface Interface {

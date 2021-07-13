@@ -1,6 +1,6 @@
 {% from 'assets/icons/index.njk' import check_mark %}
 
-{% macro checkbox(label, description, appearance, checked, disabled) %}
+{% macro checkbox(appearance='default', label, description, checked, disabled) %}
   <label class="checkbox checkbox_appearance_{{ appearance }} {% if description %}checkbox_with_description{% endif %}">
     <input
       class="checkbox__input js-checkbox__input"

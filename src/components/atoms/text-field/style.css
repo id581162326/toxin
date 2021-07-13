@@ -1,8 +1,4 @@
 .text-field {
-  --text-field-border-aplha: .25;
-  --text-field-placeholder-aplha: .25;
-  --text-field-background-color: white;
-
   display: grid;
   row-gap: 5px;
   width: 100%;
@@ -29,10 +25,9 @@
   padding: 0 15px;
   font: 14px/18px var(--font-regular);
   color: rgba(var(--dark-rgb), .75);
-  border: 1px solid rgba(var(--dark-rgb), var(--text-field-border-aplha));
+  border: 1px solid rgba(var(--dark-rgb), var(--text-field-border-aplha, .25));
   border-radius: 4px;
-  background-color: var(--text-field-background-color);
-  transition: border-color .1s ease-in-out, background-color .1s ease-in-out;
+  background-color: var(--text-field-background-color, white);
 
   &:hover, &:focus {
     --text-field-border-aplha: .5;
@@ -44,11 +39,18 @@
   }
 
   &::placeholder {
-    color: rgba(var(--dark-rgb), var(--text-field-placeholder-aplha));
-    transition: color .1s ease-in-out;
+    color: rgba(var(--dark-rgb), var(--text-field-placeholder-aplha, .25));
   }
 
   &::selection {
     background-color: rgba(var(--dark-rgb), .1);
+  }
+}
+
+.loaded .text-field__input {
+  transition: border-color .1s ease-in-out, background-color .1s ease-in-out;
+
+  &::placeholder {
+    transition: color .1s ease-in-out;
   }
 }

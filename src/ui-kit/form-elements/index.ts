@@ -7,6 +7,7 @@ import Button from 'atoms/button';
 import SubscribeField from 'atoms/subscribe-field';
 import Checkbox from 'atoms/checkbox';
 import RadioGroup from 'atoms/radio-group';
+import LikeButton from 'atoms/like-button';
 
 import CountersDropdown from 'molecules/counters-dropdown';
 
@@ -46,4 +47,10 @@ pipe(
   document,
   H.querySelectorAll<HTMLDivElement>('.js-ui-kit__radio-group'),
   A.map((container) => pipe(RadioGroup, H.instance(container, {onChange: H.trace})))
+);
+
+pipe(
+  document,
+  H.querySelectorAll<HTMLDivElement>('.js-ui-kit__like-button'),
+  A.map((container) => pipe(LikeButton, H.instance(container, {onChange: H.trace})))
 );

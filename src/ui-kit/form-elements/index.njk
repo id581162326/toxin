@@ -7,8 +7,9 @@
 {% from "atoms/button/index.njk" import button %}
 {% from "atoms/subscribe-field/index.njk" import subscribe_field %}
 {% from "atoms/checkbox/index.njk" import checkbox %}
-{% from "molecules/counters-dropdown/index.njk" import appartment_dropdown, guests_dropdown %}
 {% from "atoms/radio-group/index.njk" import radio_group %}
+{% from "atoms/like-button/index.njk" import like_button %}
+{% from "molecules/counters-dropdown/index.njk" import appartment_dropdown, guests_dropdown %}
 
 {% block content %}
   <div class="ui-kit js-ui-kit">
@@ -98,6 +99,14 @@
           appearance='toggle',
           label='Получать спецпредложения'
         ) }}
+      </div>
+
+      <div class="ui-kit__like-button js-ui-kit__like-button">
+        {{ like_button(count=0) }}
+      </div>
+
+      <div class="ui-kit__like-button js-ui-kit__like-button">
+        {{ like_button(count=13, active=true) }}
       </div>
     </div>
   </div>

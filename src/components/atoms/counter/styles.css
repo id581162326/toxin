@@ -21,7 +21,6 @@
   border-radius: 50%;
   background-color: transparent;
   cursor: pointer;
-  transition: opacity .1s ease-in-out;
 
   &:hover {
     opacity: .6;
@@ -34,6 +33,10 @@
   &:focus {
     outline: none;
   }
+}
+
+.loaded .counter__control-btn {
+  transition: opacity .1s ease-in-out;
 }
 
 .counter__input {

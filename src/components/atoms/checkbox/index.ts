@@ -2,7 +2,6 @@ import {pipe} from 'fp-ts/function';
 import * as H from 'globals/helpers';
 import * as O from 'fp-ts/Option';
 
-import './style.css';
 import Namespace from './namespace';
 
 class Checkbox implements Namespace.Interface {

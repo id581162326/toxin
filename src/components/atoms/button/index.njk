@@ -1,4 +1,4 @@
-{% macro button(type='button', label, href, appearance, disabled) %}
+{% macro button(type='button', appearance='primary', label, href, disabled) %}
   {% if href %}
     <a class="button button_appearance_{{ appearance }}" href="{{ href }}">
       {% if appearance !== 'link' %}<span class="button__overlay"></span>{% endif %}

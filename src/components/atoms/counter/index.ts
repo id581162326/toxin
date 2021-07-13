@@ -3,7 +3,6 @@ import * as H from 'globals/helpers';
 import * as F from 'fp-ts/function';
 import {pipe} from 'fp-ts/function';
 
-import './styles.css';
 import Namespace from './namespace';
 
 class Counter implements Namespace.Interface {

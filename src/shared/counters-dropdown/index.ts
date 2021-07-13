@@ -1,5 +1,4 @@
 import {pipe} from 'fp-ts/function';
-import * as O from 'fp-ts/Option';
 import * as H from 'globals/helpers';
 import * as A from 'fp-ts/Array';
 
@@ -22,7 +21,7 @@ class CountersDropdown implements Namespace.Interface {
     return (this);
   };
 
-  constructor(container: HTMLElement, private readonly props: Namespace.Props = {}) {
+  constructor(container: HTMLElement, private readonly props: Namespace.Props) {
     this.fieldManager = pipe(FieldManager, H.instance(container));
     this.dropdownManager = pipe(DropdownManager, H.instance(container));
     this.countersManager = pipe(CountersManager, H.instance(container, {onChange: this.handleCountersChange}));
@@ -37,12 +36,12 @@ class CountersDropdown implements Namespace.Interface {
   private readonly handleCountersChange = (countersData: Namespace.CountersData) => {
     pipe(countersData, H.values, this.fieldManager.updateValue);
 
-    pipe(this.props.onChange, O.fromNullable, O.map((onChange) => pipe(
+    pipe(
       countersData, H.keys,
       A.zip(pipe(countersData, H.values)),
       A.reduce({}, (acc, [name, data]) => ({...acc, [name]: data.value})),
-      onChange
-    )));
+      this.props.onChange
+    );
   };
 }
 

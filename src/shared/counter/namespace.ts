@@ -1,6 +1,6 @@
 namespace Counter {
   export interface Props {
-    onChange?: (value: number) => void
+    onChange: (value: number) => void
   }
 
   export interface Interface {

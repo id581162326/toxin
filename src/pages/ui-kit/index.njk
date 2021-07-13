@@ -7,6 +7,7 @@
 {% from "shared/counters-dropdown/index.njk" import appartment_dropdown, guests_dropdown %}
 {% from "shared/button/index.njk" import button %}
 {% from "shared/subscribe-field/index.njk" import subscribe_field %}
+{% from "shared/checkbox/index.njk" import checkbox %}
 
 {% block content %}
   <div class="ui-kit js-ui-kit">
@@ -21,20 +22,20 @@
     <div class="ui-kit__column">
       <div class="ui-kit__field js-ui-kit__field">
         <span class="ui-kit__field-desc">default</span>
-        {{ text_field(name='field', label='text-field', type='email', placeholder='Email') }}
+        {{ text_field(label='text-field', type='email', placeholder='Email') }}
       </div>
 
       <div class="ui-kit__field js-ui-kit__field">
         <span class="ui-kit__field-desc">hover/focus</span>
-        {{ text_field(name='field', label='text-field', value='This is pretty aswesome', autofocus=true) }}
+        {{ text_field(label='text-field', value='This is pretty aswesome', autofocus=true) }}
       </div>
 
       <div class="ui-kit__dropdown js-ui-kit__dropdown">
-        {{ guests_dropdown(name='field', label='dropdown') }}
+        {{ guests_dropdown(label='dropdown') }}
       </div>
 
       <div class="ui-kit__dropdown js-ui-kit__dropdown">
-        {{ appartment_dropdown(name='field', label='dropdown') }}
+        {{ appartment_dropdown(label='dropdown') }}
       </div>
 
       <div class="ui-kit__button js-ui-kit__button">
@@ -51,6 +52,20 @@
 
       <div class="ui-kit__subscribe-field js-ui-kit__subscribe-field">
         {{ subscribe_field(label='Subscribtion text-field') }}
+      </div>
+
+      <div class="ui-kit__checkbox js-ui-kit__checkbox">
+        {{ checkbox(
+          label='Завтрак',
+          checked=true
+        ) }}
+      </div>
+
+      <div class="ui-kit__checkbox js-ui-kit__checkbox">
+        {{ checkbox(
+          label='Помощник для инвалидов',
+          description='На 1 этаже вас встретит специалист  и проводит до номера.'
+        ) }}
       </div>
     </div>
   </div>

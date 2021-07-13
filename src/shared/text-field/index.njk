@@ -1,11 +1,10 @@
-{% macro text_field(type='text', name='field', value, placeholder, label, disabled, required, autofocus) %}
+{% macro text_field(type='text', value, placeholder, label, disabled, required, autofocus) %}
   <label class="text-field js-text-field">
     {% if label %}<span class="text-field__label">{{ label }}</span>{% endif %}
 
     <input
       class="text-field__input js-text-field__input"
       type="{{ type }}"
-      name="{{ name }}"
       {% if value %}value="{{ value }}"{% endif %}
       {% if placeholder %}placeholder="{{ placeholder }}"{% endif %}
       {% if autofocus %}autofocus{% endif %}

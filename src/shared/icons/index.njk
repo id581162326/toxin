@@ -4,7 +4,8 @@
     width="{{ width }}"
     height="{{ height }}"
     viewBox="0 0 {{ width }} {{ height }}"
-    fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
   >
     <path d="M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z"
           fill="currentColor"/>
@@ -12,25 +13,65 @@
 {% endmacro %}
 
 {% macro arrow_forward(width, height, gradient) %}
+  {% set paint0Id = 'id-paint-0' | uniqid %}
+
   <svg
     width="{{ width }}"
     height="{{ height }}"
     viewBox="0 0 {{ width }} {{ height }}"
-    fill="{% if gradient %}url(#paint0_linear){% else %}currentColor{% endif %}"
+    fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
       d="M9 0.984375L17.0156 9L9 17.0156L7.59375 15.6094L13.1719 9.98438H0.984375V8.01562H13.1719L7.59375 2.39062L9 0.984375Z"
-      fill="{% if gradient %}url(#paint0_linear){% else %}currentColor{% endif %}"
+      fill="{% if gradient %}url(#{{ paint0Id }}){% else %}currentColor{% endif %}"
     />
 
     {% if gradient %}
       <defs>
-        <linearGradient id="paint0_linear" x1="9" y1="-13" x2="9" y2="31" gradientUnits="userSpaceOnUse">
+        <linearGradient id="{{ paint0Id }}" x1="9" y1="-13" x2="9" y2="31" gradientUnits="userSpaceOnUse">
           <stop stop-color="#BC9CFF"/>
           <stop offset="1" stop-color="#8BA4F9"/>
         </linearGradient>
       </defs>
     {% endif %}
+  </svg>
+{% endmacro %}
+
+{% macro check_mark(width, height, gradient) %}
+  {% set paint0Id = 'id-paint-0' | uniqid %}
+  {% set paint1Id = 'id-paint-1' | uniqid %}
+
+  <svg
+    width="{{ width }}"
+    height="{{ height }}"
+    viewBox="0 0 {{ width }} {{ height }}"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M1.46439 2.40768L5.70703 6.65032L4.29282 8.06453L0.0501771 3.82189L1.46439 2.40768Z"
+      fill="{% if gradient %}url(#{{ paint0Id }}){% else %}currentColor{% endif %}"
+    />
+    <path
+      d="M8.53546 0.993466L9.94967 2.40768L4.29282 8.06453L2.8786 6.65032L8.53546 0.993466Z"
+      fill="{% if gradient %}url(#{{ paint1Id }}){% else %}currentColor{% endif %}"
+    />
+    <defs>
+      <linearGradient
+        id="{{ paint0Id }}" x1="7.82835" y1="0.286359" x2="2.1715" y2="5.94321"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="#BC9CFF"/>
+        <stop offset="1" stop-color="#8BA4F9"/>
+      </linearGradient>
+      <linearGradient
+        id="{{ paint1Id }}" x1="7.82835" y1="0.286359" x2="2.1715" y2="5.94321"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="#BC9CFF"/>
+        <stop offset="1" stop-color="#8BA4F9"/>
+      </linearGradient>
+    </defs>
   </svg>
 {% endmacro %}

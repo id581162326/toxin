@@ -24,7 +24,7 @@ class TextField implements Namespace.Interface {
     return (this);
   };
 
-  constructor(private readonly container: HTMLElement, private readonly props: Namespace.Props = {}) {
+  constructor(private readonly container: HTMLElement, private readonly props: Namespace.Props) {
     this.initInput();
   }
 
@@ -32,14 +32,12 @@ class TextField implements Namespace.Interface {
 
   private readonly input = pipe(this.container, H.querySelector<HTMLInputElement>('.js-text-field__input'));
 
-  private readonly initInput = () => pipe(this.input, O.map(flow(H.addEventListener('change', this.onChangeListener))));
+  private readonly initInput = () => pipe(this.input, O.map(flow(H.addEventListener('input', this.onChangeListener))));
 
   private readonly onChangeListener = (event: Event) => {
     const target = event.target as HTMLInputElement;
 
-    if (this.props.onChange) {
-      this.props.onChange(target.value);
-    }
+    this.props.onChange(target.value);
   };
 }
 

@@ -18,7 +18,7 @@ class Counter implements Namespace.Interface {
     return (this);
   };
 
-  constructor(private readonly container: HTMLElement, private readonly props: Namespace.Props = {}) {
+  constructor(private readonly container: HTMLElement, private readonly props: Namespace.Props) {
     this.initCounter();
   }
 
@@ -30,7 +30,7 @@ class Counter implements Namespace.Interface {
 
   private readonly updateIsMin = () => {
     this.isMin = pipe(this.input, O.map((input) => input.value === input.min), O.getOrElse(() => false as boolean));
-  }
+  };
 
   private readonly initCounter = () => {
     pipe(this.decrementBtn, O.map(H.addEventListener('click', this.handleClick('dec'))));
@@ -60,7 +60,7 @@ class Counter implements Namespace.Interface {
     pipe(this.decrementBtn, O.map(pipe('disabled', target.value !== min ? H.removeAttribute : H.setAttribute)));
     pipe(this.incrementBtn, O.map(pipe('disabled', target.value !== max ? H.removeAttribute : H.setAttribute)));
 
-    pipe(this.props.onChange, O.fromNullable, O.map((onChange) => pipe(value, Number, onChange)));
+    pipe(value, Number, this.props.onChange);
 
     this.updateIsMin();
   };

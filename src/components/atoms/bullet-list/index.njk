@@ -1,0 +1,9 @@
+{% macro bullet_list(list) %}
+  <ul class="bullet-list">
+    {% for item in list %}
+      <li class="bullet-list__item">
+        <span class="bullet-list__text">{{ item }}</span>
+      </li>
+    {% endfor %}
+  </ul>
+{% endmacro %}

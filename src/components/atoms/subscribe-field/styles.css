@@ -49,8 +49,7 @@
   }
 
   &:focus {
-    outline: var(--outline);
-    outline-offset: 2px;
+    @apply --outline;
   }
 
   &::placeholder {
@@ -74,8 +73,7 @@
   transition: opacity .1s ease-in-out;
 
   &:focus-visible {
-    outline: var(--outline);
-    outline-offset: 2px;
+    @apply --outline;
   }
 
   &:disabled, &:active {

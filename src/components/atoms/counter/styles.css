@@ -47,8 +47,7 @@
   -moz-appearance: textfield;
 
   &:focus {
-    outline: var(--outline);
-    outline-offset: 2px;
+    @apply --outline;
   }
 
   &::-webkit-outer-spin-button,

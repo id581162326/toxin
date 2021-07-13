@@ -1,5 +1,5 @@
 {% macro counter(label='Counter', value=0, min=0, max) %}
-  {% set id = 'id-counter__input' | uniqid  %}
+  {% set id = 'counter__input' | uniqid  %}
   <div class="counter js-counter">
     <label class="counter__label" for="{{ id }}">{{ label }}</label>
     <button class="counter__control-btn js-counter__decrement-btn"

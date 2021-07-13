@@ -84,13 +84,23 @@ const getNunjucksFilters = () => pipe(
   A.reduce({}, (acc, record) => ({...acc, ...record}))
 );
 
+const getPostcssApplySets = () => pipe(
+  path.resolve(__dirname, 'postcss-apply-sets'),
+  (x) => fs.readdirSync(x),
+  A.map((file) => ({[file.replace('.js', '')]: require(path.join(__dirname, 'postcss-apply-sets', `${file}`)) })),
+  A.reduce({}, (acc, record) => ({...acc, ...record}))
+)
+
 export const getRules = (buildType: BuildType): webpack.RuleSetRule[] => ([
   {
     test: /\.njk$/,
     use: {
       loader: 'simple-nunjucks-loader',
       options: {
-        searchPaths: [path.resolve(__dirname, '..', 'src')],
+        searchPaths: [
+          path.resolve(__dirname, '..', 'src'),
+          path.resolve(__dirname, '..', 'src', 'components')
+        ],
         filters: getNunjucksFilters()
       }
     },
@@ -121,15 +131,7 @@ export const getRules = (buildType: BuildType): webpack.RuleSetRule[] => ([
                 ...((buildType === 'prod') ? {browsers: 'last 2 versions'} : {})
               }],
               ['postcss-apply', {
-                sets: {
-                  'visually-hidden': {
-                    position: 'absolute',
-                    clip: 'rect(0 0 0 0)',
-                    width: '1px',
-                    height: '1px',
-                    margin: '-1px'
-                  }
-                }
+                sets: getPostcssApplySets()
               }]
             ]
           }
@@ -162,8 +164,9 @@ export const getConfig = (buildType: BuildType): webpack.Configuration => ({
     alias: {
       'assets': path.resolve(__dirname, '..', 'src/assets'),
       'globals': path.resolve(__dirname, '..', 'src/globals'),
-      'shared': path.resolve(__dirname, '..', 'src/shared'),
-      'components': path.resolve(__dirname, '..', 'src/components')
+      'atoms': path.resolve(__dirname, '..', 'src/components/atoms'),
+      'molecules': path.resolve(__dirname, '..', 'src/components/molecules'),
+      'organisms': path.resolve(__dirname, '..', 'src/components/organisms')
     }
   }
 });

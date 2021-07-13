@@ -2,14 +2,15 @@ import {pipe} from 'fp-ts/function';
 import * as A from 'fp-ts/Array';
 import * as H from 'globals/helpers';
 
-import TextField from 'shared/text-field';
-import CountersDropdown from 'shared/counters-dropdown';
-import Button from 'shared/button';
-import SubscribeField from 'shared/subscribe-field';
-import 'shared/checkbox';
+import TextField from 'atoms/text-field';
+import Button from 'atoms/button';
+import SubscribeField from 'atoms/subscribe-field';
+import Checkbox from 'atoms/checkbox';
+import RadioGroup from 'atoms/radio-group';
+
+import CountersDropdown from 'molecules/counters-dropdown';
 
 import './style.css';
-import Checkbox from 'shared/checkbox';
 
 pipe(
   document,
@@ -39,4 +40,10 @@ pipe(
   document,
   H.querySelectorAll<HTMLDivElement>('.js-ui-kit__checkbox'),
   A.map((container) => pipe(Checkbox, H.instance(container, {onChange: H.trace})))
+);
+
+pipe(
+  document,
+  H.querySelectorAll<HTMLDivElement>('.js-ui-kit__radio-group'),
+  A.map((container) => pipe(RadioGroup, H.instance(container, {onChange: H.trace})))
 );

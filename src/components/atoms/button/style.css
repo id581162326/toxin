@@ -6,6 +6,7 @@
   align-items: center;
   height: 44px;
   padding: 0 19px 0 21px;
+  text-decoration: none;
   border: none;
   border-radius: 22px;
   background: var(--primary-gradient);
@@ -13,8 +14,7 @@
   transition: opacity .1s ease-in-out;
 
   &:focus-visible {
-    outline: var(--outline);
-    outline-offset: 2px;
+    @apply --outline;
   }
 
   &:hover, &:focus-visible {
@@ -38,6 +38,7 @@
 .button_appearance_link {
   --button-text-color: var(--primary-color);
 
+  width: max-content;
   height: auto;
   padding: 0;
   background: none;

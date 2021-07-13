@@ -4,8 +4,8 @@ import * as H from 'globals/helpers';
 import * as A from 'fp-ts/Array';
 import * as F from 'fp-ts/function';
 
-import Counter from 'shared/counter';
-import Button from 'shared/button';
+import Counter from 'atoms/counter';
+import Button from 'atoms/button';
 
 import Namespace from './namespace';
 

@@ -18,8 +18,9 @@
     "paths": {
       "*": ["*"],
       "globals/*": ["globals/*"],
-      "shared/*": ["shared/*"],
-      "components/*": ["components/*"]
+      "atoms/*": ["components/atoms/*"],
+      "molecules/*": ["components/molecules/*"],
+      "organisms/*": ["components/organisms/*"]
     }
   },
   "include": ["src/**/*", "@types/*"],

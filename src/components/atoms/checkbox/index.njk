@@ -1,0 +1,21 @@
+{% from 'assets/icons/index.njk' import check_mark %}
+
+{% macro checkbox(label, description, appearance, checked, disabled) %}
+  <label class="checkbox checkbox_appearance_{{ appearance }} {% if description %}checkbox_with_description{% endif %}">
+    <input
+      class="checkbox__input js-checkbox__input"
+      type="checkbox"
+      {% if checked %}checked{% endif %}
+      {% if disabled %}disabled{% endif %}
+    >
+    <span class="checkbox__mark">
+      {% if appearance==='default' %}
+      {{ check_mark(class='checkbox__check-icon', width=10, height=8, gradient=true) }}
+      {% else %}
+      <span class="checkbox__inner-circle"></span>
+      {% endif %}
+    </span>
+    <span class="checkbox__label">{{ label }}</span>
+    {% if description %}<span class="checkbox__description">{{ description }}</span>{% endif %}
+  </label>
+{% endmacro %}

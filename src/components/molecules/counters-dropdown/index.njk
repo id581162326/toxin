@@ -1,6 +1,6 @@
-{% from 'shared/counter/index.njk' import counter %}
-{% from 'shared/button/index.njk' import button %}
-{% from 'shared/icons/index.njk' import arrow_expand %}
+{% from 'atoms/counter/index.njk' import counter %}
+{% from 'atoms/button/index.njk' import button %}
+{% from 'assets/icons/index.njk' import arrow_expand %}
 
 {% macro counters_dropdown(placeholder=' ', autoapply, disabled, label, expanded, counters=[]) %}
   <div class="counters-dropdown js-counters-dropdown {% if expanded %}counters-dropdown_expanded{% endif %}">

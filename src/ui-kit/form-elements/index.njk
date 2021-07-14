@@ -3,6 +3,7 @@
 {% set page_title = 'Ui Kit' %}
 {% set page_description = 'Form elements' %}
 
+{% from 'assets/icons/index.njk' import arrow_forward %}
 {% from 'atoms/text-field/index.njk' import text_field %}
 {% from 'atoms/button/index.njk' import button %}
 {% from 'atoms/subscribe-field/index.njk' import subscribe_field %}
@@ -12,6 +13,7 @@
 {% from 'atoms/rate-bar/index.njk' import rate_bar %}
 {% from 'atoms/bullet-list/index.njk' import bullet_list %}
 {% from 'molecules/counters-dropdown/index.njk' import appartment_dropdown, guests_dropdown %}
+{% from 'molecules/expandable-checkboxes/index.njk' import expandable_checkboxes %}
 
 {% block content %}
   <div class="ui-kit js-ui-kit">
@@ -60,6 +62,14 @@
         {{ button(label='Click me', appearance='link', href='/') }}
       </div>
 
+      <div class="ui-kit__button js-ui-kit__button">
+        {{ button(label='Перейти к оплате', appearance='primary', icon=arrow_forward) }}
+      </div>
+
+      <div class="ui-kit__button js-ui-kit__button">
+        {{ button(label='Перейти к оплате', appearance='secondary', icon=arrow_forward) }}
+      </div>
+
       <div class="ui-kit__subscribe-field js-ui-kit__subscribe-field">
         {{ subscribe_field(label='Subscribtion text-field') }}
       </div>
@@ -95,7 +105,11 @@
       </div>
 
       <div class="ui-kit__toggle js-ui-kit__checkbox">
-        {{ checkbox(appearance='toggle',label='Получать спецпредложения') }}
+        {{ checkbox(appearance='toggle', label='Получать спецпредложения') }}
+      </div>
+
+      <div class="ui-kit__toggle js-ui-kit__checkbox">
+        {{ checkbox(appearance='toggle', checked=true, label='Получать спецпредложения') }}
       </div>
 
       <div class="ui-kit__like-button js-ui-kit__like-button">
@@ -106,16 +120,81 @@
         {{ like_button(count=13, active=true) }}
       </div>
 
-      <div class="ui-kit__rate-bar js-ui-kit__rate-bar">
+      <section class="ui-kit__rate-bar" aria-labelledby="id22">
+        <span id="id22">
         {{ rate_bar(rate=5, disabled=true) }}
-      </div>
+        </span>
+      </section>
 
       <div class="ui-kit__rate-bar js-ui-kit__rate-bar">
         {{ rate_bar(rate=3) }}
       </div>
 
       <div class="ui-kit__bullet-list">
-        {{ bullet_list(['Нельзя с питомцами', 'Без вечеринок и мероприятий', 'Время прибытия — после 13:00, а выезд до 12:00']) }}
+        {{ bullet_list(['Нельзя с питомцами', 'Без вечеринок и мероприятий', 'Время прибытия — после 13:00,\nа выезд до 12:00']) }}
+      </div>
+
+      <div class="ui-kit__expandable-checkboxes js-ui-kit__expandable-checkboxes">
+        {{ expandable_checkboxes(label='Expandable checkbox list', group=[
+          {
+            name: 'breakfast',
+            label: 'Завтрак'
+          },
+          {
+            name: 'desk',
+            label: 'Письменный стол',
+            checked: true
+          },
+          {
+            name: 'feeding_chair',
+            label: 'Стул для кормления',
+            checked: true
+          },
+          {
+            name: 'crib',
+            label: 'Кроватка',
+            checked: true
+          },
+          {
+            name: 'tv',
+            label: 'Телевизор'
+          },
+          {
+            name: 'shampoo',
+            label: 'Шампунь'
+          }
+        ]) }}
+      </div>
+      <div class="ui-kit__expandable-checkboxes js-ui-kit__expandable-checkboxes">
+        {{ expandable_checkboxes(label='Expandable checkbox list', expanded=true, group=[
+          {
+            name: 'breakfast',
+            label: 'Завтрак'
+          },
+          {
+            name: 'desk',
+            label: 'Письменный стол',
+            checked: true
+          },
+          {
+            name: 'feeding_chair',
+            label: 'Стул для кормления',
+            checked: true
+          },
+          {
+            name: 'crib',
+            label: 'Кроватка',
+            checked: true
+          },
+          {
+            name: 'tv',
+            label: 'Телевизор'
+          },
+          {
+            name: 'shampoo',
+            label: 'Шампунь'
+          }
+        ]) }}
       </div>
     </div>
   </div>

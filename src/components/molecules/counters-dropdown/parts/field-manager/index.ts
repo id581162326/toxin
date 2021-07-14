@@ -34,7 +34,11 @@ class FieldManager implements Namespace.Interface {
 
   private readonly initFieldTitleSideEffect = () => pipe(window, H.addEventListener('load', this.handleWindowLoad));
 
-  private readonly handleWindowLoad = () => pipe(this.field, O.map(flow(H.prop('value'), this.setFieldTitle)));
+  private readonly handleWindowLoad = () => {
+    pipe(this.field, O.map(flow(H.prop('value'), this.setFieldTitle)));
+
+    H.removeEventListener('load', this.handleWindowLoad)(window);
+  };
 
   private readonly getFieldSizeInChar = () => pipe(
     this.field,

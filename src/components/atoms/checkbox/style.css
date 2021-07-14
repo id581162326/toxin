@@ -73,6 +73,7 @@
 }
 
 .checkbox__label {
+  align-self: center;
   font: 14px/18px var(--checkbox-label-font-family, var(--font-regular));
   color: rgba(var(--dark-rgb), var(--checkbox-label-alpha, .5));
 

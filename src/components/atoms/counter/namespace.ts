@@ -4,8 +4,7 @@ namespace Counter {
   }
 
   export interface Interface {
-    reset: () => this,
-    isMin: boolean
+    reset: () => this
   }
 }
 

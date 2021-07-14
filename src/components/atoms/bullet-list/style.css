@@ -24,5 +24,6 @@
 .bullet-list__text {
   flex: 1;
   font: 14px/24px var(--font-regular);
+  white-space: pre-wrap;
   color: rgba(var(--dark-rgb), .75);
 }

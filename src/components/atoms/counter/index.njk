@@ -1,11 +1,13 @@
-{% macro counter(label, value=0, min=0, max) %}
+{% macro counter(label, value, min, max) %}
   {% set id = 'counter__input' | uniqid  %}
   <div class="counter js-counter">
     <label class="counter__label" for="{{ id }}">{{ label }}</label>
     <button class="counter__control-btn js-counter__decrement-btn"
             type="button" {% if value===min %}disabled{% endif %} tabindex="-1">-</button>
     <input class="counter__input js-counter__input"
-           value="{{ value }}" min="{{ min }}" {% if max %}max="{{ max }}"{% endif %}
+           value="{% if value | jsonStringify %}{{ value }}{% elseif min | jsonStringify %}{{ min }}{% else %}0{% endif %}"
+           min="{% if min | jsonStringify %}{{ min }}{% else %}0{% endif %}"
+           {% if max %}max="{{ max }}"{% endif %}
            type="number" id="{{ id }}">
     <button class="counter__control-btn js-counter__increment-btn"
             type="button" {% if value===max %}disabled{% endif %} tabindex="-1">+</button>

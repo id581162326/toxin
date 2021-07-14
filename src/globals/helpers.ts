@@ -25,7 +25,7 @@ export const call = <Fn extends { (...args: any[]): ReturnType<Fn> }>(
 
 export const instance = <Class extends { new(...params: any[]): InstanceType<Class> }>(
   ...params: Class extends { new(...params: infer Params): any } ? Params : never
-) => (Func: Class) => new Func(...params);
+) => (Fn: Class) => new Fn(...params);
 
 export const method = <Instance extends Object, Key extends keyof Instance>(
   key: Instance[Key] extends Function ? Key : never,

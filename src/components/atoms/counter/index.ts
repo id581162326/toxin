@@ -6,8 +6,6 @@ import {pipe} from 'fp-ts/function';
 import Namespace from './namespace';
 
 class Counter implements Namespace.Interface {
-  public isMin: boolean = true;
-
   public readonly reset = () => {
     pipe(this.input, O.map((input) => {
       input.stepDown(pipe(input.value, Number));
@@ -26,10 +24,6 @@ class Counter implements Namespace.Interface {
   private readonly decrementBtn = pipe(this.container, H.querySelector<HTMLButtonElement>('.js-counter__decrement-btn'));
 
   private readonly incrementBtn = pipe(this.container, H.querySelector<HTMLButtonElement>('.js-counter__increment-btn'));
-
-  private readonly updateIsMin = () => {
-    this.isMin = pipe(this.input, O.map((input) => input.value === input.min), O.getOrElse(() => false as boolean));
-  };
 
   private readonly initCounter = () => {
     pipe(this.decrementBtn, O.map(H.addEventListener('click', this.handleClick('dec'))));
@@ -60,8 +54,6 @@ class Counter implements Namespace.Interface {
     pipe(this.incrementBtn, O.map(pipe('disabled', target.value !== max ? H.removeAttribute : H.setAttribute)));
 
     pipe(value, Number, this.props.onChange);
-
-    this.updateIsMin();
   };
 }
 

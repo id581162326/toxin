@@ -34,10 +34,10 @@
           {% for item in counters %}
             <li
               class="counters-dropdown__item js-counters-dropdown__item"
-              data-name="{{ item.name }}"
-              data-plurals="{{ item.plurals | jsonStringify }}"
-              data-value="{{ item.value }}"
-              data-min="{{ item.min }}"
+              {% if item.name %}data-name="{{ item.name }}"{% endif %}
+              {% if item.plurals %}data-plurals="{{ item.plurals | jsonStringify }}"{% endif %}
+              {% if item.value | jsonStringify %}data-value="{{ item.value }}"{% endif %}
+              {% if item.min | jsonStringify %}data-min="{{ item.min }}"{% endif %}
             >
               {{ counter(name=item.name, label=item.label, value=item.value, min=item.min, max=item.max) }}
             </li>
@@ -67,7 +67,7 @@
       label: 'Спальни',
       value: values.bedrooms,
       min: 1,
-      plurals: {one: 'Спальня', few: 'Спалени', many: 'Спален'}
+      plurals: {one: 'Спальня', few: 'Спальни', many: 'Спален'}
     },
     {
       name: 'beds',

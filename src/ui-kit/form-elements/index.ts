@@ -13,6 +13,7 @@ import RateBar from 'atoms/rate-bar';
 import CountersDropdown from 'molecules/counters-dropdown';
 
 import './style.css';
+import ExpandableCheckboxes from 'molecules/expandable-checkboxes';
 
 pipe(
   document,
@@ -60,4 +61,10 @@ pipe(
   document,
   H.querySelectorAll<HTMLDivElement>('.js-ui-kit__rate-bar'),
   A.map((container) => pipe(RateBar, H.instance(container, {onChange: H.trace})))
+);
+
+pipe(
+  document,
+  H.querySelectorAll<HTMLDivElement>('.js-ui-kit__expandable-checkboxes'),
+  A.map((container) => pipe(ExpandableCheckboxes, H.instance(container, {onChange: H.trace})))
 );

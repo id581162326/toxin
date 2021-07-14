@@ -2,6 +2,7 @@
   position: relative;
   display: flex;
   align-items: center;
+  width: var(--button-width, auto);
   height: 44px;
   padding: 0 19px 0 21px;
   text-decoration: none;
@@ -25,6 +26,12 @@
 
 .loaded .button {
   transition: opacity .1s ease-in-out;
+}
+
+.button_with_icon {
+  --button-width: 100%;
+
+  justify-content: center;
 }
 
 .button_appearance_secondary {
@@ -70,4 +77,10 @@
 
 .loaded .button__label {
   transition: color .1s ease-in-out;
+}
+
+.button__icon {
+  position: absolute;
+  right: 13px;
+  color: var(--button-text-color, white);
 }

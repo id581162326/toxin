@@ -38,9 +38,7 @@ class SubscribeField {
   ], F.constTrue));
 
   private readonly setValid = (valid: boolean) => {
-    if (!valid) {
-      pipe(this.input, O.map(H.method('focus')));
-    }
+    pipe(this.input, O.map(!valid ? H.method('focus') : H.ident));
 
     pipe(this.root, O.map(pipe(['subscribe-field_invalid'], valid ? H.removeClassList : H.addClassList)));
 

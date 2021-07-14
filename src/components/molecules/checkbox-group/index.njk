@@ -1,0 +1,15 @@
+{% from 'atoms/checkbox/index.njk' import checkbox %}
+
+{% macro checkbox_group(group) %}
+  <ul class="checkbox-group">
+    {% for item in group %}
+      <li
+        class="js-checkbox-group__item"
+        data-name="{{ item.name }}"
+        data-checked="{% if item.checked %}true{% else %}false{% endif %}"
+      >
+        {{ checkbox(checked=item.checked, label=item.label) }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endmacro %}

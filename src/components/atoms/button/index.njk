@@ -1,13 +1,21 @@
-{% macro button(type='button', appearance='primary', label, href, disabled) %}
+{% macro button(type='button', appearance='primary', icon, label, href, disabled) %}
   {% if href %}
-    <a class="button button_appearance_{{ appearance }}" href="{{ href }}">
+    <a
+      class="button button_appearance_{{ appearance }} {% if icon and appearance !== 'link' %}button_with_icon{% endif %}"
+      href="{{ href }}"
+    >
       {% if appearance !== 'link' %}<span class="button__overlay"></span>{% endif %}
       <span class="button__label js-button__label">{{ label }}</span>
+      {% if icon and appearance !== 'link' %}{{ icon(class='button__icon', width=18, height=18) }}{% endif %}
     </a>
   {% else %}
-    <button class="button js-button button_appearance_{{ appearance }}" type="{{ type }}">
+    <button
+      class="button js-button button_appearance_{{ appearance }} {% if icon and appearance !== 'link' %}button_with_icon{% endif %}"
+      type="{{ type }}"
+    >
       {% if appearance !== 'link' %}<span class="button__overlay"></span>{% endif %}
       <span class="button__label js-button__label">{{ label }}</span>
+      {% if icon and appearance !== 'link' %}{{ icon(class='button__icon', width=18, height=18) }}{% endif %}
     </button>
   {% endif %}
 {% endmacro %}

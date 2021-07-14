@@ -1,0 +1,21 @@
+{% from 'assets/icons/index.njk' import arrow_expand %}
+
+{% from 'molecules/checkbox-group/index.njk' import checkbox_group %}
+
+{% macro expandable_checkboxes(label, expanded, group) %}
+  {% set listId = 'expandable-checkboxes__list' | uniqid %}
+
+  <div class="expandable-checkboxes js-expandable-checkboxes {% if expanded%}expandable-checkboxes_expanded{% endif %}">
+    <button
+      class="expandable-checkboxes__button js-expandable-checkboxes__button"
+      type="button"
+      aria-expanded="{% if expanded %}true{% else %}false{% endif %}"
+      aria-controls="{{ listId }}"
+    >
+      <span class="expandable-checkboxes__label">{{ label }}</span>
+      {{ arrow_expand(class='expandable-checkboxes__icon', width=12, height=8) }}
+    </button>
+
+    <div class="expandable-checkboxes__group js-expandable-checkboxes__group" id="{{ listId }}" role="region">{{ checkbox_group(group=group) }}</div>
+  </div>
+{% endmacro %}

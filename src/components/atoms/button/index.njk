@@ -6,7 +6,7 @@
     >
       {% if appearance !== 'link' %}<span class="button__overlay"></span>{% endif %}
       <span class="button__label js-button__label">{{ label }}</span>
-      {% if icon and appearance !== 'link' %}{{ icon(class='button__icon', width=18, height=18) }}{% endif %}
+      {% if icon and appearance !== 'link' %}{{ icon(class='button__icon', width=18, height=18, gradient=appearance==='secondary') }}{% endif %}
     </a>
   {% else %}
     <button
@@ -15,7 +15,7 @@
     >
       {% if appearance !== 'link' %}<span class="button__overlay"></span>{% endif %}
       <span class="button__label js-button__label">{{ label }}</span>
-      {% if icon and appearance !== 'link' %}{{ icon(class='button__icon', width=18, height=18) }}{% endif %}
+      {% if icon and appearance !== 'link' %}{{ icon(class='button__icon', width=18, height=18, gradient=appearance==='secondary') }}{% endif %}
     </button>
   {% endif %}
 {% endmacro %}

@@ -42,15 +42,21 @@ class CountersManager {
     ], F.constTrue)
   );
 
+  private readonly validateCountersData = ({value, min, plurals}: { value: number, min: number, plurals: any }) => pipe(false, H.switchCases([
+    [Number.isFinite(value), F.constFalse],
+    [Number.isFinite(min), F.constFalse],
+    [this.checkPluralsFormat(plurals), F.constFalse]
+  ], F.constTrue));
+
   private countersData: Namespace.CountersData = pipe(
     this.list,
     A.map(H.prop('dataset')),
     A.reduce({}, (acc, {name, value, plurals, min}) => pipe(
-      name, O.fromNullable, O.chain((name) => pipe(value, O.fromNullable, O.chain(
+      name, O.fromNullable, O.chain((name) => pipe(value, O.fromNullable, O.map(Number), O.chain(
         (value) => pipe(plurals, O.fromNullable, O.map(JSON.parse), O.chain(
-          (plurals) => pipe(min, O.fromNullable, O.chain(
-            (min) => this.checkPluralsFormat(plurals) ? O.some({
-              [name]: {plurals, value: Number(value), min: Number(min)}
+          (plurals) => pipe(min, O.fromNullable, O.map(Number), O.chain(
+            (min) => this.validateCountersData({value, min, plurals}) ? O.some({
+              [name]: {plurals, value, min}
             }) : O.none)))))
       )), O.fold(() => ({...acc, ...this.invalidData}), (data) => ({...acc, ...data}))
     ))

@@ -11,60 +11,24 @@ import LikeButton from 'atoms/like-button';
 import RateBar from 'atoms/rate-bar';
 
 import CountersDropdown from 'molecules/counters-dropdown';
-
-import './style.css';
 import ExpandableCheckboxes from 'molecules/expandable-checkboxes';
 
-pipe(
-  document,
-  H.querySelectorAll<HTMLDivElement>('.js-ui-kit__field'),
-  A.map((container) => pipe(TextField, H.instance(container, {onChange: H.trace})))
-);
+import './style.css';
 
-pipe(
-  document,
-  H.querySelectorAll<HTMLDivElement>('.js-ui-kit__dropdown'),
-  A.map((container) => pipe(CountersDropdown, H.instance(container, {onChange: H.trace})))
-);
+type InitTuple<Class extends { new(container: HTMLElement, ...params: any[]): any }> = [
+  string, Class, ...(Class extends { new(container: HTMLElement, ...params: infer Params): any } ? Params : never)
+]
 
-pipe(
-  document,
-  H.querySelectorAll<HTMLDivElement>('.js-ui-kit__button'),
-  A.map((container) => pipe(Button, H.instance(container, {onClick: () => H.trace('Click!')})))
-);
+const init = <Class extends { new(container: HTMLElement, ...params: any[]): any }>(
+  [selector, Fn, ...params]: InitTuple<Class>
+) => pipe(document, H.querySelectorAll<HTMLElement>(selector), A.map((container) => new Fn(container, ...params)));
 
-pipe(
-  document,
-  H.querySelectorAll<HTMLDivElement>('.js-ui-kit__subscribe-field'),
-  A.map((container) => pipe(SubscribeField, H.instance(container, {onSubmit: H.trace})))
-);
-
-pipe(
-  document,
-  H.querySelectorAll<HTMLDivElement>('.js-ui-kit__checkbox'),
-  A.map((container) => pipe(Checkbox, H.instance(container, {onChange: H.trace})))
-);
-
-pipe(
-  document,
-  H.querySelectorAll<HTMLDivElement>('.js-ui-kit__radio-group'),
-  A.map((container) => pipe(RadioGroup, H.instance(container, {onChange: H.trace})))
-);
-
-pipe(
-  document,
-  H.querySelectorAll<HTMLDivElement>('.js-ui-kit__like-button'),
-  A.map((container) => pipe(LikeButton, H.instance(container, {onChange: H.trace})))
-);
-
-pipe(
-  document,
-  H.querySelectorAll<HTMLDivElement>('.js-ui-kit__rate-bar'),
-  A.map((container) => pipe(RateBar, H.instance(container, {onChange: H.trace})))
-);
-
-pipe(
-  document,
-  H.querySelectorAll<HTMLDivElement>('.js-ui-kit__expandable-checkboxes'),
-  A.map((container) => pipe(ExpandableCheckboxes, H.instance(container, {onChange: H.trace})))
-);
+init(['.js-ui-kit__field', TextField, {onChange: H.trace}]);
+init(['.js-ui-kit__dropdown', CountersDropdown, {onChange: H.trace}]);
+init(['.js-ui-kit__button', Button, {onClick: () => H.trace('Click!')}]);
+init(['.js-ui-kit__subscribe-field', SubscribeField, {onSubmit: H.trace}]);
+init(['.js-ui-kit__checkbox', Checkbox, {onChange: H.trace}]);
+init(['.js-ui-kit__radio-group', RadioGroup, {onChange: H.trace}]);
+init(['.js-ui-kit__like-button', LikeButton, {onChange: H.trace}]);
+init(['.js-ui-kit__rate-bar', RateBar, {onChange: H.trace}]);
+init(['.js-ui-kit__expandable-checkboxes', ExpandableCheckboxes, {onChange: H.trace}]);

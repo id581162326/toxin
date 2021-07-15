@@ -82,5 +82,5 @@
 .button__icon {
   position: absolute;
   right: 13px;
-  color: var(--button-text-color, white);
+  color: white;
 }

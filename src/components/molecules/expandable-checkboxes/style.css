@@ -10,10 +10,11 @@
 
 .expandable-checkboxes_expanded {
   --expandable-checkboxes-max-height: 1000px;
-  --expandable-checkboxed-icon-rotate: 180deg;
-  --expandable-checkbox-group-visibility: visible;
-  --expandable-checkboxed-group-opacity: 1;
-  --expandable-checkboxed-group-visibility-transition: .1s;
+  --expandable-checkboxes-icon-rotate: 180deg;
+  --expandable-checkboxes-group-visibility: visible;
+  --expandable-checkboxes-group-opacity: 1;
+  --expandable-checkboxes-group-visibility-transition: .1s;
+  --expandable-checkboxes-group-pointer-events: auto;
 }
 
 .expandable-checkboxes__button {
@@ -43,7 +44,7 @@
 
 .expandable-checkboxes__icon {
   color: rgba(var(--dark-rgb), var(--expandable-checkboxes-icon-aplha, .5));
-  transform: rotate(var(--expandable-checkboxed-icon-rotate, 0));
+  transform: rotate(var(--expandable-checkboxes-icon-rotate, 0));
 }
 
 .loaded .expandable-checkboxes__icon {
@@ -51,15 +52,16 @@
 }
 
 .expandable-checkboxes__group {
-  opacity: var(--expandable-checkboxed-group-opacity, 0);
+  pointer-events: var(--expandable-checkboxes-group-pointer-events, none);
+  opacity: var(--expandable-checkboxes-group-opacity, 0);
 }
 
 .expandable-checkboxes__group * {
-  visibility: var(--expandable-checkbox-group-visibility, hidden);
+  visibility: var(--expandable-checkboxes-group-visibility, hidden);
 }
 
 .loaded .expandable-checkboxes__group * {
-  transition: visibility var(--expandable-checkboxed-group-visibility-transition, 0s);
+  transition: visibility var(--expandable-checkboxes-group-visibility-transition, 0s);
 }
 
 .loaded .expandable-checkboxes__group {

@@ -1,4 +1,4 @@
-import {pipe} from 'fp-ts/function';
+import {flow, pipe} from 'fp-ts/function';
 import * as H from 'globals/helpers';
 import * as O from 'fp-ts/Option';
 
@@ -17,12 +17,15 @@ class Checkbox implements Namespace.Interface {
 
   private readonly checkbox = pipe(this.container, H.querySelector<HTMLInputElement>('.js-checkbox__input'));
 
-  private readonly initCheckbox = () => pipe(this.checkbox, O.map(H.addEventListener('click', this.handleCheck)));
+  private readonly initCheckbox = () => pipe(this.checkbox, O.map(flow(
+    H.addEventListener('click', this.handleCheck),
+    H.method('dispatchEvent', new Event('click'))
+  )));
 
   private readonly handleCheck = (event: MouseEvent) => {
-    const target = event.target as HTMLInputElement;
+    const {checked, name} = event.target as HTMLInputElement;
 
-    pipe(target.checked, this.props.onChange);
+    this.props.onChange({[name]: checked});
   };
 }
 

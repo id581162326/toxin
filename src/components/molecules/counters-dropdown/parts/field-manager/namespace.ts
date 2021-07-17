@@ -1,10 +1,7 @@
-namespace FieldManager {
-  export type Plurals = {one: string, few: string, many: string};
+import {Plural} from 'globals/utils'
 
-  export type CountersData = Array<{
-    value: number,
-    plurals: Plurals
-  }>;
+namespace FieldManager {
+  export type CountersData = Array<{ value: number, plural: Plural }>;
 
   export interface Interface {
     setDisabled: (disabled: boolean) => this,

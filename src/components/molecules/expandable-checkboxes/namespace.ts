@@ -1,8 +1,6 @@
 namespace ExpandableCheckboxes {
-  export type CheckboxesData = Record<string, boolean>;
-
   export interface Props {
-    onChange: (checkboxesData: CheckboxesData) => void
+    onChange: (checkboxesData: Record<string, boolean>) => void
   }
 
   export interface Interface {

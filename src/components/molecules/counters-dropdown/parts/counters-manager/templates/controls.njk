@@ -1,0 +1,11 @@
+{% from 'atoms/button/index.njk' import button %}
+
+<div class="counters-dropdown__controls">
+  <div class="counters-dropdown__control-btn js-counters-dropdown__clear-btn">
+    {{ button(label='Очистить', appearance='link') }}
+  </div>
+
+  <div class="counters-dropdown__control-btn js-counters-dropdown__apply-btn">
+    {{ button(label='Применить', appearance='link') }}
+  </div>
+</div>

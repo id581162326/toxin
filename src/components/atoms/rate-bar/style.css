@@ -3,9 +3,13 @@
   width: max-content;
 }
 
+/* title, label */
+
 .rate-bar__title, .rate-bar__label {
   @apply --visually-hidden;
 }
+
+/* input */
 
 .rate-bar__input {
   @apply --visually-hidden;
@@ -41,6 +45,8 @@
   }
 }
 
+/* mark */
+
 .rate-bar__mark {
   position: relative;
   display: grid;
@@ -50,6 +56,8 @@
   cursor: pointer;
 }
 
+/* icon filled */
+
 .rate-bar__icon-filled {
   position: absolute;
   opacity: var(--rate-bar-icon-filled-opacity, 1);
@@ -58,6 +66,8 @@
 .loaded .rate-bar__icon-filled {
   transition: opacity .1s ease-in-out;
 }
+
+/* icon shaped */
 
 .rate-bar__icon-shaped {
   position: absolute;

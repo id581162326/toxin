@@ -6,6 +6,8 @@
   list-style: none;
 }
 
+/* item */
+
 .bullet-list__item {
   display: flex;
   align-items: baseline;
@@ -20,6 +22,8 @@
     background: rgba(var(--dark-rgb), .25);
   }
 }
+
+/* text */
 
 .bullet-list__text {
   flex: 1;

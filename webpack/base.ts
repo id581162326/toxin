@@ -17,6 +17,7 @@ const toHtmlWebpackPluginFrom = (buildType: BuildType, folder: string) => (filen
   filename: `${filename}.html`,
   template: `./${folder}/${filename}/index.njk`,
   inject: 'body',
+  minify: true,
   ...(buildType === 'prod' ? {alwaysWriteToDisk: true} : {})
 });
 

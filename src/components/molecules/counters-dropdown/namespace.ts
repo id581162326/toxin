@@ -1,10 +1,14 @@
 import CountersManager from './parts/counters-manager/namespace';
 
 namespace CountersDropdown {
-  export type CountersData = CountersManager.CountersData
+  export type CountersData = CountersManager.CountersData;
+
+  export type Counter = CountersManager.Counter;
 
   export interface Props {
-    onChange: (countersData: Record<string, number>) => void
+    counters: Array<Counter>,
+    onChange: (countersData: Record<string, number>) => void,
+    autoApply?: true
   }
 
   export interface Interface {

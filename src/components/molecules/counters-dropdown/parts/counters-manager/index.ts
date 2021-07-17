@@ -1,6 +1,7 @@
 import * as F from 'fp-ts/function';
 import {pipe} from 'fp-ts/function';
 import * as O from 'fp-ts/Option';
+import {Option} from 'fp-ts/Option';
 import * as H from 'globals/helpers';
 import * as A from 'fp-ts/Array';
 
@@ -8,9 +9,12 @@ import Counter from 'atoms/counter';
 import Button from 'atoms/button';
 
 import Namespace from './namespace';
+import listTemplate from './templates/list.njk';
+import controlsTemplate from './templates/controls.njk';
 
 class CountersManager {
   constructor(private readonly container: HTMLElement, private readonly props: Namespace.Props) {
+    this.renderContent();
     this.counters = this.initCounters();
     this.initApplyBtn();
     this.initClearBtn();
@@ -18,78 +22,44 @@ class CountersManager {
     this.setClearBtnVisibility();
   }
 
+  private countersData: Namespace.CountersData = pipe(
+    this.props.counters,
+    A.reduce({}, (acc, {name, value, min, plural}) => ({...acc, ...{[name]: {value, plural, min: min ? min : 0}}}))
+  );
+
+  private readonly listWrap = pipe(this.container, H.querySelector<HTMLDivElement>('.js-counters-dropdown__list-wrap'));
+
   private readonly counters: Array<InstanceType<typeof Counter>>;
 
-  private readonly clearBtnContainer = pipe(this.container, H.querySelector<HTMLButtonElement>('.js-counters-dropdown__clear-btn'));
+  private list: Array<HTMLLIElement> = [];
 
-  private readonly applyBtnContainer = pipe(this.container, H.querySelector<HTMLButtonElement>('.js-counters-dropdown__apply-btn'));
+  private applyBtnContainer: Option<HTMLDivElement> = O.none;
 
-  private readonly list = pipe(this.container, H.querySelectorAll<HTMLLIElement>('.js-counters-dropdown__item'));
+  private clearBtnContainer: Option<HTMLDivElement> = O.none;
 
-  private readonly invalidData = {
-    'invalid-data': {
-      plurals: {one: 'invalid data', few: 'invalid data', many: 'invalid data'},
-      value: 0,
-      min: 0
-    }
-  };
+  private readonly renderContent = () => pipe(this.listWrap, O.map((listWrap) => {
+    const {counters, autoApply} = this.props;
 
-  private readonly checkPluralsFormat = (plurals: any | { one: string, few: string, many: string }) => pipe(
-    false, H.switchCases([
-      [Boolean('one' in plurals && typeof plurals['one'] === 'string'), F.constFalse],
-      [Boolean('few' in plurals && typeof plurals['few'] === 'string'), F.constFalse],
-      [Boolean('many' in plurals && typeof plurals['many'] === 'string'), F.constFalse]
-    ], F.constTrue)
-  );
+    const listHTML = listTemplate({counters});
 
-  private readonly validateCountersData = ({value, min, plurals}: { value: number, min: number, plurals: any }) => pipe(false, H.switchCases([
-    [Number.isFinite(value), F.constFalse],
-    [Number.isFinite(min), F.constFalse],
-    [this.checkPluralsFormat(plurals), F.constFalse]
-  ], F.constTrue));
+    const controlsHTML = !autoApply ? controlsTemplate() : '';
 
-  private countersData: Namespace.CountersData = pipe(
-    this.list,
-    A.map(H.prop('dataset')),
-    A.reduce({}, (acc, {name, value, plurals, min}) => pipe(
-      name, O.fromNullable, O.chain((name) => pipe(value, O.fromNullable, O.map(Number), O.chain(
-        (value) => pipe(plurals, O.fromNullable, O.map(JSON.parse), O.chain(
-          (plurals) => pipe(min, O.fromNullable, O.map(Number), O.chain(
-            (min) => this.validateCountersData({value, min, plurals}) ? O.some({
-              [name]: {plurals, value, min}
-            }) : O.none)))))
-      )), O.fold(() => ({...acc, ...this.invalidData}), (data) => ({...acc, ...data}))
-    ))
-  );
+    listWrap.insertAdjacentHTML('afterbegin', listHTML + controlsHTML);
 
-  private readonly initCounters = () => pipe(this.list, A.map((item) => pipe(Counter, H.instance(item, {
-    onChange: this.handleCounterChange(item)
-  }))));
+    this.list = pipe(listWrap, H.querySelectorAll<HTMLLIElement>('.js-counters-dropdown__item'));
 
-  private readonly sendCountersData = () => this.props.onChange(this.countersData);
+    this.applyBtnContainer = pipe(listWrap, H.querySelector<HTMLDivElement>('.js-counters-dropdown__apply-btn'));
 
-  private readonly resetCountersData = () => {
-    pipe(this.counters, A.map(H.method('reset')));
+    this.clearBtnContainer = pipe(listWrap, H.querySelector<HTMLDivElement>('.js-counters-dropdown__clear-btn'));
+  }));
 
-    this.sendCountersData();
-  };
-
-  private readonly setClearBtnVisibility = () => {
-    const isHidden = pipe(this.countersData, H.values, A.map(({value, min}) => pipe(value, H.sub(min), Boolean)), H.includes(true), H.not);
-
-    pipe(this.clearBtnContainer, O.map(pipe(['counters-dropdown__control-btn_is_hidden'], isHidden
-      ? H.addClassList : H.removeClassList)));
-  };
-
-  private readonly handleCounterChange = ({dataset}: HTMLLIElement) => (value: number) => {
-    pipe(dataset.name, O.fromNullable, O.fold(
-      () => this.setCountersData(value)('invalid-data'), this.setCountersData(value))
-    );
-
-    pipe(O.isNone(this.applyBtnContainer) || O.isNone(this.clearBtnContainer), H.switchCases([
-      [true, this.sendCountersData], [false, this.setClearBtnVisibility]
-    ], F.constVoid));
-  };
+  private readonly initCounters = () => pipe(this.list, A.zip(this.props.counters), A.map(([item, data]) => pipe(
+    Counter, H.instance(item, {
+      value: data.value,
+      min: data.min,
+      onChange: this.handleCounterChange(data.name)
+    }))
+  ));
 
   private readonly initApplyBtn = () => pipe(this.applyBtnContainer, O.map(
     (btnContainer) => pipe(Button, H.instance(btnContainer, {onClick: this.sendCountersData}))
@@ -99,10 +69,33 @@ class CountersManager {
     (btnContainer) => pipe(Button, H.instance(btnContainer, {onClick: this.resetCountersData}))
   ));
 
-  private readonly setCountersData = (value: number) => (name: string) => {
-    const key = name in this.countersData ? name : 'invalid-data';
+  private readonly sendCountersData = () => this.props.onChange(this.countersData);
 
-    this.countersData = {...this.countersData, [key]: {...this.countersData[key], value}};
+  private readonly setCountersData = (value: number) => (name: string) => {
+    this.countersData = {...this.countersData, [name]: {...this.countersData[name], value}};
+  };
+
+  private readonly resetCountersData = () => {
+    pipe(this.counters, A.map(H.method('reset')));
+
+    this.sendCountersData();
+  };
+
+  private readonly setClearBtnVisibility = () => {
+    const isHidden = pipe(this.countersData, H.values, A.map(({value, min}) => pipe(
+      value, H.sub(min), Boolean)
+    ), H.includes(true), H.not);
+
+    pipe(this.clearBtnContainer, O.map(pipe(['counters-dropdown__control-btn_is_hidden'], isHidden
+      ? H.addClassList : H.removeClassList)));
+  };
+
+  private readonly handleCounterChange = (name: string) => (value: number) => {
+    this.setCountersData(value)(name);
+
+    pipe(O.isNone(this.applyBtnContainer) || O.isNone(this.clearBtnContainer), H.switchCases([
+      [true, this.sendCountersData], [false, this.setClearBtnVisibility]
+    ], F.constVoid));
   };
 }
 

@@ -23,7 +23,11 @@ class CountersDropdown implements Namespace.Interface {
   constructor(container: HTMLElement, private readonly props: Namespace.Props) {
     this.fieldManager = pipe(FieldManager, H.instance(container));
     this.dropdownManager = pipe(DropdownManager, H.instance(container));
-    this.countersManager = pipe(CountersManager, H.instance(container, {onChange: this.handleCountersChange}));
+    this.countersManager = pipe(CountersManager, H.instance(container, {
+      counters: props.counters,
+      autoApply: props.autoApply,
+      onChange: this.handleCountersChange
+    }));
   }
 
   private readonly dropdownManager: InstanceType<typeof DropdownManager>;

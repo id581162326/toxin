@@ -3,6 +3,8 @@
   width: max-content;
 }
 
+/* input */
+
 .like-button__input {
   @apply --visually-hidden;
 
@@ -24,6 +26,8 @@
   }
 }
 
+/* mark */
+
 .like-button__mark {
   position: relative;
   display: flex;
@@ -40,6 +44,8 @@
   transition: border-color .1s ease-in-out;
 }
 
+/* icon filled */
+
 .like-button__icon-filled {
   left: 4px;
   position: absolute;
@@ -49,6 +55,8 @@
 .loaded .like-button__icon-filled {
   transition: opacity .1s ease-in-out;
 }
+
+/* icon shaped */
 
 .like-button__icon-shaped {
   left: 4px;
@@ -60,6 +68,8 @@
 .loaded .like-button__icon-shaped {
   transition: color .1s ease-in-out, opacity .1s ease-in-out;
 }
+
+/* count */
 
 .like-button__count {
   width: 30px;
@@ -74,6 +84,8 @@
 .like-button__count {
   transition: color .1s ease-in-out;
 }
+
+/* label */
 
 .like-button__label {
   @apply --visually-hidden;

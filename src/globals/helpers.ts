@@ -23,6 +23,8 @@ export const call = <Fn extends { (...args: any[]): ReturnType<Fn> }>(
   ...args: Fn extends { (...args: infer Args): any } ? Args : never
 ) => (fn: Fn) => fn(...args);
 
+export const concat = (x: unknown) => (y: unknown) => `${y}${x}`;
+
 export const instance = <Class extends { new(...params: any[]): InstanceType<Class> }>(
   ...params: Class extends { new(...params: infer Params): any } ? Params : never
 ) => (Fn: Class) => new Fn(...params);
@@ -37,7 +39,7 @@ export const method = <Instance extends Object, Key extends keyof Instance>(
 export const switchCases = <Case extends [Tag, F.Lazy<Value>], Tag, Value>(cases: Case[], def: F.Lazy<Value>) => (tag: Tag) =>
   pipe(cases, A.findLast(([key]) => key === tag), O.fold<Case, Value>(() => def(), ([_, value]) => value()));
 
-export const pluralRule = (
+export const pluralize = (
   plurals: { one: string, few: string, many: string }
 ) => (count: number) => pipe(
   Intl.PluralRules, instance('ru'), method('select', count), (rule) => pipe(plurals, prop(rule as | 'one' | 'few' | 'many'))

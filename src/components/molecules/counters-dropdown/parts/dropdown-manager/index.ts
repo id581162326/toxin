@@ -10,39 +10,54 @@ class DropdownManager implements Namespace.Interface {
   public readonly setExpanded = (expanded: boolean) => {
     pipe(this.root, O.map(pipe(['counters-dropdown_expanded'], expanded ? H.addClassList : H.removeClassList)));
     pipe(this.button, O.map(H.setAttribute('aria-expanded', H.toString(expanded))));
-    pipe([this.setOutsideClickSideEffect, this.setFocusTrapSideEffect], A.map(H.call(expanded ? 'add' : 'remove')));
+    pipe([this.setOutsideClickSideEffect, this.setFocusTrapSideEffect, this.setEscapeKeyPress], A.map(
+      H.call(expanded ? 'add' : 'remove')
+    ));
 
     return (this);
   };
 
   constructor(private readonly container: HTMLElement) {
     this.initButton();
-    this.initEscapeKeyPress();
   }
 
   private readonly root = pipe(this.container, H.querySelector<HTMLDivElement>('.js-counters-dropdown'));
 
   private readonly button = pipe(this.container, H.querySelector<HTMLInputElement>('.js-counters-dropdown__input'));
 
-  private readonly focusable = pipe(this.container, H.querySelectorAll<HTMLElement>('input, button:not([tabindex="-1"])'));
-
   private readonly initButton = () => pipe(this.button, O.map(flow(H.addEventListener('click', this.toggleExpanded))));
+
+  private readonly getAllFocusable = () => pipe(
+    this.container, H.querySelectorAll<HTMLElement>('input, button:not([tabindex="-1"])')
+  );
 
   private readonly setFocusTrapSideEffect = (type: 'add' | 'remove') => pipe(type, H.switchCases([
     ['add', this.initFocusTrap], ['remove', this.removeFocusTrap]
   ], F.constVoid));
 
   private readonly initFocusTrap = () => {
-    pipe(this.focusable, A.head, O.map(H.addEventListener('blur', this.handleHeadBlur)));
-    pipe(this.focusable, A.last, O.map(H.addEventListener('blur', this.handleLastBlur)));
+    const focusable = this.getAllFocusable();
+
+    pipe(focusable, A.head, O.map(H.addEventListener('blur', this.handleHeadBlur)));
+    pipe(focusable, A.last, O.map(H.addEventListener('blur', this.handleLastBlur)));
   };
 
   private readonly removeFocusTrap = () => {
-    pipe(this.focusable, A.head, O.map(H.addEventListener('blur', this.handleHeadBlur)));
-    pipe(this.focusable, A.last, O.map(H.addEventListener('blur', this.handleLastBlur)));
+    const focusable = this.getAllFocusable();
+
+    pipe(focusable, A.head, O.map(H.removeEventListener('blur', this.handleHeadBlur)));
+    pipe(focusable, A.last, O.map(H.removeEventListener('blur', this.handleLastBlur)));
   };
 
-  private readonly initEscapeKeyPress = () => pipe(this.focusable, A.map(H.addEventListener('keyup', this.handleEscapePress)));
+
+  private readonly setEscapeKeyPress = (type: 'add' | 'remove') => {
+    const focusable = this.getAllFocusable();
+
+    pipe(type, H.switchCases([
+      ['add', () => pipe(focusable, A.map(H.addEventListener('keyup', this.handleEscapePress)))],
+      ['remove', () => pipe(focusable, A.map(H.removeEventListener('keyup', this.handleEscapePress)))]
+    ], F.constVoid))
+  };
 
   private readonly setOutsideClickSideEffect = (type: 'add' | 'remove') => pipe(type, H.switchCases([
     ['add', () => H.addEventListener('click', this.handleOutsideClick)(document)],
@@ -51,11 +66,11 @@ class DropdownManager implements Namespace.Interface {
 
   private readonly toggleExpanded = () => pipe(this.root, O.map((root) => pipe(!root.classList.contains('counters-dropdown_expanded'), this.setExpanded)));
 
-  private readonly handleHeadBlur = ({relatedTarget}: FocusEvent) => pipe(this.focusable, A.last, O.map(
+  private readonly handleHeadBlur = ({relatedTarget}: FocusEvent) => pipe(this.getAllFocusable(), A.last, O.map(
     relatedTarget && !this.container.contains(relatedTarget as Node) ? H.method('focus') : H.ident
   ));
 
-  private readonly handleLastBlur = ({relatedTarget}: FocusEvent) => pipe(this.focusable, A.head, O.map(
+  private readonly handleLastBlur = ({relatedTarget}: FocusEvent) => pipe(this.getAllFocusable(), A.head, O.map(
     relatedTarget && !this.container.contains(relatedTarget as Node) ? H.method('focus') : H.ident
   ));
 

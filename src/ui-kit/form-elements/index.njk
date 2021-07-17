@@ -12,8 +12,9 @@
 {% from 'atoms/like-button/index.njk' import like_button %}
 {% from 'atoms/rate-bar/index.njk' import rate_bar %}
 {% from 'atoms/bullet-list/index.njk' import bullet_list %}
-{% from 'molecules/counters-dropdown/index.njk' import appartment_dropdown, guests_dropdown %}
+{% from 'molecules/counters-dropdown/index.njk' import counters_dropdown %}
 {% from 'molecules/expandable-checkboxes/index.njk' import expandable_checkboxes %}
+{% from 'molecules/date-dropdown/index.njk' import date_dropdown, date_dropdown_twin %}
 
 {% block content %}
   <div class="ui-kit js-ui-kit">
@@ -42,12 +43,12 @@
         {{ text_field(label='text-field', value='This is pretty aswesome', autofocus=true) }}
       </div>
 
-      <div class="ui-kit__dropdown js-ui-kit__dropdown">
-        {{ guests_dropdown(label='dropdown') }}
+      <div class="ui-kit__dropdown js-ui-kit__dropdown_theme_guests">
+        {{ counters_dropdown(placeholder='Сколько гостей', label='dropdown') }}
       </div>
 
-      <div class="ui-kit__dropdown js-ui-kit__dropdown">
-        {{ appartment_dropdown(label='dropdown') }}
+      <div class="ui-kit__dropdown js-ui-kit__dropdown_theme_apartment">
+        {{ counters_dropdown(placeholder='Конфигурация номера', label='dropdown') }}
       </div>
 
       <div class="ui-kit__button js-ui-kit__button">
@@ -165,6 +166,7 @@
           }
         ]) }}
       </div>
+
       <div class="ui-kit__expandable-checkboxes js-ui-kit__expandable-checkboxes">
         {{ expandable_checkboxes(label='Expandable checkbox list', expanded=true, group=[
           {
@@ -195,6 +197,14 @@
             label: 'Шампунь'
           }
         ]) }}
+      </div>
+
+      <div class="ui-kit__single-date-dropdown js-ui-kit__single-date-dropdown">
+        {{ date_dropdown(label='filter date dropdown', rangeStart='2021-07-16', rangeEnd='2021-07-20') }}
+      </div>
+
+      <div class="ui-kit__twin-date-dropdown js-ui-kit__twin-date-dropdown">
+        {{ date_dropdown_twin(labelFrom='date dropdown', labelTo='date dropdown') }}
       </div>
     </div>
   </div>

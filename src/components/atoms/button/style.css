@@ -79,6 +79,8 @@
   transition: color .1s ease-in-out;
 }
 
+/* icon */
+
 .button__icon {
   position: absolute;
   right: 13px;

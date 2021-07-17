@@ -1,6 +1,6 @@
 namespace Checkbox {
   export interface Props {
-    onChange: (checked: boolean) => void
+    onChange: (data: Record<string, boolean>) => void
   }
 
   export interface Interface {

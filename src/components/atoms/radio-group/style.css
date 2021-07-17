@@ -3,11 +3,15 @@
   column-gap: 20px;
 }
 
+/* input wrap */
+
 .radio-group__input-wrap {
   display: grid;
   grid-template-columns: max-content 1fr;
   column-gap: 10px;
 }
+
+/* input */
 
 .radio-group__input {
   @apply --visually-hidden;
@@ -30,6 +34,8 @@
   }
 }
 
+/* mark */
+
 .radio-group__mark {
   display: grid;
   place-items: center;
@@ -44,6 +50,8 @@
   transition: border-color .1s ease-in-out;
 }
 
+/* inner circle */
+
 .radio-group__inner-circle {
   width: 12px;
   height: 12px;
@@ -55,6 +63,8 @@
 .loaded .radio-group__inner-circle {
   transition: opacity .1s ease-in-out;
 }
+
+/* label */
 
 .radio-group__label {
   font: 14px/24px var(--font-regular);

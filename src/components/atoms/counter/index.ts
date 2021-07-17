@@ -1,7 +1,7 @@
 import * as O from 'fp-ts/Option';
 import * as H from 'globals/helpers';
 import * as F from 'fp-ts/function';
-import {pipe} from 'fp-ts/function';
+import {flow, pipe} from 'fp-ts/function';
 
 import Namespace from './namespace';
 
@@ -28,7 +28,21 @@ class Counter implements Namespace.Interface {
   private readonly initCounter = () => {
     pipe(this.decrementBtn, O.map(H.addEventListener('click', this.handleClick('dec'))));
     pipe(this.incrementBtn, O.map(H.addEventListener('click', this.handleClick('inc'))));
-    pipe(this.input, O.map(H.addEventListener('change', this.handleChange)));
+    pipe(this.input, O.map(flow(
+      H.addEventListener('change', this.handleChange),
+      this.setInputProps,
+      H.method('dispatchEvent', new Event('change'))
+    )));
+  };
+
+  private readonly setInputProps = (input: HTMLInputElement) => {
+    const {value, min, max} = this.props;
+
+    pipe(value, O.fromNullable, O.map((value) => input.value = H.toString(value)));
+    pipe(min, O.fromNullable, O.map((min) => input.min = H.toString(min)));
+    pipe(max, O.fromNullable, O.map((max) => input.max = H.toString(max)));
+
+    return (input);
   };
 
   private readonly handleClick = (type: 'dec' | 'inc') => () => pipe(

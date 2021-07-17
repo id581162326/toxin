@@ -4,11 +4,15 @@
   align-items: center;
 }
 
+/* label */
+
 .counter__label {
   font: 12px/15px var(--font-bold);
   text-transform: uppercase;
   color: var(--dark-color);
 }
+
+/* control button */
 
 .counter__control-btn {
   display: grid;
@@ -38,6 +42,8 @@
 .loaded .counter__control-btn {
   transition: opacity .1s ease-in-out;
 }
+
+/* input */
 
 .counter__input {
   width: 32px;

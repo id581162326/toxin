@@ -17,8 +17,8 @@
 {% from 'molecules/date-dropdown/index.njk' import date_dropdown, date_dropdown_twin %}
 
 {% block content %}
-  <div class="ui-kit js-ui-kit">
-    <div class="ui-kit__logo">
+  <div class="form-elements js-form-elements">
+    <div class="form-elements__logo">
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M23.9989 32.4712C23.2224 32.4712 22.5871 31.8359 22.5871 31.0594C22.5871 25.6241 18.14 21.177 12.7047 21.177C11.9283 21.177 11.293 20.5418 11.293 19.7653C11.293 18.9888 11.9283 18.3535 12.7047 18.3535C19.7283 18.3535 25.4106 24.0359 25.4106 31.0594C25.4106 31.8359 24.7753 32.4712 23.9989 32.4712Z"
@@ -32,108 +32,101 @@
       </svg>
     </div>
 
-    <div class="ui-kit__column">
-      <div class="ui-kit__field js-ui-kit__field">
-        <span class="ui-kit__field-desc">default</span>
+    <div class="form-elements__column">
+      <div class="form-elements__field js-form-elements__field">
+        <span class="form-elements__field-desc">default</span>
         {{ text_field(label='text-field', type='email', placeholder='Email') }}
       </div>
 
-      <div class="ui-kit__field js-ui-kit__field">
-        <span class="ui-kit__field-desc">hover/focus</span>
+      <div class="form-elements__field js-form-elements__field">
+        <span class="form-elements__field-desc">hover/focus</span>
         {{ text_field(label='text-field', value='This is pretty aswesome', autofocus=true) }}
       </div>
 
-      <div class="ui-kit__dropdown js-ui-kit__dropdown_theme_guests">
+      <div class="form-elements__dropdown js-form-elements__dropdown_theme_guests">
         {{ counters_dropdown(placeholder='Сколько гостей', label='dropdown') }}
       </div>
 
-      <div class="ui-kit__dropdown js-ui-kit__dropdown_theme_apartment">
+      <div class="form-elements__dropdown js-form-elements__dropdown_theme_apartment">
         {{ counters_dropdown(placeholder='Конфигурация номера', label='dropdown') }}
       </div>
 
-      <div class="ui-kit__button js-ui-kit__button">
+      <div class="form-elements__button js-form-elements__button">
         {{ button(label='Click me', appearance='primary') }}
       </div>
 
-      <div class="ui-kit__button js-ui-kit__button">
+      <div class="form-elements__button js-form-elements__button">
         {{ button(label='Click me', appearance='secondary') }}
       </div>
 
-      <div class="ui-kit__button js-ui-kit__button">
+      <div class="form-elements__button js-form-elements__button">
         {{ button(label='Click me', appearance='link', href='/') }}
       </div>
 
-      <div class="ui-kit__button js-ui-kit__button">
+      <div class="form-elements__button js-form-elements__button">
         {{ button(label='Перейти к оплате', appearance='primary', icon=arrow_forward) }}
       </div>
 
-      <div class="ui-kit__button js-ui-kit__button">
+      <div class="form-elements__button js-form-elements__button">
         {{ button(label='Перейти к оплате', appearance='secondary', icon=arrow_forward) }}
       </div>
 
-      <div class="ui-kit__subscribe-field js-ui-kit__subscribe-field">
+      <div class="form-elements__subscribe-field js-form-elements__subscribe-field">
         {{ subscribe_field(label='Subscribtion text-field') }}
       </div>
 
-      <div class="ui-kit__checkbox js-ui-kit__checkbox">
+      <div class="form-elements__checkbox js-form-elements__checkbox">
         {{ checkbox(
           name='breakfast',
-          appearance='default',
+          appearance='checkbox',
           label='Завтрак',
           checked=true
         ) }}
       </div>
 
-      <div class="ui-kit__checkbox js-ui-kit__checkbox">
+      <div class="form-elements__checkbox js-form-elements__checkbox">
         {{ checkbox(
           name='disabled-asistance',
-          appearance='default',
+          appearance='checkbox',
           label='Помощник для инвалидов',
           description='На 1 этаже вас встретит специалист  и проводит до номера.'
         ) }}
       </div>
 
-      <div class="ui-kit__radio-group js-ui-kit__radio-group">
+      <div class="form-elements__radio-group js-form-elements__radio-group">
         {{ radio_group(name='gender', group=[
-          {
-            value: 'male',
-            label: 'Мужчина',
-            checked: true
-          },
-          {
-            value: 'female',
-            label: 'Женщина'
-          }
+          {value: 'male', label: 'Мужчина', checked: true},
+          {value: 'female', label: 'Женщина'}
         ]) }}
       </div>
 
-      <div class="ui-kit__toggle js-ui-kit__checkbox">
+      <div class="form-elements__toggle js-form-elements__checkbox">
         {{ checkbox(name='get-special-requests', appearance='toggle', label='Получать спецпредложения') }}
       </div>
 
-      <div class="ui-kit__toggle js-ui-kit__checkbox">
+      <div class="form-elements__toggle js-form-elements__checkbox">
         {{ checkbox(name='get-special-requests', appearance='toggle', checked=true, label='Получать спецпредложения') }}
       </div>
 
-      <div class="ui-kit__like-button js-ui-kit__like-button">
+      <div class="form-elements__like-button js-form-elements__like-button">
         {{ like_button(name='like-button', count=0) }}
       </div>
 
-      <div class="ui-kit__like-button js-ui-kit__like-button">
+      <div class="form-elements__like-button js-form-elements__like-button">
         {{ like_button(name='like-button', count=13, active=true) }}
       </div>
 
-      <section class="ui-kit__rate-bar" aria-labelledby="id22">
+      <section class="form-elements__rate-bar" aria-labelledby="id22">
         <span id="id22">
         {{ rate_bar(rate=4) }}
         </span>
       </section>
 
-      <div class="ui-kit__rate-bar js-ui-kit__rate-bar">
+      <div class="form-elements__rate-bar js-form-elements__rate-bar">
         {{ rate_bar(name='rating', rate=3, interactive=true) }}
       </div>
 
-      <div class="ui-kit__bullet-list">
+      <div class="form-elements__bullet-list">
         {{ bullet_list(['Нельзя с питомцами', 'Без вечеринок и мероприятий', 'Время прибытия — после 13:00,\nа выезд до 12:00']) }}
       </div>
 
@@ -146,19 +139,19 @@
         {name: 'shampoo', label: 'Шампунь'}
       ] %}
 
-      <div class="ui-kit__expandable-checkboxes js-ui-kit__expandable-checkboxes">
+      <div class="form-elements__expandable-checkboxes js-form-elements__expandable-checkboxes">
         {{ expandable_checkboxes(label='Expandable checkbox list', group=expandable_checkboxes_group) }}
       </div>
 
-      <div class="ui-kit__expandable-checkboxes js-ui-kit__expandable-checkboxes">
+      <div class="form-elements__expandable-checkboxes js-form-elements__expandable-checkboxes">
         {{ expandable_checkboxes(label='Expandable checkbox list', expanded=true, group=expandable_checkboxes_group) }}
       </div>
 
-      <div class="ui-kit__single-date-dropdown js-ui-kit__single-date-dropdown">
+      <div class="form-elements__single-date-dropdown js-form-elements__single-date-dropdown">
         {{ date_dropdown(label='filter date dropdown', rangeStart='2021-07-16', rangeEnd='2021-07-20') }}
       </div>
 
-      <div class="ui-kit__twin-date-dropdown js-ui-kit__twin-date-dropdown">
+      <div class="form-elements__twin-date-dropdown js-form-elements__twin-date-dropdown">
         {{ date_dropdown_twin(labelFrom='date dropdown', labelTo='date dropdown') }}
       </div>
     </div>

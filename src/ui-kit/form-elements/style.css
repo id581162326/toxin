@@ -1,27 +1,27 @@
-.ui-kit {
+.form-elements {
   position: relative;
   width: 1380px;
   margin: 0 auto;
   padding: 141px;
 }
 
-.ui-kit__logo {
+.form-elements__logo {
   position: absolute;
   top: 30px;
   left: 0;
 }
 
-.ui-kit__column {
+.form-elements__column {
   display: grid;
   row-gap: 20px;
   width: 320px;
 }
 
-.ui-kit__field {
+.form-elements__field {
   position: relative;
 }
 
-.ui-kit__field-desc {
+.form-elements__field-desc {
   position: absolute;
   top: 0;
   right: 0;

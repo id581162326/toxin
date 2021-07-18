@@ -25,8 +25,8 @@ const init = <Class extends { new(container: HTMLElement, ...params: any[]): any
   [selector, Fn, ...params]: InitTuple<Class>
 ) => pipe(document, H.querySelectorAll<HTMLElement>(selector), A.map((container) => new Fn(container, ...params)));
 
-init(['.js-ui-kit__field', TextField, {onChange: H.trace}]);
-init(['.js-ui-kit__dropdown_theme_guests', CountersDropdown, {
+init(['.js-form-elements__field', TextField, {onChange: H.trace}]);
+init(['.js-form-elements__dropdown_theme_guests', CountersDropdown, {
   counters: [
     {label: 'Взрослые', name: 'adults', value: 0, min: 0, plural: plurals.guest},
     {label: 'Дети', name: 'children', value: 0, min: 0, plural: plurals.guest},
@@ -34,7 +34,7 @@ init(['.js-ui-kit__dropdown_theme_guests', CountersDropdown, {
   ],
   onChange: H.trace
 }]);
-init(['.js-ui-kit__dropdown_theme_apartment', CountersDropdown, {
+init(['.js-form-elements__dropdown_theme_apartment', CountersDropdown, {
   counters: [
     {label: 'Комнаты', name: 'rooms', value: 1, min: 1, plural: plurals.rooms},
     {label: 'Кровати', name: 'beds', value: 0, min: 0, plural: plurals.beds},
@@ -43,11 +43,11 @@ init(['.js-ui-kit__dropdown_theme_apartment', CountersDropdown, {
   autoApply: true,
   onChange: H.trace
 }]);
-init(['.js-ui-kit__button', Button, {onClick: () => H.trace('Click!')}]);
-init(['.js-ui-kit__subscribe-field', SubscribeField, {onSubmit: H.trace}]);
-init(['.js-ui-kit__checkbox', Checkbox, {onChange: H.trace}]);
-init(['.js-ui-kit__radio-group', RadioGroup, {onChange: H.trace}]);
-init(['.js-ui-kit__like-button', LikeButton, {onChange: H.trace}]);
-init(['.js-ui-kit__rate-bar', RateBar, {onChange: H.trace}]);
-init(['.js-ui-kit__expandable-checkboxes', ExpandableCheckboxes, {onChange: H.trace}]);
-init(['.js-ui-kit__single-date-dropdown', DateDropdown, {}]);
+init(['.js-form-elements__button', Button, {onClick: () => H.trace('Click!')}]);
+init(['.js-form-elements__subscribe-field', SubscribeField, {onSubmit: H.trace}]);
+init(['.js-form-elements__checkbox', Checkbox, {onChange: H.trace}]);
+init(['.js-form-elements__radio-group', RadioGroup, {onChange: H.trace}]);
+init(['.js-form-elements__like-button', LikeButton, {onChange: H.trace}]);
+init(['.js-form-elements__rate-bar', RateBar, {onChange: H.trace}]);
+init(['.js-form-elements__expandable-checkboxes', ExpandableCheckboxes, {onChange: H.trace}]);
+init(['.js-form-elements__single-date-dropdown', DateDropdown, {}]);

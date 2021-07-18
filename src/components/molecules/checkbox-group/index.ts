@@ -9,6 +9,7 @@ import Namespace from './namespace';
 class CheckboxGroup {
   constructor(private readonly container: HTMLElement, private readonly props: Namespace.Props) {
     this.initCheckboxInstances();
+    this.props.onChange(this.checkboxesData);
   }
 
   private checkboxesData: Namespace.CheckboxesData = {};
@@ -22,7 +23,9 @@ class CheckboxGroup {
   private readonly handleCheckboxChange = (data: Namespace.CheckboxesData) => {
     this.checkboxesData = {...this.checkboxesData, ...data};
 
-    this.props.onChange(this.checkboxesData);
+    if (document.readyState === 'complete') {
+      this.props.onChange(this.checkboxesData);
+    }
   };
 }
 

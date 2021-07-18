@@ -1,4 +1,4 @@
-import {pipe} from 'fp-ts/function';
+import {flow, pipe} from 'fp-ts/function';
 import * as H from 'globals/helpers';
 import * as O from 'fp-ts/Option';
 
@@ -13,7 +13,10 @@ class LikeButton {
 
   private readonly counter = pipe(this.container, H.querySelector<HTMLSpanElement>('.js-like-button__count'));
 
-  private readonly initButton = () => pipe(this.button, O.map(H.addEventListener('click', this.handleChange)));
+  private readonly initButton = () => pipe(this.button, O.map(flow(
+    H.addEventListener('click', this.handleChange),
+    H.method('dispatchEvent', new Event('click'))
+  )));
 
   private readonly setCounter = (active: boolean) => pipe(
     this.counter,
@@ -24,11 +27,13 @@ class LikeButton {
   );
 
   private readonly handleChange = (event: MouseEvent) => {
-    const target = event.target as HTMLInputElement;
+    const {name, checked} = event.target as HTMLInputElement;
 
-    this.props.onChange(target.checked);
+    this.props.onChange({[name]: checked});
 
-    this.setCounter(target.checked);
+    if (document.readyState === 'complete') {
+      this.setCounter(checked);
+    }
   };
 }
 

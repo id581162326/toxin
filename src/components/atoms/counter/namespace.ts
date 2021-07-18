@@ -1,9 +1,6 @@
 namespace Counter {
   export interface Props {
-    onChange: (value: number) => void,
-    value?: number,
-    min?: number,
-    max?: number
+    onChange: (data: Record<string, number>) => void
   }
 
   export interface Interface {

@@ -1,6 +1,6 @@
 namespace RateBar {
   export interface Props {
-    onChange: (value: string) => void
+    onChange: (data: Record<string, number>) => void
   }
 }
 

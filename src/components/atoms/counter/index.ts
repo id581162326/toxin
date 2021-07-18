@@ -30,19 +30,8 @@ class Counter implements Namespace.Interface {
     pipe(this.incrementBtn, O.map(H.addEventListener('click', this.handleClick('inc'))));
     pipe(this.input, O.map(flow(
       H.addEventListener('change', this.handleChange),
-      this.setInputProps,
       H.method('dispatchEvent', new Event('change'))
     )));
-  };
-
-  private readonly setInputProps = (input: HTMLInputElement) => {
-    const {value, min, max} = this.props;
-
-    pipe(value, O.fromNullable, O.map((value) => input.value = H.toString(value)));
-    pipe(min, O.fromNullable, O.map((min) => input.min = H.toString(min)));
-    pipe(max, O.fromNullable, O.map((max) => input.max = H.toString(max)));
-
-    return (input);
   };
 
   private readonly handleClick = (type: 'dec' | 'inc') => () => pipe(
@@ -57,7 +46,7 @@ class Counter implements Namespace.Interface {
 
   private readonly handleChange = (event: Event) => {
     const target = event.target as HTMLInputElement;
-    const {min, max, value} = target;
+    const {min, max, value, name} = target;
 
     pipe(true, H.switchCases([
       [target.value < min, () => target.value = min],
@@ -67,7 +56,7 @@ class Counter implements Namespace.Interface {
     pipe(this.decrementBtn, O.map(pipe('disabled', target.value !== min ? H.removeAttribute : H.setAttribute)));
     pipe(this.incrementBtn, O.map(pipe('disabled', target.value !== max ? H.removeAttribute : H.setAttribute)));
 
-    pipe(value, Number, this.props.onChange);
+    this.props.onChange({[name]: Number(value)});
   };
 }
 

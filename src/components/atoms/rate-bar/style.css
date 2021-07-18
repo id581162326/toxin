@@ -3,6 +3,12 @@
   width: max-content;
 }
 
+.rate-bar_interactive {
+  --rate-bar-icon-filled-opacity: 1;
+  --rate-bar-icon-shaped-opacity: 0;
+  --rate-bar-cursor: pointer;
+}
+
 /* title, label */
 
 .rate-bar__title, .rate-bar__label {
@@ -27,10 +33,6 @@
     --rate-bar-icon-filled-opacity: 1;
     --rate-bar-icon-shaped-opacity: 0;
   }
-
-  &:disabled + * {
-    cursor: auto;
-  }
 }
 
 .rate-bar:not(:hover) .rate-bar__input {
@@ -53,7 +55,7 @@
   place-items: center;
   width: 24px;
   height: 24px;
-  cursor: pointer;
+  cursor: var(--rate-bar-cursor, auto);
 }
 
 /* icon filled */
@@ -71,7 +73,7 @@
 
 .rate-bar__icon-shaped {
   position: absolute;
-  opacity: var(--rate-bar-icon-shaped-opacity, 0);
+  opacity: var(--rate-bar-icon-shaped-opacity, 1);
 }
 
 .loaded .rate-bar__icon-shaped {

@@ -77,6 +77,7 @@
 
       <div class="ui-kit__checkbox js-ui-kit__checkbox">
         {{ checkbox(
+          name='breakfast',
           appearance='default',
           label='Завтрак',
           checked=true
@@ -85,6 +86,7 @@
 
       <div class="ui-kit__checkbox js-ui-kit__checkbox">
         {{ checkbox(
+          name='disabled-asistance',
           appearance='default',
           label='Помощник для инвалидов',
           description='На 1 этаже вас встретит специалист  и проводит до номера.'
@@ -92,7 +94,7 @@
       </div>
 
       <div class="ui-kit__radio-group js-ui-kit__radio-group">
-        {{ radio_group(group=[
+        {{ radio_group(name='gender', group=[
           {
             value: 'male',
             label: 'Мужчина',
@@ -106,97 +108,50 @@
       </div>
 
       <div class="ui-kit__toggle js-ui-kit__checkbox">
-        {{ checkbox(appearance='toggle', label='Получать спецпредложения') }}
+        {{ checkbox(name='get-special-requests', appearance='toggle', label='Получать спецпредложения') }}
       </div>
 
       <div class="ui-kit__toggle js-ui-kit__checkbox">
-        {{ checkbox(appearance='toggle', checked=true, label='Получать спецпредложения') }}
+        {{ checkbox(name='get-special-requests', appearance='toggle', checked=true, label='Получать спецпредложения') }}
       </div>
 
       <div class="ui-kit__like-button js-ui-kit__like-button">
-        {{ like_button(count=0) }}
+        {{ like_button(name='like-button', count=0) }}
       </div>
 
       <div class="ui-kit__like-button js-ui-kit__like-button">
-        {{ like_button(count=13, active=true) }}
+        {{ like_button(name='like-button', count=13, active=true) }}
       </div>
 
       <section class="ui-kit__rate-bar" aria-labelledby="id22">
         <span id="id22">
-        {{ rate_bar(rate=5, disabled=true) }}
+        {{ rate_bar(rate=4) }}
         </span>
       </section>
 
       <div class="ui-kit__rate-bar js-ui-kit__rate-bar">
-        {{ rate_bar(rate=3) }}
+        {{ rate_bar(name='rating', rate=3, interactive=true) }}
       </div>
 
       <div class="ui-kit__bullet-list">
         {{ bullet_list(['Нельзя с питомцами', 'Без вечеринок и мероприятий', 'Время прибытия — после 13:00,\nа выезд до 12:00']) }}
       </div>
 
+      {% set expandable_checkboxes_group = [
+        {name: 'breakfast', label: 'Завтрак'},
+        {name: 'desk', label: 'Письменный стол', checked: true},
+        {name: 'feeding_chair', label: 'Стул для кормления', checked: true},
+        {name: 'crib', label: 'Кроватка', checked: true},
+        {name: 'tv', label: 'Телевизор'},
+        {name: 'shampoo', label: 'Шампунь'}
+      ] %}
+
       <div class="ui-kit__expandable-checkboxes js-ui-kit__expandable-checkboxes">
-        {{ expandable_checkboxes(label='Expandable checkbox list', group=[
-          {
-            name: 'breakfast',
-            label: 'Завтрак'
-          },
-          {
-            name: 'desk',
-            label: 'Письменный стол',
-            checked: true
-          },
-          {
-            name: 'feeding_chair',
-            label: 'Стул для кормления',
-            checked: true
-          },
-          {
-            name: 'crib',
-            label: 'Кроватка',
-            checked: true
-          },
-          {
-            name: 'tv',
-            label: 'Телевизор'
-          },
-          {
-            name: 'shampoo',
-            label: 'Шампунь'
-          }
-        ]) }}
+        {{ expandable_checkboxes(label='Expandable checkbox list', group=expandable_checkboxes_group) }}
       </div>
 
       <div class="ui-kit__expandable-checkboxes js-ui-kit__expandable-checkboxes">
-        {{ expandable_checkboxes(label='Expandable checkbox list', expanded=true, group=[
-          {
-            name: 'breakfast',
-            label: 'Завтрак'
-          },
-          {
-            name: 'desk',
-            label: 'Письменный стол',
-            checked: true
-          },
-          {
-            name: 'feeding_chair',
-            label: 'Стул для кормления',
-            checked: true
-          },
-          {
-            name: 'crib',
-            label: 'Кроватка',
-            checked: true
-          },
-          {
-            name: 'tv',
-            label: 'Телевизор'
-          },
-          {
-            name: 'shampoo',
-            label: 'Шампунь'
-          }
-        ]) }}
+        {{ expandable_checkboxes(label='Expandable checkbox list', expanded=true, group=expandable_checkboxes_group) }}
       </div>
 
       <div class="ui-kit__single-date-dropdown js-ui-kit__single-date-dropdown">

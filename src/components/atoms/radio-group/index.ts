@@ -1,4 +1,4 @@
-import {pipe} from 'fp-ts/function';
+import {flow, pipe} from 'fp-ts/function';
 import * as H from 'globals/helpers';
 import * as A from 'fp-ts/Array';
 
@@ -17,12 +17,17 @@ class RadioGroup implements Namespace.Interface {
 
   private readonly radioGroup = pipe(this.container, H.querySelectorAll<HTMLInputElement>('.js-radio-group__input'));
 
-  private readonly initRadioGroup = () => pipe(this.radioGroup, A.map(H.addEventListener('click', this.handleCheck)));
+  private readonly initRadioGroup = () => pipe(this.radioGroup, A.map(flow(
+    H.addEventListener('click', this.handleCheck),
+    H.method('dispatchEvent', new Event('click'))
+  )));
 
   private readonly handleCheck = (event: MouseEvent) => {
-    const target = event.target as HTMLInputElement;
+    const {value, name, checked} = event.target as HTMLInputElement;
 
-    pipe(target.value, this.props.onChange);
+    if (checked) {
+      this.props.onChange({[name]: value});
+    }
   };
 }
 

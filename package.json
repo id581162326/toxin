@@ -32,7 +32,6 @@
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@babel/plugin-proposal-class-properties": "^7.14.5",
-    "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.14.5",
     "@babel/preset-typescript": "^7.14.5",
     "@types/css-minimizer-webpack-plugin": "^3.0.2",
@@ -43,6 +42,7 @@
     "@types/webpack": "^4.41.30",
     "@types/webpack-dev-server": "^3.11.4",
     "@types/webpack-env": "^1.16.2",
+    "@webcomponents/webcomponentsjs": "^2.5.0",
     "babel-loader": "^8.2.2",
     "better-npm-run": "^0.1.1",
     "clean-webpack-plugin": "^3.0.0",

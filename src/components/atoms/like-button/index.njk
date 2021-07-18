@@ -1,6 +1,6 @@
 {%  from 'assets/icons/index.njk' import favorite_filled, favorite_shaped %}
 
-{% macro like_button(active, count) %}
+{% macro like_button(name, active, count) %}
   {% set likeLabel = 'like-button__label' | uniqid %}
   {% set likeDesc = 'like-button__count' | uniqid %}
 
@@ -8,6 +8,7 @@
     <input
       class="like-button__input js-like-button__input"
       type="checkbox"
+      name="{{ name }}"
       aria-labelledby="{{ likeLabel }}"
       aria-describedby="{{ likeDesc }}"
       {% if active %}checked{% endif %}

@@ -4,6 +4,7 @@ import * as O from 'fp-ts/Option';
 import {Option} from 'fp-ts/Option';
 import * as H from 'globals/helpers';
 import * as A from 'fp-ts/Array';
+import * as R from 'fp-ts/Record';
 
 import Counter from 'atoms/counter';
 import Button from 'atoms/button';
@@ -53,12 +54,8 @@ class CountersManager {
     this.clearBtnContainer = pipe(listWrap, H.querySelector<HTMLDivElement>('.js-counters-dropdown__clear-btn'));
   }));
 
-  private readonly initCounters = () => pipe(this.list, A.zip(this.props.counters), A.map(([item, data]) => pipe(
-    Counter, H.instance(item, {
-      value: data.value,
-      min: data.min,
-      onChange: this.handleCounterChange(data.name)
-    }))
+  private readonly initCounters = () => pipe(this.list, A.map((item) => pipe(
+    Counter, H.instance(item, {onChange: this.handleCounterChange}))
   ));
 
   private readonly initApplyBtn = () => pipe(this.applyBtnContainer, O.map(
@@ -71,9 +68,9 @@ class CountersManager {
 
   private readonly sendCountersData = () => this.props.onChange(this.countersData);
 
-  private readonly setCountersData = (value: number) => (name: string) => {
-    this.countersData = {...this.countersData, [name]: {...this.countersData[name], value}};
-  };
+  private readonly setCountersData = (data: Record<string, number>) => pipe(data, R.keys, A.head, O.map((name) => {
+    this.countersData = {...this.countersData, [name]: {...this.countersData[name], value: data[name]}};
+  }));
 
   private readonly resetCountersData = () => {
     pipe(this.counters, A.map(H.method('reset')));
@@ -90,12 +87,14 @@ class CountersManager {
       ? H.addClassList : H.removeClassList)));
   };
 
-  private readonly handleCounterChange = (name: string) => (value: number) => {
-    this.setCountersData(value)(name);
+  private readonly handleCounterChange = (data: Record<string, number>) => {
+    this.setCountersData(data);
 
-    pipe(O.isNone(this.applyBtnContainer) || O.isNone(this.clearBtnContainer), H.switchCases([
-      [true, this.sendCountersData], [false, this.setClearBtnVisibility]
-    ], F.constVoid));
+    if (document.readyState === 'complete') {
+      pipe(O.isNone(this.applyBtnContainer) || O.isNone(this.clearBtnContainer), H.switchCases([
+        [true, this.sendCountersData], [false, this.setClearBtnVisibility]
+      ], F.constVoid));
+    }
   };
 }
 

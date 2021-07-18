@@ -1,6 +1,6 @@
 namespace RadioGroup {
   export interface Props {
-    onChange: (value: string) => void
+    onChange: (data: Record<string, string>) => void
   }
 
   export interface Interface {

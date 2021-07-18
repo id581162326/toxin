@@ -1,6 +1,6 @@
 namespace LikeButton {
   export interface Props {
-    onChange: (active: boolean) => void
+    onChange: (data: Record<string, boolean>) => void
   }
 }
 

@@ -28,8 +28,8 @@ const init = <Class extends { new(container: HTMLElement, ...params: any[]): any
 init(['.js-ui-kit__field', TextField, {onChange: H.trace}]);
 init(['.js-ui-kit__dropdown_theme_guests', CountersDropdown, {
   counters: [
-    {label: 'Взрослые', name: 'adults', value: 0, min: 0, plural: plurals.adults},
-    {label: 'Дети', name: 'children', value: 0, min: 0, plural: plurals.children},
+    {label: 'Взрослые', name: 'adults', value: 0, min: 0, plural: plurals.guest},
+    {label: 'Дети', name: 'children', value: 0, min: 0, plural: plurals.guest},
     {label: 'Младенцы', name: 'babies', value: 0, min: 0, plural: plurals.babies}
   ],
   onChange: H.trace

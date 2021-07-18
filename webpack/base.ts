@@ -88,9 +88,9 @@ const getNunjucksFilters = () => pipe(
 const getPostcssApplySets = () => pipe(
   path.resolve(__dirname, 'postcss-apply-sets'),
   (x) => fs.readdirSync(x),
-  A.map((file) => ({[file.replace('.js', '')]: require(path.join(__dirname, 'postcss-apply-sets', `${file}`)) })),
+  A.map((file) => ({[file.replace('.js', '')]: require(path.join(__dirname, 'postcss-apply-sets', `${file}`))})),
   A.reduce({}, (acc, record) => ({...acc, ...record}))
-)
+);
 
 export const getRules = (buildType: BuildType): webpack.RuleSetRule[] => ([
   {

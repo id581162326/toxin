@@ -7,6 +7,7 @@ import * as H from 'globals/helpers';
 import {today} from 'globals/utils';
 
 import Namespace from './namespace';
+import {Ordering} from 'fp-ts/Ordering';
 
 class Model implements Namespace.Interface {
   public readonly turnToNext = () => {
@@ -43,8 +44,6 @@ class Model implements Namespace.Interface {
     return (this);
   };
 
-  public readonly normalizeSelected = (date: Date) => H.dateLt(today)(date) ? today : date;
-
   public readonly attachListener = (listener: Namespace.Listener) => {
     this.listeners.push(listener);
 
@@ -75,9 +74,21 @@ class Model implements Namespace.Interface {
     calendar: this.getCalendar()
   })));
 
+  private readonly compareDates = (...orderings: Array<Ordering>) => (x: Date) => (y: Date) => {
+    const comparison = H.compare(D.Ord)(x)(y);
+
+    return (pipe(orderings, A.reduce(false, (acc, ordering) => acc || comparison === ordering)))
+  };
+
+  private readonly dateGte = this.compareDates(1, 0);
+
+  private readonly dateLte = this.compareDates(-1, 0);
+
+  private readonly dateLt = this.compareDates(-1);
+
   private readonly dateInRange = (date: Date) => pipe(
     this.state.selected, O.fromNullable, O.map(([startDate, endDate]) => pipe(true, H.switchCases([
-      [H.dateGte(startDate)(date) && H.dateLte(endDate)(date), F.constTrue]
+      [this.dateGte(startDate)(date) && this.dateLte(endDate)(date), F.constTrue]
     ], F.constFalse))), O.getOrElse(F.constFalse)
   );
 
@@ -89,7 +100,9 @@ class Model implements Namespace.Interface {
   private readonly dateIsEnd = (date: Date) => pipe(this.state.selected, O.fromNullable, O.map(
     ([_, endDate]) => this.datesAreEquals(endDate, date)), O.getOrElse(F.constFalse));
 
-  private readonly dateIsDisabled = H.dateLt(today);
+  private readonly normalizeSelected = (date: Date) => this.dateLt(today)(date) ? today : date;
+
+  private readonly dateIsDisabled = this.dateLt(today);
 
   public readonly getCalendar = () => {
     const {year, month} = this.state;

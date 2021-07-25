@@ -4,6 +4,7 @@ import * as O from 'fp-ts/Option';
 import * as A from 'fp-ts/Array';
 import {Eq} from 'fp-ts/Eq';
 import {Plural} from 'globals/utils';
+import {Ord} from 'fp-ts/Ord';
 
 //
 
@@ -49,11 +50,7 @@ export const pluralize = (
 
 export const test = (regexp: RegExp) => (x: string) => regexp.test(x);
 
-export const dateLt = (x: Date) => (y: Date) => y.getTime() < x.getTime();
-
-export const dateLte = (x: Date) => (y: Date) => y.getTime() <= x.getTime();
-
-export const dateGte = (x: Date) => (y: Date) => y.getTime() >= x.getTime();
+export const compare = <Type>(ord: Ord<Type>) => (x: Type) => (y: Type) => ord.compare(y, x);
 
 //
 

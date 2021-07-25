@@ -30,9 +30,8 @@ class SelectManager {
     H.addEventListener('focus', this.handleHover(date))
   );
 
-  private readonly handleOutsideClick = ({target}: MouseEvent) => pipe(this.gridWrap, O.map((wrap) =>
-    !wrap.contains(target as Node) ? this.endSelection(this.lastSelected) : {}
-  ))
+  private readonly handleOutsideClick = ({target}: MouseEvent) => !this.wrap.contains(target as Node)
+    ? this.endSelection(this.lastSelected) : {};
 
   private readonly selectDate = (date: Date) => pipe(this.selectionType, H.switchCases([
     ['active', () => this.endSelection(date)],

@@ -1,6 +1,7 @@
+import Radio from 'modules/radio/namespace';
+
 namespace RateBar {
-  export interface Props {
-    onChange: (data: Record<string, number>) => void
+  export interface Props extends Radio.Props {
   }
 }
 

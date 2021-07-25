@@ -11,11 +11,11 @@ class Checkbox implements Namespace.Interface {
     return (this);
   };
 
-  constructor(private readonly container: HTMLElement, private readonly props: Namespace.Props) {
+  constructor(private readonly wrap: HTMLElement, private readonly props: Namespace.Props) {
     this.initCheckbox();
   }
 
-  private readonly checkbox = pipe(this.container, H.querySelector<HTMLInputElement>('.js-checkbox__input'));
+  private readonly checkbox = pipe(this.wrap, H.querySelector<HTMLInputElement>('.js-checkbox__input'));
 
   private readonly initCheckbox = () => pipe(this.checkbox, O.map(flow(
     H.addEventListener('click', this.handleCheck),

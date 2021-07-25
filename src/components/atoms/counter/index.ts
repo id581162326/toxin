@@ -15,19 +15,17 @@ class Counter implements Namespace.Interface {
     return (this);
   };
 
-  constructor(private readonly container: HTMLElement, private readonly props: Namespace.Props) {
+  constructor(private readonly wrap: HTMLElement, private readonly props: Namespace.Props) {
     this.initCounter();
   }
 
-  private readonly input = pipe(this.container, H.querySelector<HTMLInputElement>('.js-counter__input'));
-
-  private readonly decrementBtn = pipe(this.container, H.querySelector<HTMLButtonElement>('.js-counter__decrement-btn'));
-
-  private readonly incrementBtn = pipe(this.container, H.querySelector<HTMLButtonElement>('.js-counter__increment-btn'));
+  private readonly input = pipe(this.wrap, H.querySelector<HTMLInputElement>('.js-counter__input'));
+  private readonly decrement = pipe(this.wrap, H.querySelector<HTMLButtonElement>('.js-counter__control-btn_is_decrement'));
+  private readonly increment = pipe(this.wrap, H.querySelector<HTMLButtonElement>('.js-counter__control-btn_is_increment'));
 
   private readonly initCounter = () => {
-    pipe(this.decrementBtn, O.map(H.addEventListener('click', this.handleClick('dec'))));
-    pipe(this.incrementBtn, O.map(H.addEventListener('click', this.handleClick('inc'))));
+    pipe(this.decrement, O.map(H.addEventListener('click', this.handleClick('dec'))));
+    pipe(this.increment, O.map(H.addEventListener('click', this.handleClick('inc'))));
     pipe(this.input, O.map(flow(
       H.addEventListener('change', this.handleChange),
       H.method('dispatchEvent', new Event('change'))
@@ -53,8 +51,8 @@ class Counter implements Namespace.Interface {
       [Boolean(max) && target.value > max, () => target.value = max]
     ], F.constVoid));
 
-    pipe(this.decrementBtn, O.map(pipe('disabled', target.value !== min ? H.removeAttribute : H.setAttribute)));
-    pipe(this.incrementBtn, O.map(pipe('disabled', target.value !== max ? H.removeAttribute : H.setAttribute)));
+    pipe(this.decrement, O.map(pipe('disabled', target.value !== min ? H.removeAttribute : H.setAttribute)));
+    pipe(this.increment, O.map(pipe('disabled', target.value !== max ? H.removeAttribute : H.setAttribute)));
 
     this.props.onChange({[name]: Number(value)});
   };

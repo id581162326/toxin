@@ -17,7 +17,7 @@ const toHtmlWebpackPluginFrom = (buildType: BuildType, folder: string) => (filen
   filename: `${filename}.html`,
   template: `./${folder}/${filename}/index.njk`,
   inject: 'body',
-  minify: true,
+  minify: 'auto',
   ...(buildType === 'prod' ? {alwaysWriteToDisk: true} : {})
 });
 
@@ -98,6 +98,9 @@ export const getRules = (buildType: BuildType): webpack.RuleSetRule[] => ([
     use: {
       loader: 'simple-nunjucks-loader',
       options: {
+        throwOnUndefined: true,
+        trimBlocks: true,
+        dev: buildType === 'dev',
         searchPaths: [
           path.resolve(__dirname, '..', 'src'),
           path.resolve(__dirname, '..', 'src', 'components')
@@ -165,6 +168,7 @@ export const getConfig = (buildType: BuildType): webpack.Configuration => ({
     alias: {
       'assets': path.resolve(__dirname, '..', 'src/assets'),
       'globals': path.resolve(__dirname, '..', 'src/globals'),
+      'modules': path.resolve(__dirname, '..', 'src/components/modules'),
       'atoms': path.resolve(__dirname, '..', 'src/components/atoms'),
       'molecules': path.resolve(__dirname, '..', 'src/components/molecules'),
       'organisms': path.resolve(__dirname, '..', 'src/components/organisms')

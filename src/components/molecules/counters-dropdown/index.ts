@@ -3,9 +3,9 @@ import * as H from 'globals/helpers';
 import * as A from 'fp-ts/Array';
 
 import Namespace from './namespace';
+import DropdownManager from './parts/dropdown-manager';
 import FieldManager from './parts/field-manager';
 import CountersManager from './parts/counters-manager';
-import DropdownManager from './parts/dropdown-manager';
 
 class CountersDropdown implements Namespace.Interface {
   public readonly setExpanded = (expanded: boolean) => {
@@ -20,20 +20,19 @@ class CountersDropdown implements Namespace.Interface {
     return (this);
   };
 
-  constructor(container: HTMLElement, private readonly props: Namespace.Props) {
-    this.fieldManager = pipe(FieldManager, H.instance(container));
-    this.dropdownManager = pipe(DropdownManager, H.instance(container));
-    this.countersManager = pipe(CountersManager, H.instance(container, {
+  constructor(wrap: HTMLElement, private readonly props: Namespace.Props) {
+    this.fieldManager = pipe(FieldManager, H.instance(wrap));
+    this.dropdownManager = pipe(DropdownManager, H.instance(wrap));
+    this.countersManager = pipe(CountersManager, H.instance(wrap, {
       counters: props.counters,
       autoApply: props.autoApply,
-      onChange: this.handleCountersChange
+      onChange: this.handleCountersChange,
+      onApply: this.handleApply
     }));
   }
 
   private readonly dropdownManager: InstanceType<typeof DropdownManager>;
-
   private readonly countersManager: InstanceType<typeof CountersManager>;
-
   private readonly fieldManager: InstanceType<typeof FieldManager>;
 
   private readonly handleCountersChange = (countersData: Namespace.CountersData) => {
@@ -46,6 +45,10 @@ class CountersDropdown implements Namespace.Interface {
       this.props.onChange
     );
   };
+
+  private readonly handleApply = () => {
+    this.dropdownManager.setExpanded(false);
+  }
 }
 
 

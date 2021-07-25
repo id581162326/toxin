@@ -1,0 +1,37 @@
+{% set weekdays = [
+  {name: 'Понедельник', abbr: 'Пн'},
+  {name: 'Вторник', abbr: 'Вт'},
+  {name: 'Среда', abbr: 'Ср'},
+  {name: 'Четверг', abbr: 'Чт'},
+  {name: 'Пятница', abbr: 'Пт'},
+  {name: 'Суббота', abbr: 'Сб'},
+  {name: 'Воскресение', abbr: 'Вс'}
+] %}
+
+<div class="datepicker__row" role="row">
+  {% for item in weekdays %}
+    <span class="datepicker__cell datepicker__cell_is_weekday" role="columnheader">
+      <abbr class="datepicker__abbr" title="{{ item.name }}">{{ item.abbr }}</abbr>
+    </span>
+  {% endfor %}
+</div>
+
+{% for week in calendar %}
+  <div class="datepicker__row" role="row">
+    {% for item in week %}
+      <div
+        class="datepicker__cell js-datepicker__cell
+{% if item.disabled %}datepicker__cell_disabled{% endif %}
+{% if item.isToday %} datepicker__cell_is_today{% endif %}
+{% if item.selected %} datepicker__cell_selected{% endif %}
+{% if item.isSibling %} datepicker__cell_is_sibling{% endif %}
+{% if item.isStart %} datepicker__cell_is_start{% endif %}
+{% if item.isEnd %} datepicker__cell_is_end{% endif %}"
+        role="gridcell"
+        aria-selected="{{ item.selected }}"
+        aria-disabled="{{ item.disabled }}"
+        tabindex="-1"
+      ><span class="datepicker__day">{{ item.date }}</span></div>
+    {% endfor %}
+  </div>
+{% endfor %}

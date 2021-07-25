@@ -7,14 +7,14 @@
     <label class="counters-dropdown__field">
       {% if label %}<span class="counters-dropdown__label">{{ label }}</span>{% endif %}
 
-      <span class="counters-dropdown__input-wrap">
+      <span class="counters-dropdown__button-wrap">
         <input
-          class="counters-dropdown__input js-counters-dropdown__input"
+          class="counters-dropdown__button js-counters-dropdown__button"
           type="button"
           aria-expanded="{% if expanded %}true{% else %}false{% endif %}"
           aria-controls="{{ listWrapId }}"
           {% if value %}value="{{ placeholder }}"{% endif %}
-          {% if placeholder %}placeholder="{{ placeholder }}"{% endif %}
+          {% if placeholder %}data-placeholder="{{ placeholder }}"{% endif %}
           {% if disabled %}disabled{% endif %}
         >
        {{ arrow_expand(class='counters-dropdown__icon', width=12, height=8) }}

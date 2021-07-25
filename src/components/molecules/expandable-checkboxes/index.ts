@@ -1,4 +1,4 @@
-import {pipe} from 'fp-ts/function';
+import {flow, pipe} from 'fp-ts/function';
 import * as H from 'globals/helpers';
 import * as O from 'fp-ts/Option';
 
@@ -14,26 +14,26 @@ class ExpandableCheckboxes implements Namespace.Interface {
     return (this);
   };
 
-  constructor(private readonly container: HTMLElement, private readonly props: Namespace.Props) {
+  constructor(private readonly wrap: HTMLElement, private readonly props: Namespace.Props) {
     this.initButton();
     this.initCheckboxGroup();
   }
 
-  private readonly root = pipe(this.container, H.querySelector<HTMLDivElement>('.js-expandable-checkboxes'));
-
-  private readonly button = pipe(this.container, H.querySelector<HTMLButtonElement>('.js-expandable-checkboxes__button'));
-
-  private readonly groupContainer = pipe(this.container, H.querySelector<HTMLDivElement>('.js-expandable-checkboxes__group'));
+  private readonly root = pipe(this.wrap, H.querySelector<HTMLDivElement>('.js-expandable-checkboxes'));
+  private readonly button = pipe(this.wrap, H.querySelector<HTMLButtonElement>('.js-expandable-checkboxes__button'));
+  private readonly groupWrap = pipe(this.wrap, H.querySelector<HTMLDivElement>('.js-expandable-checkboxes__group'));
 
   private readonly initButton = () => pipe(this.button, O.map(H.addEventListener('click', this.toggleExpanded)));
 
-  private readonly initCheckboxGroup = () => pipe(this.groupContainer, O.map((group) => pipe(
-    CheckboxGroup, H.instance(group, {
+  private readonly initCheckboxGroup = () => pipe(this.groupWrap, O.map((wrap) => pipe(
+    CheckboxGroup, H.instance(wrap, {
       onChange: this.props.onChange
     }))
   ));
 
-  private readonly toggleExpanded = () => pipe(this.root, O.map((root) => pipe(!root.classList.contains('expandable-checkboxes_expanded'), this.setExpanded)));
+  private readonly toggleExpanded = () => pipe(this.root, O.map(flow(
+    H.containsClass('expandable-checkboxes_expanded'), H.not, this.setExpanded
+  )));
 }
 
 export default ExpandableCheckboxes;

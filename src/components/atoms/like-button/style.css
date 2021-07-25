@@ -69,9 +69,9 @@
   transition: color .1s ease-in-out, opacity .1s ease-in-out;
 }
 
-/* count */
+/* counter */
 
-.like-button__count {
+.like-button__counter {
   width: 30px;
   text-align: center;
   font: 10px/12px var(--font-regular);
@@ -81,7 +81,7 @@
   -moz-user-select: none;
 }
 
-.like-button__count {
+.like-button__counter {
   transition: color .1s ease-in-out;
 }
 

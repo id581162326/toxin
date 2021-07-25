@@ -1,0 +1,13 @@
+{% from 'atoms/button/index.njk' import button %}
+
+{% if not autoApply %}
+  <div class="date-dropdown__controls">
+    <div class="date-dropdown__control-btn js-date-dropdown__clear-btn">
+      {{ button(label='Очистить', appearance='link') }}
+    </div>
+
+    <div class="date-dropdown__control-btn js-date-dropdown__apply-btn">
+      {{ button(label='Применить', appearance='link') }}
+    </div>
+  </div>
+{% endif %}

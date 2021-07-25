@@ -18,6 +18,7 @@
     "paths": {
       "*": ["*"],
       "globals/*": ["globals/*"],
+      "modules/*": ["components/modules/*"],
       "atoms/*": ["components/atoms/*"],
       "molecules/*": ["components/molecules/*"],
       "organisms/*": ["components/organisms/*"]

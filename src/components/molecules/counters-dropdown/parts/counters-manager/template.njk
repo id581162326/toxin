@@ -1,0 +1,22 @@
+{% from 'atoms/counter/index.njk' import counter %}
+{% from 'atoms/button/index.njk' import button %}
+
+<ul class="counters-dropdown__list">
+  {% for item in counters %}
+    <li class="counters-dropdown__item js-counters-dropdown__item">
+      {{ counter(name=item.name, label=item.label, value=item.value, min=item.min, max=item.max) }}
+    </li>
+  {% endfor %}
+</ul>
+
+{% if not autoApply %}
+  <div class="counters-dropdown__controls">
+    <div class="counters-dropdown__control-btn js-counters-dropdown__clear-btn">
+      {{ button(label='Очистить', appearance='link') }}
+    </div>
+
+    <div class="counters-dropdown__control-btn js-counters-dropdown__apply-btn">
+      {{ button(label='Применить', appearance='link') }}
+    </div>
+  </div>
+{% endif %}

@@ -19,6 +19,7 @@ namespace CountersDropdown {
   export interface Props {
     counters: Array<Counter>,
     onChange: (countersData: CountersData) => void,
+    onApply: () => void,
     autoApply?: true
   }
 }

@@ -1,0 +1,152 @@
+.date-dropdown {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+}
+
+.date-dropdown_is_twin {
+  display: flex;
+  column-gap: 20px;
+}
+
+.date-dropdown_expanded {
+  --date-dropdown-border-alpha: .5;
+  --date-dropdown-icon-alpha: .75;
+  --date-dropdown-view-port-pointer-events: auto;
+  --date-dropdown-datepicker-wrap-visibility: visible;
+  --date-dropdown-datepicker-wrap-translate-y: 0;
+  --date-dropdown-controls-visibility: visible;
+}
+
+/* field */
+
+.date-dropdown__field {
+  display: grid;
+  row-gap: 5px;
+  width: 100%;
+}
+
+/* label */
+
+.date-dropdown__label {
+  font-family: var(--font-bold);
+  font-size: 12px;
+  line-height: 15px;
+  text-transform: uppercase;
+  color: var(--dark-color);
+}
+
+/* input wrap */
+
+.date-dropdown__button-wrap {
+  position: relative;
+  display: grid;
+}
+
+/* input */
+
+.date-dropdown__button {
+  width: 100%;
+  height: 44px;
+  padding: 0 44px 0 15px;
+  font: 14px/18px var(--font-regular);
+  text-align: start;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: rgba(var(--dark-rgb), .75);
+  border: 1px solid rgba(var(--dark-rgb), var(--date-dropdown-border-alpha, .25));
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+
+  &:hover, &:focus-visible {
+    --date-dropdown-border-alpha: .5;
+  }
+
+  &:hover + *, &:focus-visible + * {
+    --date-dropdown-icon-alpha: .75;
+  }
+
+  &:active + * {
+    --date-dropdown-icon-translate-y: 5px;
+  }
+
+  &:focus-visible {
+    @apply --outline;
+  }
+}
+
+.loaded .date-dropdown__button {
+  transition: border-color .1s ease-in-out;
+}
+
+/* icon */
+
+.date-dropdown__icon {
+  position: absolute;
+  right: 15px;
+  display: flex;
+  align-self: center;
+  color: rgba(var(--dark-rgb), var(--date-dropdown-icon-alpha, .5));
+  transform: translateY(var(--date-dropdown-icon-translate-y, 0));
+  pointer-events: none;
+}
+
+.loaded .date-dropdown__icon {
+  transition: transform .1s ease-in-out;
+}
+
+/* view port */
+
+.date-dropdown__view-port {
+  --date-dropdown-datepicker-padding: 25px;
+
+  z-index: 1;
+  position: absolute;
+  top: 100%;
+  width: calc(100% + var(--date-dropdown-datepicker-padding) * 2);
+  left: calc(0px - var(--date-dropdown-datepicker-padding));
+  overflow: hidden;
+  padding: 5.56px var(--date-dropdown-datepicker-padding) var(--date-dropdown-datepicker-padding);
+  pointer-events: var(--date-dropdown-view-port-pointer-events, none);
+}
+
+/* datepicker wrap */
+
+.date-dropdown__datepicker {
+  padding: 20px;
+  width: 100%;
+  border: 1px solid rgba(var(--dark-rgb), .25);
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 0 10px 20px rgba(var(--dark-rgb), .05);
+  transform: translateY(
+    var(--date-dropdown-datepicker-wrap-translate-y, calc(-100% - (var(--date-dropdown-datepicker-padding) + 5.56px)))
+  );
+}
+
+.loaded .date-dropdown__datepicker {
+  transition: transform .1s ease-in-out;
+}
+
+.date-dropdown__datepicker * {
+  visibility: var(--date-dropdown-datepicker-wrap-visibility, hidden);
+}
+
+/* controls */
+
+.date-dropdown__controls {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0 0;
+}
+
+.date-dropdown__controls * {
+  visibility: var(--date-dropdown-controls-visibility, hidden);
+}
+
+.date-dropdown__control-btn_is_hidden * {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}

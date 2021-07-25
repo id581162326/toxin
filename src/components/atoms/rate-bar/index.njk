@@ -9,7 +9,7 @@
     { value: 5, active: rate===5, label: 'Пять звёзд' }
   ] %}
 
-  {% set rateBarLabel = 'rate-bar__input' | uniqid %}
+  {% set rateBarLabelId = 'rate-bar__input' | uniqid %}
 
   <span class="rate-bar {% if interactive %}rate-bar_interactive{% endif %}" {% if interactive %}role="radiogroup"{% endif %}>
     {% if not interactive %}<span class="rate-bar__title">Рейтинг: {{ stars[rate - 1].label }} из пяти</span>{% endif %}
@@ -18,14 +18,14 @@
         <input
           class="rate-bar__input js-rate-bar__input"
           type="radio"
-          id="{{ rateBarLabel }}-{{ item.value }}"
+          id="{{ rateBarLabelId }}-{{ item.value }}"
           name="{{ name }}"
           value="{{ item.value }}"
           {% if rate===item.value %}checked{% endif %}
           {% if disabled %}disabled{% endif %}
           {% if disabled %}aria-hidden="true"{% endif %}
         >
-        <label class="rate-bar__mark" for="{{ rateBarLabel }}-{{ item.value }}">
+        <label class="rate-bar__mark" for="{{ rateBarLabelId }}-{{ item.value }}">
           <span class="rate-bar__label">{{ item.label }}</span>
           {{ star_filled(class='rate-bar__icon-filled', width=20, height=18, gradient=true) }}
           {{ star_shaped(class='rate-bar__icon-shaped', width=20, height=18, gradient=true) }}

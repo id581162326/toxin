@@ -17,13 +17,12 @@ class Button implements Namespace.Interface {
     return (this);
   };
 
-  constructor(private readonly container: HTMLElement, private readonly props: Namespace.Props) {
+  constructor(private readonly wrap: HTMLElement, private readonly props: Namespace.Props) {
     this.initButton();
   }
 
-  private readonly button = pipe(this.container, H.querySelector<HTMLButtonElement>('.js-button'));
-
-  private readonly label = pipe(this.container, H.querySelector<HTMLSpanElement>('.js-button__label'));
+  private readonly button = pipe(this.wrap, H.querySelector<HTMLButtonElement>('.js-button'));
+  private readonly label = pipe(this.wrap, H.querySelector<HTMLSpanElement>('.js-button__label'));
 
   private readonly initButton = () => pipe(this.button, O.map(H.addEventListener('click', this.props.onClick)));
 }

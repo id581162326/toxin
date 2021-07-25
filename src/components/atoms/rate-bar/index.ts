@@ -5,11 +5,11 @@ import * as A from 'fp-ts/Array';
 import Namespace from './namespace';
 
 class RateBar {
-  constructor(private readonly container: HTMLElement, private readonly props: Namespace.Props) {
+  constructor(private readonly wrap: HTMLElement, private readonly props: Namespace.Props) {
     this.initRadioGroup();
   }
 
-  private readonly radioGroup = pipe(this.container, H.querySelectorAll<HTMLInputElement>('.js-rate-bar__input'));
+  private readonly radioGroup = pipe(this.wrap, H.querySelectorAll<HTMLInputElement>('.js-rate-bar__input'));
 
   private readonly initRadioGroup = () => pipe(this.radioGroup, A.map(flow(
     H.addEventListener('click', this.handleCheck),

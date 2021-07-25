@@ -1,0 +1,24 @@
+{% from 'assets/icons/index.njk' import arrow_expand, arrow_back, arrow_forward %}
+{% from 'atoms/button/index.njk' import button %}
+
+{% macro datepicker() %}
+  {% set dateDropdownHeadingId = 'datepicker__heading' | uniqid %}
+
+  <div class="datepicker js-datepicker">
+    <div class="datepicker__nav">
+      <div class="datepicker__nav-btn js-datepicker__prev-btn">
+        {{ button(appearance='icon', label='Предыдущий месяц', icon=arrow_back) }}
+      </div>
+
+      <div class="datepicker__nav-btn js-datepicker__next-btn">
+        {{ button(appearance='icon', label='Следующий месяц', icon=arrow_forward) }}
+      </div>
+    </div>
+
+    <div class="datepicker__calendar">
+      <span class="datepicker__heading js-datepicker__heading" id="{{ dateDropdownHeadingId }}"></span>
+
+      <div class="datepicker__grid js-datepicker__grid" tabindex="0" role="grid" aria-labelledby="{{ dateDropdownHeadingId }}"></div>
+    </div>
+  </div>
+{% endmacro %}

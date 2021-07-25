@@ -23,13 +23,12 @@ class TextField implements Namespace.Interface {
     return (this);
   };
 
-  constructor(private readonly container: HTMLElement, private readonly props: Namespace.Props) {
+  constructor(private readonly wrap: HTMLElement, private readonly props: Namespace.Props) {
     this.initInput();
   }
 
-  private readonly root = pipe(this.container, H.querySelector<HTMLLabelElement>('.js-text-field'));
-
-  private readonly input = pipe(this.container, H.querySelector<HTMLInputElement>('.js-text-field__input'));
+  private readonly root = pipe(this.wrap, H.querySelector<HTMLLabelElement>('.js-text-field'));
+  private readonly input = pipe(this.wrap, H.querySelector<HTMLInputElement>('.js-text-field__input'));
 
   private readonly initInput = () => pipe(this.input, O.map(H.addEventListener('input', this.onChangeListener)));
 

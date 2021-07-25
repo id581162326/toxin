@@ -139,20 +139,20 @@
         {name: 'shampoo', label: 'Шампунь'}
       ] %}
 
+      <div class="form-elements__single-date-dropdown js-form-elements__single-date-dropdown">
+        {{ date_dropdown(label='filter date dropdown') }}
+      </div>
+
+      <div class="form-elements__twin-date-dropdown js-form-elements__twin-date-dropdown">
+        {{ date_dropdown_twin(labelFrom='date dropdown', labelTo='date dropdown') }}
+      </div>
+
       <div class="form-elements__expandable-checkboxes js-form-elements__expandable-checkboxes">
         {{ expandable_checkboxes(label='Expandable checkbox list', group=expandable_checkboxes_group) }}
       </div>
 
       <div class="form-elements__expandable-checkboxes js-form-elements__expandable-checkboxes">
         {{ expandable_checkboxes(label='Expandable checkbox list', expanded=true, group=expandable_checkboxes_group) }}
-      </div>
-
-      <div class="form-elements__single-date-dropdown js-form-elements__single-date-dropdown">
-        {{ date_dropdown(label='filter date dropdown', rangeStart='2021-07-16', rangeEnd='2021-07-20') }}
-      </div>
-
-      <div class="form-elements__twin-date-dropdown js-form-elements__twin-date-dropdown">
-        {{ date_dropdown_twin(labelFrom='date dropdown', labelTo='date dropdown') }}
       </div>
     </div>
   </div>

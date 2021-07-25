@@ -5,13 +5,12 @@ import * as O from 'fp-ts/Option';
 import Namespace from './namespace';
 
 class LikeButton {
-  constructor(private readonly container: HTMLElement, private readonly props: Namespace.Props) {
+  constructor(private readonly wrap: HTMLElement, private readonly props: Namespace.Props) {
     this.initButton();
   }
 
-  private readonly button = pipe(this.container, H.querySelector<HTMLInputElement>('.js-like-button__input'));
-
-  private readonly counter = pipe(this.container, H.querySelector<HTMLSpanElement>('.js-like-button__count'));
+  private readonly button = pipe(this.wrap, H.querySelector<HTMLInputElement>('.js-like-button__input'));
+  private readonly counter = pipe(this.wrap, H.querySelector<HTMLSpanElement>('.js-like-button__counter'));
 
   private readonly initButton = () => pipe(this.button, O.map(flow(
     H.addEventListener('click', this.handleChange),

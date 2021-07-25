@@ -1,0 +1,78 @@
+{% from 'assets/icons/index.njk' import arrow_expand %}
+{% from 'atoms/button/index.njk' import button %}
+{% from 'molecules/datepicker/index.njk' import datepicker %}
+
+{% macro date_dropdown(label, disabled, expanded) %}
+  {% set datepickerWrapId = 'date-dropdown__datepicker-wrap' | uniqid %}
+
+  <div class="date-dropdown js-date-dropdown {% if expanded %}date-dropdown_expanded{% endif %}">
+    <label class="date-dropdown__field">
+      {% if label %}<span class="date-dropdown__label">{{ label }}</span>{% endif %}
+
+      <span class="date-dropdown__button-wrap">
+        <input
+          class="date-dropdown__button js-date-dropdown__button"
+          type="button"
+          value="ДД.ММ - ДД.ММ"
+          aria-expanded="{% if expanded %}true{% else %}false{% endif %}"
+          aria-controls="{{ datepickerWrapId }}"
+          data-placeholder="ДД.ММ - ДД.ММ"
+          {% if disabled %}disabled{% endif %}
+        >
+        {{ arrow_expand(class='date-dropdown__icon', width=12, height=8) }}
+      </span>
+    </label>
+
+    <div class="date-dropdown__view-port">
+      <div class="date-dropdown__datepicker js-date-dropdown__datepicker" id="{{ datepickerWrapId }}">
+        {{ datepicker() }}
+      </div>
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro date_dropdown_twin(labelFrom, labelTo, disabled, expanded) %}
+  {% set datepickerWrapId = 'date-dropdown__datepicker-wrap' | uniqid %}
+
+  <div class="date-dropdown date-dropdown_is_twin js-date-dropdown {% if expanded %}date-dropdown_expanded{% endif %}">
+    <label class="date-dropdown__field">
+      {% if labelTo and labelFrom %}<span class="date-dropdown__label">{{ labelFrom }}</span>{% endif %}
+
+      <span class="date-dropdown__button-wrap">
+        <input
+          class="date-dropdown__button js-date-dropdown__button js-date-dropdown__button_is_from"
+          type="button"
+          value="ДД.ММ.ГГГГ"
+          aria-expanded="{% if expanded %}true{% else %}false{% endif %}"
+          aria-controls="{{ datepickerWrapId }}"
+          data-placeholder="ДД.ММ.ГГГГ"
+          {% if disabled %}disabled{% endif %}
+        >
+        {{ arrow_expand(class='date-dropdown__icon', width=12, height=8) }}
+      </span>
+    </label>
+
+    <label class="date-dropdown__field">
+      {% if labelTo and labelFrom %}<span class="date-dropdown__label">{{ labelTo }}</span>{% endif %}
+
+      <span class="date-dropdown__button-wrap">
+        <input
+          class="date-dropdown__button js-date-dropdown__button js-date-dropdown__button_is_to"
+          type="button"
+          value="ДД.ММ.ГГГГ"
+          aria-expanded="{% if expanded %}true{% else %}false{% endif %}"
+          aria-controls="{{ datepickerWrapId }}"
+          data-placeholder="ДД.ММ.ГГГГ"
+          {% if disabled %}disabled{% endif %}
+        >
+        {{ arrow_expand(class='date-dropdown__icon', width=12, height=8) }}
+      </span>
+    </label>
+
+    <div class="date-dropdown__view-port">
+      <div class="date-dropdown__datepicker js-date-dropdown__datepicker" id="{{ datepickerWrapId }}">
+        {{ datepicker() }}
+      </div>
+    </div>
+  </div>
+{% endmacro %}

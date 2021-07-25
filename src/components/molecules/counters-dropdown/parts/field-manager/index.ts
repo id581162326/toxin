@@ -2,7 +2,6 @@ import {flow, pipe} from 'fp-ts/function';
 import * as H from 'globals/helpers';
 import * as A from 'fp-ts/Array';
 import * as O from 'fp-ts/Option';
-import {Plural} from 'globals/utils';
 
 import Namespace from './namespace';
 
@@ -23,13 +22,15 @@ class FieldManager implements Namespace.Interface {
     return (this);
   };
 
-  constructor(private readonly container: HTMLElement) {
+  constructor(private readonly wrap: HTMLElement) {
     this.initFieldTitleSideEffect();
   }
 
-  private readonly field = pipe(this.container, H.querySelector<HTMLInputElement>('.js-counters-dropdown__input'));
+  private readonly field = pipe(this.wrap, H.querySelector<HTMLInputElement>('.js-counters-dropdown__button'));
 
-  private readonly placeholder = pipe(this.field, O.map((field) => field.placeholder), O.getOrElse(() => ' '));
+  private readonly placeholder = pipe(this.field, O.chain(
+    ({dataset}) => O.fromNullable(dataset.placeholder)
+  ), O.getOrElse(() => ' '));
 
   private readonly initFieldTitleSideEffect = () => pipe(window, H.addEventListener('load', this.handleWindowLoad));
 
@@ -57,19 +58,15 @@ class FieldManager implements Namespace.Interface {
     (xs) => A.size(xs) === 0 ? this.placeholder : H.join(', ')(xs)
   );
 
-  private readonly sumCountersData = (countersData: Namespace.CountersData) => pipe(countersData, this.chopOnChunks, this.sumChunks);
+  private readonly sumCountersData = (countersData: Namespace.CountersData) => pipe(countersData, H.group(this.pluralAreEqual), this.sumChunks);
 
-  private readonly chopOnChunks = (countersData: Namespace.CountersData) => pipe(countersData, A.chop((xs) => {
-    const pluralAreEqual = (x: Plural, y: Plural) => pipe(
-      H.values(x),
-      A.zip(H.values(y)),
+  private readonly pluralAreEqual = {
+    equals: (x: ArrayElement<Namespace.CountersData>, y: ArrayElement<Namespace.CountersData>) => pipe(
+      H.values(x.plural),
+      A.zip(H.values(y.plural)),
       A.reduce(true as boolean, (acc, [x, y]) => x !== y ? false : acc)
-    );
-
-    return (pipe(
-      xs, A.spanLeft((a) => pluralAreEqual(a.plural, xs[0].plural)), H.values
-    ) as [Namespace.CountersData, Namespace.CountersData]);
-  }));
+    )
+  };
 
   private readonly sumChunks = (chunks: Array<Namespace.CountersData>) => pipe(
     chunks, A.reduce([] as Namespace.CountersData, (acc, chunk) => [...acc, ...pipe(

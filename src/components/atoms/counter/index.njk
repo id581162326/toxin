@@ -1,8 +1,8 @@
 {% macro counter(label, name, value=0, min=0, max) %}
-  {% set counterLabel = 'counter__input' | uniqid  %}
+  {% set counterLabelId = 'counter__input' | uniqid  %}
   <div class="counter js-counter">
-    <label class="counter__label" for="{{ counterLabel }}">{{ label }}</label>
-    <button class="counter__control-btn js-counter__decrement-btn" type="button" tabindex="-1" aria-hidden="true">-</button>
+    <label class="counter__label" for="{{ counterLabelId }}">{{ label }}</label>
+    <button class="counter__control-btn js-counter__control-btn_is_decrement" type="button" tabindex="-1" aria-hidden="true">-</button>
     <input
       class="counter__input js-counter__input"
       value="{{ value }}"
@@ -10,8 +10,8 @@
       name="{{ name }}"
       min="{{ min }}"
       {% if max %}max="{{ max }}"{% endif %}
-      id="{{ counterLabel }}"
+      id="{{ counterLabelId }}"
     >
-    <button class="counter__control-btn js-counter__increment-btn" type="button" tabindex="-1" aria-hidden="true">+</button>
+    <button class="counter__control-btn js-counter__control-btn_is_increment" type="button" tabindex="-1" aria-hidden="true">+</button>
   </div>
 {% endmacro %}

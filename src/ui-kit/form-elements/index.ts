@@ -17,13 +17,13 @@ import DateDropdown from 'molecules/date-dropdown';
 
 import './style.css';
 
-type InitTuple<Class extends { new(container: HTMLElement, ...params: any[]): any }> = [
-  string, Class, ...(Class extends { new(container: HTMLElement, ...params: infer Params): any } ? Params : never)
+type InitTuple<Class extends { new(wrap: HTMLElement, ...params: any[]): any }> = [
+  string, Class, ...(Class extends { new(wrap: HTMLElement, ...params: infer Params): any } ? Params : never)
 ]
 
-const init = <Class extends { new(container: HTMLElement, ...params: any[]): any }>(
+const init = <Class extends { new(wrap: HTMLElement, ...params: any[]): any }>(
   [selector, Fn, ...params]: InitTuple<Class>
-) => pipe(document, H.querySelectorAll<HTMLElement>(selector), A.map((container) => new Fn(container, ...params)));
+) => pipe(document, H.querySelectorAll<HTMLElement>(selector), A.map((wrap) => new Fn(wrap, ...params)));
 
 init(['.js-form-elements__field', TextField, {onChange: H.trace}]);
 init(['.js-form-elements__dropdown_theme_guests', CountersDropdown, {
@@ -50,4 +50,9 @@ init(['.js-form-elements__radio-group', RadioGroup, {onChange: H.trace}]);
 init(['.js-form-elements__like-button', LikeButton, {onChange: H.trace}]);
 init(['.js-form-elements__rate-bar', RateBar, {onChange: H.trace}]);
 init(['.js-form-elements__expandable-checkboxes', ExpandableCheckboxes, {onChange: H.trace}]);
-init(['.js-form-elements__single-date-dropdown', DateDropdown, {}]);
+init(['.js-form-elements__single-date-dropdown', DateDropdown, {
+  autoApply: true,
+  onChange: H.trace,
+  selected: [new Date(2021, 6, 20), new Date(2021, 6, 30)]
+}]);
+init(['.js-form-elements__twin-date-dropdown', DateDropdown, {onChange: H.trace}]);

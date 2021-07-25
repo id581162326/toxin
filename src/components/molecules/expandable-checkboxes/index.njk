@@ -4,7 +4,7 @@
 
 {% macro expandable_checkboxes(label, expanded, group) %}
   {% set listId = 'expandable-checkboxes__list' | uniqid %}
-  {% set listLabel = 'expandable-checkboxes__label' | uniqid %}
+  {% set listLabelId = 'expandable-checkboxes__label' | uniqid %}
 
   <div class="expandable-checkboxes js-expandable-checkboxes {% if expanded%}expandable-checkboxes_expanded{% endif %}">
     <button
@@ -13,7 +13,7 @@
       aria-expanded="{% if expanded %}true{% else %}false{% endif %}"
       aria-controls="{{ listId }}"
     >
-      <span class="expandable-checkboxes__label" id="{{ listLabel }}">{{ label }}</span>
+      <span class="expandable-checkboxes__label" id="{{ listLabelId }}">{{ label }}</span>
       {{ arrow_expand(class='expandable-checkboxes__icon', width=12, height=8) }}
     </button>
 

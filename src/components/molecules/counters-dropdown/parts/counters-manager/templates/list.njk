@@ -1,9 +1,0 @@
-{% from 'atoms/counter/index.njk' import counter %}
-
-<ul class="counters-dropdown__list">
-  {% for item in counters %}
-    <li class="counters-dropdown__item js-counters-dropdown__item">
-      {{ counter(name=item.name, label=item.label, value=item.value, min=item.min, max=item.max) }}
-    </li>
-  {% endfor %}
-</ul>

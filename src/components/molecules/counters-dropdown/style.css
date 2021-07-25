@@ -10,7 +10,7 @@
   --counters-dropdown-border-bottom-radius: 0;
   --counters-dropdown-icon-alpha: .75;
   --counters-dropdown-view-port-pointer-events: auto;
-  --counters-dropdown-list-wrape-visibility: visible;
+  --counters-dropdown-list-wrap-visibility: visible;
   --counters-dropdown-list-wrap-translate-y: 0;
   --counters-dropdown-controls-visibility: visible;
 }
@@ -34,14 +34,14 @@
 
 /* input wrap */
 
-.counters-dropdown__input-wrap {
+.counters-dropdown__button-wrap {
   position: relative;
   display: grid;
 }
 
 /* input */
 
-.counters-dropdown__input {
+.counters-dropdown__button {
   overflow: hidden;
   width: 100%;
   height: 44px;
@@ -73,7 +73,7 @@
   }
 }
 
-.loaded .counters-dropdown__input {
+.loaded .counters-dropdown__button {
   transition: border-color .1s ease-in-out;
 }
 
@@ -119,7 +119,7 @@
 }
 
 .counters-dropdown__list-wrap * {
-  visibility: var(--counters-dropdown-list-wrape-visibility, hidden);
+  visibility: var(--counters-dropdown-list-wrap-visibility, hidden);
 }
 
 .counters-dropdown__list {

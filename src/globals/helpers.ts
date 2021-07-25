@@ -2,6 +2,8 @@ import * as F from 'fp-ts/function';
 import {pipe} from 'fp-ts/function';
 import * as O from 'fp-ts/Option';
 import * as A from 'fp-ts/Array';
+import {Eq} from 'fp-ts/Eq';
+import {Plural} from 'globals/utils';
 
 //
 
@@ -40,16 +42,22 @@ export const switchCases = <Case extends [Tag, F.Lazy<Value>], Tag, Value>(cases
   pipe(cases, A.findLast(([key]) => key === tag), O.fold<Case, Value>(() => def(), ([_, value]) => value()));
 
 export const pluralize = (
-  plurals: { one: string, few: string, many: string }
+  plural: Plural
 ) => (count: number) => pipe(
-  Intl.PluralRules, instance('ru'), method('select', count), (rule) => pipe(plurals, prop(rule as | 'one' | 'few' | 'many'))
+  Intl.PluralRules, instance('ru'), method('select', count), (rule) => pipe(plural, prop(rule as | 'one' | 'few' | 'many'))
 );
 
-export const validateEmail = (email: string) => /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(email);
+export const test = (regexp: RegExp) => (x: string) => regexp.test(x);
+
+export const dateLt = (x: Date) => (y: Date) => y.getTime() < x.getTime();
+
+export const dateLte = (x: Date) => (y: Date) => y.getTime() <= x.getTime();
+
+export const dateGte = (x: Date) => (y: Date) => y.getTime() >= x.getTime();
 
 //
 
-export const eq = <Type>(x: Type) => (y: Type) => x === y;
+export const equals = <Type>(eq: Eq<Type>) => (x: Type, y: Type) => eq.equals(x, y);
 
 export const not = (x: boolean) => !x;
 
@@ -97,6 +105,12 @@ export const join = (sep: string) => (arr: Array<unknown>) => arr.join(sep);
 
 export const includes = <Type>(x: Type) => (xs: Array<Type>) => xs.includes(x);
 
+export const group = <Type>(eq: Eq<Type>): ((xs: Array<Type>) => Array<Array<Type>>) => A.chop((xs) => {
+  const {init, rest} = pipe(xs, A.spanLeft((x: Type) => eq.equals(x, xs[0])));
+
+  return [init, rest];
+});
+
 //
 
 export const node = <NodeName extends keyof HTMLElementTagNameMap>(nodeName: NodeName) => document.createElement<NodeName>(nodeName);
@@ -120,6 +134,8 @@ export const toggleClassName = (className: string) => <Node extends Element>(nod
 
   return (node);
 };
+
+export const containsClass = (className: string) => <Node extends Element>(node: Node) => node.classList.contains(className);
 
 export const setInlineStyle = (style: string) => <Node extends HTMLElement>(node: Node) => {
   node.style.cssText = style;

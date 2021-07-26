@@ -1,8 +1,15 @@
 .form-elements {
   position: relative;
-  width: 1380px;
+  width: 100%;
+  max-width: 1380px;
   margin: 0 auto;
   padding: 141px;
+}
+
+@media screen and (width < 1380px){
+  .form-elements {
+    padding: 20px;
+  }
 }
 
 .form-elements__logo {
@@ -14,7 +21,8 @@
 .form-elements__column {
   display: grid;
   row-gap: 20px;
-  width: 320px;
+  width: 100%;
+  max-width: 320px;
 }
 
 .form-elements__field {

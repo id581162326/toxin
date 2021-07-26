@@ -6,12 +6,13 @@
 {% from 'assets/icons/index.njk' import arrow_forward %}
 {% from 'atoms/text-field/index.njk' import text_field %}
 {% from 'atoms/button/index.njk' import button %}
-{% from 'atoms/subscribe-field/index.njk' import subscribe_field %}
 {% from 'atoms/checkbox/index.njk' import checkbox %}
 {% from 'atoms/radio-group/index.njk' import radio_group %}
 {% from 'atoms/like-button/index.njk' import like_button %}
 {% from 'atoms/rate-bar/index.njk' import rate_bar %}
 {% from 'atoms/bullet-list/index.njk' import bullet_list %}
+{% from 'molecules/pagination/index.njk' import pagination %}
+{% from 'molecules/subscribe-field/index.njk' import subscribe_field %}
 {% from 'molecules/counters-dropdown/index.njk' import counters_dropdown %}
 {% from 'molecules/expandable-checkboxes/index.njk' import expandable_checkboxes %}
 {% from 'molecules/date-dropdown/index.njk' import date_dropdown, date_dropdown_twin %}
@@ -153,6 +154,10 @@
 
       <div class="form-elements__expandable-checkboxes js-form-elements__expandable-checkboxes">
         {{ expandable_checkboxes(label='Expandable checkbox list', expanded=true, group=expandable_checkboxes_group) }}
+      </div>
+
+      <div class="form-elements__pagination js-form-elements__pagination">
+        {{ pagination(total=120) }}
       </div>
     </div>
   </div>

@@ -1,6 +1,7 @@
+import CheckboxGroup from '../checkbox-group/namespace';
+
 namespace ExpandableCheckboxes {
-  export interface Props {
-    onChange: (checkboxesData: Record<string, boolean>) => void
+  export interface Props extends CheckboxGroup.Props {
   }
 
   export interface Interface {

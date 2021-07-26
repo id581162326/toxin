@@ -67,7 +67,7 @@ const getTypeDependingConfigProps: (buildType: BuildType) => webpack.Configurati
         mode: 'production',
         optimization: {
           minimize: true,
-          minimizer: [new TerserJSPlugin({extractComments: false}), new CssMinimizerWebpackPlugin()]
+          minimizer: ['...', new TerserJSPlugin({extractComments: false}), new CssMinimizerWebpackPlugin()]
         }
       });
     }

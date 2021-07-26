@@ -7,14 +7,14 @@ import Checkbox from 'atoms/checkbox';
 import Namespace from './namespace';
 
 class CheckboxGroup {
-  constructor(private readonly wrap: HTMLElement, private readonly props: Namespace.Props) {
+  constructor(protected readonly wrap: HTMLElement, protected readonly props: Namespace.Props) {
     this.initCheckboxInstances();
     this.props.onChange(this.checkboxesData);
   }
 
-  private checkboxesData: Namespace.CheckboxesData = {};
+  protected checkboxesData: Namespace.CheckboxesData = {};
 
-  private items: Array<HTMLLIElement> = pipe(this.wrap, H.querySelectorAll<HTMLLIElement>('.js-checkbox-group__item'));
+  protected items: Array<HTMLLIElement> = pipe(this.wrap, H.querySelectorAll<HTMLLIElement>('.js-checkbox-group__item'));
 
   private readonly initCheckboxInstances = () => pipe(this.items, A.map((item) => pipe(Checkbox, H.instance(item, {
     onChange: this.handleCheckboxChange

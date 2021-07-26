@@ -145,6 +145,8 @@
   visibility: var(--date-dropdown-controls-visibility, hidden);
 }
 
+/* control button */
+
 .date-dropdown__control-btn_is_hidden * {
   visibility: hidden;
   opacity: 0;

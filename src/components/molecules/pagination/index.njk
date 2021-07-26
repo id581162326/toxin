@@ -1,0 +1,44 @@
+{% from 'assets/icons/index.njk' import arrow_back, arrow_forward %}
+
+{% macro pagination(total) %}
+  {% set paginationTitleId = 'pagination__label' | uniqid %}
+  {% set amount = total / 12 | floor %}
+
+  <nav class="pagination js-pagination" aria-labelledby="{{ paginationTitleId }}">
+    <ul class="pagination__list">
+      <li class="pagination__item pagination__item_is_nav js-pagination__nav-item">
+        <a class="pagination__link js-pagination__nav-link">
+          <span class="pagination__label">Назад</span>
+          {{ arrow_back(class='pagination__icon', width=18, height=18) }}
+        </a>
+      </li>
+      {% for item in range(0, amount) %}
+        {% if loop.index === 1 %}
+          <li class="pagination__item js-pagination__item">
+            <a class="pagination__link js-pagination__link" aria-label="Перейти на страницу {{ loop.index }}">{{ loop.index }}</a>
+          </li>
+          <li class="pagination__ellipsis js-pagination__ellipsis" aria-hidden="true">…</li>
+        {% elseif loop.index === amount %}
+          <li class="pagination__ellipsis js-pagination__ellipsis" aria-hidden="true">…</li>
+          <li class="pagination__item js-pagination__item">
+            <a class="pagination__link js-pagination__link" aria-label="Перейти на страницу {{ loop.index }}">{{ loop.index }}</a>
+          </li>
+        {% else %}
+          <li class="pagination__item js-pagination__item">
+            <a class="pagination__link js-pagination__link" aria-label="Перейти на страницу {{ loop.index }}">{{ loop.index }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+      <li class="pagination__item pagination__item_is_nav js-pagination__nav-item">
+        <a class="pagination__link js-pagination__nav-link">
+          <span class="pagination__label">Вперед</span>
+          {{ arrow_forward(class='pagination__icon', width=18, height=18) }}
+        </a>
+      </li>
+    </ul>
+
+    <span class="pagination__title" id="{{ paginationTitleId }}">
+      1 – 12 из {% if total > 100 %}100+{% else %}{{ total }}{% endif %} вариантов аренды
+    </span>
+  </nav>
+{% endmacro %}

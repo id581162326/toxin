@@ -5,15 +5,16 @@ import {plurals} from 'globals/utils';
 
 import TextField from 'atoms/text-field';
 import Button from 'atoms/button';
-import SubscribeField from 'atoms/subscribe-field';
 import Checkbox from 'atoms/checkbox';
 import RadioGroup from 'atoms/radio-group';
 import LikeButton from 'atoms/like-button';
 import RateBar from 'atoms/rate-bar';
 
+import SubscribeField from 'molecules/subscribe-field';
 import CountersDropdown from 'molecules/counters-dropdown';
 import ExpandableCheckboxes from 'molecules/expandable-checkboxes';
 import DateDropdown from 'molecules/date-dropdown';
+import Pagination from 'molecules/pagination';
 
 import './style.css';
 
@@ -56,3 +57,4 @@ init(['.js-form-elements__single-date-dropdown', DateDropdown, {
   selected: [new Date(2021, 6, 20), new Date(2021, 6, 30)]
 }]);
 init(['.js-form-elements__twin-date-dropdown', DateDropdown, {onChange: H.trace}]);
+init(['.js-form-elements__pagination', Pagination])

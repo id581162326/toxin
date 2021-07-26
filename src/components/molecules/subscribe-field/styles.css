@@ -1,0 +1,27 @@
+.subscribe-field {
+  position: relative;
+  display: grid;
+
+  &:hover, &:focus-within {
+    --subscribe-field-border-aplha: .5;
+  }
+}
+
+/* input */
+
+.subscribe-field__input {
+  & input {
+    padding-right: 44px;
+  }
+}
+
+/* submit btn */
+
+.subscribe-field__submit-btn {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  place-self: end;
+}

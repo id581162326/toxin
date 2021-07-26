@@ -1,4 +1,4 @@
-{% macro button(type='button', appearance='primary', icon, label, href, disabled) %}
+{% macro button(type='button', appearance='primary', icon, icon_with_gradient, label, href, disabled) %}
   {% if href %}
     <a
       class="button button_appearance_{{ appearance }} {% if icon and appearance !== 'link' %}button_with_icon{% endif %}"
@@ -18,7 +18,7 @@
       {% if icon and appearance!=='link' and appearance!=='icon' %}
         {{ icon(class='button__icon', width=18, height=18, gradient=appearance==='secondary') }}
       {% elseif icon and appearance!=='link' %}
-        {{ icon(class='button__icon', width=18, height=18) }}
+        {{ icon(class='button__icon', width=18, height=18, gradient=icon_with_gradient) }}
       {% endif %}
     </button>
   {% endif %}

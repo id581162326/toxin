@@ -17,6 +17,10 @@
   color: var(--dark-color);
 }
 
+.text-field__label_hidden {
+  @apply --visually-hidden;
+}
+
 /* input */
 
 .text-field__input {

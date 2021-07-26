@@ -58,9 +58,9 @@
 
 .datepicker__cell {
   flex: 1;
+  aspect-ratio: 1/1;
   display: grid;
   place-items: center;
-  height: 40px;
   background: var(--datepicker-cell-background, none);
   border-radius: var(--datepicker-cell-border-radius, 0);
   font: 12px/15px var(--datepicker-cell-font, var(--font-regular));

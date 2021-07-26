@@ -8,7 +8,7 @@
   text-decoration: none;
   border: none;
   border-radius: 22px;
-  background: var(--primary-gradient);
+  background: var(--button-background-gradient, var(--primary-gradient));
   cursor: pointer;
 
   &:focus-visible {

@@ -1,8 +1,9 @@
-import Datepicker from 'molecules/datepicker';
 import {pipe} from 'fp-ts/function';
 import * as O from 'fp-ts/Option';
 import {Option} from 'fp-ts/Option';
 import * as H from 'globals/helpers';
+
+import Datepicker from 'molecules/datepicker';
 
 import Namespace from './namespace';
 import controlsTemplate from './template.njk';

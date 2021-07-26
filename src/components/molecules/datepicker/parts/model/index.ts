@@ -5,9 +5,9 @@ import {pipe} from 'fp-ts/function';
 import * as O from 'fp-ts/Option';
 import * as H from 'globals/helpers';
 import {today} from 'globals/utils';
+import {Ordering} from 'fp-ts/Ordering';
 
 import Namespace from './namespace';
-import {Ordering} from 'fp-ts/Ordering';
 
 class Model implements Namespace.Interface {
   public readonly turnToNext = () => {
@@ -30,7 +30,6 @@ class Model implements Namespace.Interface {
 
   public readonly resetSelected = () => {
     this.updateState({selected: undefined});
-
     this.props.onSelect(this.state.selected);
 
     return (this);
@@ -38,7 +37,6 @@ class Model implements Namespace.Interface {
 
   public readonly setSelected = (selected: [Date, Date]) => {
     this.updateState({selected: pipe(selected, A.map(this.normalizeSelected), A.sort(D.Ord)) as [Date, Date]});
-
     this.props.onSelect(this.state.selected);
 
     return (this);
@@ -46,7 +44,6 @@ class Model implements Namespace.Interface {
 
   public readonly attachListener = (listener: Namespace.Listener) => {
     this.listeners.push(listener);
-
     this.updateListeners();
 
     return (this);

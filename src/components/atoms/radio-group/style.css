@@ -1,4 +1,21 @@
 .radio-group {
+  display: grid;
+  row-gap: 16px;
+}
+
+.radio-group__label {
+  font: 12px/15px var(--font-bold);
+  color: var(--dark-color);
+  text-transform: uppercase;
+}
+
+.radio-group__label_hidden {
+  @apply --visually-hidden;
+}
+
+/* items */
+
+.radio-group__items {
   display: flex;
   column-gap: 20px;
 }
@@ -66,11 +83,11 @@
 
 /* label */
 
-.radio-group__label {
+.radio-group__item-label {
   font: 14px/24px var(--font-regular);
   color: rgba(var(--dark-rgb), var(--radio-group-label-alpha, .5));
 }
 
-.loaded .radio-group__label {
+.loaded .radio-group__item-label {
   transition: color .1s ease-in-out;
 }

@@ -6,11 +6,13 @@
 {% from 'assets/icons/index.njk' import arrow_forward %}
 {% from 'atoms/text-field/index.njk' import text_field %}
 {% from 'atoms/button/index.njk' import button %}
-{% from 'atoms/checkbox/index.njk' import checkbox %}
 {% from 'atoms/radio-group/index.njk' import radio_group %}
 {% from 'atoms/like-button/index.njk' import like_button %}
 {% from 'atoms/rate-bar/index.njk' import rate_bar %}
 {% from 'atoms/bullet-list/index.njk' import bullet_list %}
+{% from 'atoms/checkbox/index.njk' import checkbox %}
+{% from 'atoms/range-slider/index.njk' import range_slider %}
+{% from 'molecules/checkbox-group/index.njk' import checkbox_group %}
 {% from 'molecules/pagination/index.njk' import pagination %}
 {% from 'molecules/subscribe-field/index.njk' import subscribe_field %}
 {% from 'molecules/counters-dropdown/index.njk' import counters_dropdown %}
@@ -76,26 +78,24 @@
         {{ subscribe_field(label='Subscribtion text-field') }}
       </div>
 
-      <div class="form-elements__checkbox js-form-elements__checkbox">
-        {{ checkbox(
-          name='breakfast',
-          appearance='checkbox',
-          label='Завтрак',
-          checked=true
-        ) }}
+      <div class="form-elements__checkbox-group js-form-elements__checkbox-group">
+        {{ checkbox_group(label='checkbox buttons', group=[
+          {name: 'smoking', label: 'Можно курить'},
+          {name: 'pets', label: 'Можно с питомцами'},
+          {name: 'guests', label: 'Можно пригласить гостей\n(до 10 человек)'}
+        ]) }}
       </div>
 
-      <div class="form-elements__checkbox js-form-elements__checkbox">
-        {{ checkbox(
-          name='disabled-asistance',
-          appearance='checkbox',
-          label='Помощник для инвалидов',
-          description='На 1 этаже вас встретит специалист  и проводит до номера.'
-        ) }}
+
+      <div class="form-elements__checkbox-group js-form-elements__checkbox-group">
+        {{ checkbox_group(label='rich checkbox buttons', group=[
+          {name: 'wide-corridor', label: 'Широкий коридор', description: 'Ширина коридоров в номере не менее 91 см.'},
+          {name: 'disabled-assistance', label: 'Помощник для инвалидов', description: 'На 1 этаже вас встретит специалист  и проводит до номера.'}
+        ]) }}
       </div>
 
       <div class="form-elements__radio-group js-form-elements__radio-group">
-        {{ radio_group(name='gender', group=[
+        {{ radio_group(name='gender', label='radio buttons', group=[
           {value: 'male', label: 'Мужчина', checked: true},
           {value: 'female', label: 'Женщина'}
         ]) }}
@@ -117,18 +117,20 @@
         {{ like_button(name='like-button', count=13, active=true) }}
       </div>
 
-      <section class="form-elements__rate-bar" aria-labelledby="id22">
-        <span id="id22">
-        {{ rate_bar(rate=4) }}
-        </span>
-      </section>
-
       <div class="form-elements__rate-bar js-form-elements__rate-bar">
-        {{ rate_bar(name='rating', rate=3, interactive=true) }}
+        {{ rate_bar(label='rate button', name='rating', rate=4, interactive=true) }}
       </div>
 
+      <section class="form-elements__rate-bar">
+        {{ rate_bar(rate=5) }}
+      </section>
+
       <div class="form-elements__bullet-list">
-        {{ bullet_list(['Нельзя с питомцами', 'Без вечеринок и мероприятий', 'Время прибытия — после 13:00,\nа выезд до 12:00']) }}
+        {{ bullet_list(label='bullet list', list=[
+          'Нельзя с питомцами',
+          'Без вечеринок и мероприятий',
+          'Время прибытия — после 13:00,\nа выезд до 12:00'
+        ]) }}
       </div>
 
       {% set expandable_checkboxes_group = [
@@ -158,6 +160,10 @@
 
       <div class="form-elements__pagination js-form-elements__pagination">
         {{ pagination(total=120) }}
+      </div>
+
+      <div class="form-elements__range-slider js-form-elements__range-slider">
+        {{ range_slider(label='range slider') }}
       </div>
     </div>
   </div>

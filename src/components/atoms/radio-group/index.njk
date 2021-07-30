@@ -1,20 +1,25 @@
-{% macro radio_group(name, disabled, group) %}
-  <div class="radio-group" role="radiogroup">
-    {% for radio in group %}
-      <label class="radio-group__input-wrap">
-        <input
-          class="radio-group__input js-radio-group__input"
-          type="radio"
-          name="{{ name }}"
-          value="{{ radio.value }}"
-          {% if radio.checked %}checked{% endif %}
-          {% if disabled %}disabled{% endif %}
-        >
-        <span class="radio-group__mark">
+{% macro radio_group(label, hidden_label, name, disabled, group) %}
+  {% set radioGroupLabelId = 'radio-group__label' | uniqid %}
+
+  <div class="radio-group">
+    <span class="radio-group__label{% if hidden_label %}radio-group__label_hidden{% endif %}" id="{{ radioGroupLabelId }}">{{ label }}</span>
+    <div class="radio-group__items" role="radiogroup" aria-labelledby="{{ radioGroupLabelId }}">
+      {% for radio in group %}
+        <label class="radio-group__input-wrap">
+          <input
+            class="radio-group__input js-radio-group__input"
+            type="radio"
+            name="{{ name }}"
+            value="{{ radio.value }}"
+            {% if radio.checked %}checked{% endif %}
+            {% if disabled %}disabled{% endif %}
+          >
+          <span class="radio-group__mark">
           <span class="radio-group__inner-circle"></span>
         </span>
-        <span class="radio-group__label">{{ radio.label }}</span>
-      </label>
-    {% endfor %}
+          <span class="radio-group__item-label">{{ radio.label }}</span>
+        </label>
+      {% endfor %}
+    </div>
   </div>
 {% endmacro %}

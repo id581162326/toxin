@@ -4,6 +4,7 @@ module.exports = {
   width: '1px',
   height: '1px',
   margin: '-1px',
+  overflow: 'hidden',
   'user-select': 'none',
   '-moz-user-select': 'none'
 };

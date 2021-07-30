@@ -1,6 +1,6 @@
 {% from 'assets/icons/index.njk' import star_filled, star_shaped %}
 
-{% macro rate_bar(name, rate=1, interactive) %}
+{% macro rate_bar(label, hidden_label, name, rate=1, interactive) %}
   {% set stars = [
     { value: 1, active: rate===1, label: 'Одна звезда' },
     { value: 2, active: rate===2, label: 'Две звезды' },
@@ -9,37 +9,44 @@
     { value: 5, active: rate===5, label: 'Пять звёзд' }
   ] %}
 
-  {% set rateBarLabelId = 'rate-bar__input' | uniqid %}
+  {% set rateBarInputId = 'rate-bar__input' | uniqid %}
+  {% set rateBarLabelId = 'rate-bar__label' | uniqid %}
 
-  <span class="rate-bar {% if interactive %}rate-bar_interactive{% endif %}" {% if interactive %}role="radiogroup"{% endif %}>
+  <span class="rate-bar{% if interactive %} rate-bar_interactive{% endif %}">
+    {% if interactive %}
+      <span class="rate-bar__label{% if hidden_label %} rate-bar__label_hidden{% endif %}" id="{{ rateBarLabelId }}">{{ label }}</span>
+    {% endif %}
+
+    <span class="rate-bar__items" {% if interactive %}role="radiogroup" aria-labelledby="{{ rateBarLabelId }}"{% endif %}>
     {% if not interactive %}<span class="rate-bar__title">Рейтинг: {{ stars[rate - 1].label }} из пяти</span>{% endif %}
-    {% for item in stars %}
-      {% if interactive %}
-        <input
-          class="rate-bar__input js-rate-bar__input"
-          type="radio"
-          id="{{ rateBarLabelId }}-{{ item.value }}"
-          name="{{ name }}"
-          value="{{ item.value }}"
-          {% if rate===item.value %}checked{% endif %}
-          {% if disabled %}disabled{% endif %}
-          {% if disabled %}aria-hidden="true"{% endif %}
+      {% for item in stars %}
+        {% if interactive %}
+          <input
+            class="rate-bar__input js-rate-bar__input"
+            type="radio"
+            id="{{ rateBarInputId }}-{{ item.value }}"
+            name="{{ name }}"
+            value="{{ item.value }}"
+            {% if rate===item.value %}checked{% endif %}
+            {% if disabled %}disabled{% endif %}
+            {% if disabled %}aria-hidden="true"{% endif %}
         >
-        <label class="rate-bar__mark" for="{{ rateBarLabelId }}-{{ item.value }}">
-          <span class="rate-bar__label">{{ item.label }}</span>
-          {{ star_filled(class='rate-bar__icon-filled', width=20, height=18, gradient=true) }}
-          {{ star_shaped(class='rate-bar__icon-shaped', width=20, height=18, gradient=true) }}
-        </label>
-      {% else %}
-        <span class="rate-bar__mark">
-          <span class="rate-bar__label">{{ item.label }}</span>
-          {% if item.value <= rate %}
+          <label class="rate-bar__mark" for="{{ rateBarInputId }}-{{ item.value }}">
+            <span class="rate-bar__item-label">{{ item.label }}</span>
             {{ star_filled(class='rate-bar__icon-filled', width=20, height=18, gradient=true) }}
-          {% else %}
-            {{ star_shaped(class='rate-bar__icon-shaped', width=20, height=18, gradient=true) }}
-          {% endif %}
-        </span>
-      {% endif %}
-    {% endfor %}
+              {{ star_shaped(class='rate-bar__icon-shaped', width=20, height=18, gradient=true) }}
+          </label>
+        {% else %}
+          <span class="rate-bar__mark">
+            <span class="rate-bar__item-label">{{ item.label }}</span>
+            {% if item.value <= rate %}
+              {{ star_filled(class='rate-bar__icon-filled', width=20, height=18, gradient=true) }}
+            {% else %}
+              {{ star_shaped(class='rate-bar__icon-shaped', width=20, height=18, gradient=true) }}
+            {% endif %}
+          </span>
+        {% endif %}
+      {% endfor %}
+    </span>
   </span>
 {% endmacro %}

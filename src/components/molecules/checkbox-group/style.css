@@ -1,7 +1,26 @@
 .checkbox-group {
   display: grid;
+  row-gap: 16px;
+}
+
+/* label */
+
+.checkbox-group__label {
+  font: 12px/15px var(--font-bold);
+  color: var(--dark-color);
+  text-transform: uppercase;
+}
+
+.checkbox-group__label_hidden {
+  @apply --visually-hidden;
+}
+
+/* list */
+
+.checkbox-group__list {
+  display: grid;
   row-gap: 10px;
-  padding: 2.44px 0 0;
+  padding: 0;
   margin: 0;
   list-style: none;
 }

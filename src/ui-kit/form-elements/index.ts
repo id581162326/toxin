@@ -5,16 +5,18 @@ import {plurals} from 'globals/utils';
 
 import TextField from 'atoms/text-field';
 import Button from 'atoms/button';
-import Checkbox from 'atoms/checkbox';
 import RadioGroup from 'atoms/radio-group';
 import LikeButton from 'atoms/like-button';
 import RateBar from 'atoms/rate-bar';
+import Checkbox from 'atoms/checkbox';
+import RangeSlider from 'atoms/range-slider';
 
 import SubscribeField from 'molecules/subscribe-field';
 import CountersDropdown from 'molecules/counters-dropdown';
 import ExpandableCheckboxes from 'molecules/expandable-checkboxes';
 import DateDropdown from 'molecules/date-dropdown';
 import Pagination from 'molecules/pagination';
+import CheckboxGroup from 'molecules/checkbox-group';
 
 import './style.css';
 
@@ -47,6 +49,7 @@ init(['.js-form-elements__dropdown_theme_apartment', CountersDropdown, {
 init(['.js-form-elements__button', Button, {onClick: () => H.trace('Click!')}]);
 init(['.js-form-elements__subscribe-field', SubscribeField, {onSubmit: H.trace}]);
 init(['.js-form-elements__checkbox', Checkbox, {onChange: H.trace}]);
+init(['.js-form-elements__checkbox-group', CheckboxGroup, {onChange: H.trace}]);
 init(['.js-form-elements__radio-group', RadioGroup, {onChange: H.trace}]);
 init(['.js-form-elements__like-button', LikeButton, {onChange: H.trace}]);
 init(['.js-form-elements__rate-bar', RateBar, {onChange: H.trace}]);
@@ -57,4 +60,8 @@ init(['.js-form-elements__single-date-dropdown', DateDropdown, {
   selected: [new Date(2021, 6, 20), new Date(2021, 6, 30)]
 }]);
 init(['.js-form-elements__twin-date-dropdown', DateDropdown, {onChange: H.trace}]);
-init(['.js-form-elements__pagination', Pagination])
+init(['.js-form-elements__pagination', Pagination]);
+init(['.js-form-elements__range-slider', RangeSlider, {
+  range: [0, 16000], initials: [5000, 10000],
+  margin: 1000, onChange: H.trace
+}])

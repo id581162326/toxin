@@ -60,6 +60,7 @@
 /* group */
 
 .expandable-checkboxes__group {
+  padding: 2.44px 0 0;
   pointer-events: var(--expandable-checkboxes-group-pointer-events, none);
   opacity: var(--expandable-checkboxes-group-opacity, 0);
 }

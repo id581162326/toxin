@@ -1,5 +1,24 @@
 .bullet-list {
   display: grid;
+  row-gap: 16px;
+}
+
+/* label */
+
+.bullet-list__label {
+  font: 12px/15px var(--font-bold);
+  color: var(--dark-color);
+  text-transform: uppercase;
+}
+
+.bullet-list__label_hidden {
+  @apply --visually-hidden;
+}
+
+/* items */
+
+.bullet-list__items {
+  display: grid;
   row-gap: 10px;
   padding: 0;
   margin: 0;

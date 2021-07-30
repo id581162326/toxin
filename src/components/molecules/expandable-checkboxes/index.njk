@@ -3,22 +3,22 @@
 {% from 'molecules/checkbox-group/index.njk' import checkbox_group %}
 
 {% macro expandable_checkboxes(label, expanded, group) %}
-  {% set listId = 'expandable-checkboxes__list' | uniqid %}
-  {% set listLabelId = 'expandable-checkboxes__label' | uniqid %}
+  {% set expandableCheckboxesGroupId = 'expandable-checkboxes__list' | uniqid %}
+  {% set expandableCheckboxesLabelId = 'expandable-checkboxes__label' | uniqid %}
 
   <div class="expandable-checkboxes js-expandable-checkboxes {% if expanded%}expandable-checkboxes_expanded{% endif %}">
     <button
       class="expandable-checkboxes__button js-expandable-checkboxes__button"
       type="button"
       aria-expanded="{% if expanded %}true{% else %}false{% endif %}"
-      aria-controls="{{ listId }}"
+      aria-controls="{{ expandableCheckboxesGroupId }}"
     >
-      <span class="expandable-checkboxes__label" id="{{ listLabelId }}">{{ label }}</span>
+      <span class="expandable-checkboxes__label" id="{{ expandableCheckboxesLabelId }}">{{ label }}</span>
       {{ arrow_expand(class='expandable-checkboxes__icon', width=12, height=8) }}
     </button>
 
-    <div class="expandable-checkboxes__group" id="{{ listId }}">
-      {{ checkbox_group(group=group) }}
+    <div class="expandable-checkboxes__group" id="{{ expandableCheckboxesGroupId }}">
+      {{ checkbox_group(group=group, hidden_label=true, label=label) }}
     </div>
   </div>
 {% endmacro %}

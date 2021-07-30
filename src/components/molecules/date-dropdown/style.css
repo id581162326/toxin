@@ -18,6 +18,12 @@
   --date-dropdown-controls-visibility: visible;
 }
 
+@media screen and (width < 640px) {
+  .date-dropdown_is_twin {
+    column-gap: 10px;
+  }
+}
+
 /* field */
 
 .date-dropdown__field {
@@ -48,7 +54,7 @@
 .date-dropdown__button {
   width: 100%;
   height: 44px;
-  padding: 0 44px 0 15px;
+  padding: 0 0 0 15px;
   font: 14px/18px var(--font-regular);
   text-align: start;
   text-overflow: ellipsis;

@@ -1,6 +1,6 @@
 .rate-bar {
-  display: flex;
-  width: max-content;
+  display: grid;
+  row-gap: 16px;
 }
 
 .rate-bar_interactive {
@@ -9,9 +9,24 @@
   --rate-bar-cursor: pointer;
 }
 
-/* title, label */
+/* items */
 
-.rate-bar__title, .rate-bar__label {
+.rate-bar__items {
+  display: flex;
+  width: max-content;
+}
+
+/* label */
+
+.rate-bar__label {
+  font: 12px/15px var(--font-bold);
+  color: var(--dark-color);
+  text-transform: uppercase;
+}
+
+/* title, label, item label */
+
+.rate-bar__title, .rate-bar__item-label, .rate-bar__label_hidden {
   @apply --visually-hidden;
 }
 

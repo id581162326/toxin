@@ -1,4 +1,5 @@
 import {NonEmptyArray} from 'fp-ts/NonEmptyArray';
+import {Option} from 'fp-ts/Option';
 
 namespace Model {
   export interface Day {
@@ -18,14 +19,14 @@ namespace Model {
   }
 
   export interface Props {
-    selected?: [Date, Date],
-    onSelect: (dates?: [Date, Date]) => void
+    onSelect: (dates: Option<[Date, Date]>) => void,
+    selected?: [Date, Date]
   }
 
   export interface State {
     year: number,
     month: number,
-    selected?: [Date, Date]
+    selected: Option<[Date, Date]>
   }
 
   export interface Listener {
@@ -36,8 +37,7 @@ namespace Model {
     attachListener: (listener: Listener) => this,
     turnToNext: () => this,
     turnToPrev: () => this,
-    setSelected: (dates: [Date, Date]) => this,
-    resetSelected: () => this
+    setSelected: (dates: Option<[Date, Date]>) => this
   }
 }
 

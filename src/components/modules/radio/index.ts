@@ -4,13 +4,7 @@ import * as A from 'fp-ts/Array';
 
 import Namespace from './namespace';
 
-class Radio implements Namespace.Interface {
-  public readonly setDisabled = (disabled: boolean) => {
-    pipe(this.buttons, A.map(pipe('disabled', disabled ? H.setAttribute : H.removeAttribute)));
-
-    return (this);
-  };
-
+class Radio {
   constructor(private readonly bemBlockName: string, protected readonly wrap: HTMLElement, protected readonly props: Namespace.Props) {
     this.initRadio();
   }

@@ -23,7 +23,7 @@ class DatepickerManager {
     this.sendDates();
   }
 
-  private selectedDates: [Date, Date] | undefined;
+  private selectedDates: Option<[Date, Date]> = O.none;
   private readonly datepickerWrap = pipe(this.wrap, H.querySelector<HTMLDivElement>('.js-date-dropdown__datepicker'));
   private readonly applyBtnWrap: Option<HTMLDivElement>;
   private readonly clearBtnWrap: Option<HTMLDivElement>;
@@ -46,7 +46,7 @@ class DatepickerManager {
   private readonly initClearBtn = () => pipe(this.clearBtnWrap, O.map(H.addEventListener('click', this.resetDatepicker)));
 
   private readonly setClearBtnVisibility = () => {
-    const isHidden = pipe(this.selectedDates, Boolean, H.not);
+    const isHidden = O.isNone(this.selectedDates);
 
     pipe(this.clearBtnWrap, O.map(pipe(['date-dropdown__control-btn_is_hidden'], isHidden
       ? H.addClassList : H.removeClassList)));
@@ -62,7 +62,7 @@ class DatepickerManager {
     this.sendDates();
   };
 
-  private readonly handleDateSelect = (dates?: [Date, Date]) => {
+  private readonly handleDateSelect = (dates: Option<[Date, Date]>) => {
     this.selectedDates = dates;
 
     if (document.readyState === 'complete' && this.props.autoApply) {

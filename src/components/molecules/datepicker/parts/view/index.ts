@@ -73,18 +73,18 @@ class View implements Namespace.Interface {
 
     this.firstSelectedDate = date;
 
-    this.props.onSelect([date, date]);
+    this.props.onSelect(O.some([date, date]));
   };
 
   private readonly handleSelectionEnd = (date: Date) => {
     this.selectionType = 'inactive';
 
-    this.props.onSelect([this.firstSelectedDate, date]);
+    this.props.onSelect(O.some([this.firstSelectedDate, date]));
     this.props.onSelectionEnd();
   };
 
   private readonly handleSelectionMove = (date: Date) => {
-    this.props.onSelect([this.firstSelectedDate, date]);
+    this.props.onSelect(O.some([this.firstSelectedDate, date]));
   };
 }
 

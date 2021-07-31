@@ -19,6 +19,7 @@
 {% from 'molecules/expandable-checkboxes/index.njk' import expandable_checkboxes %}
 {% from 'molecules/date-dropdown/index.njk' import date_dropdown, date_dropdown_twin %}
 {% from 'molecules/review/index.njk' import review %}
+{% from 'organisms/search-room/index.njk' import search_room %}
 
 {% block content %}
   <div class="form-elements js-form-elements">
@@ -181,6 +182,10 @@
         liked=reviews[0].liked,
         avatar_url=reviews[0].avatar_url | from
       ) }}
+    </div>
+
+    <div class="form-elements__search-room js-form-elements__search-room">
+      {{ search_room() }}
     </div>
   </div>
 {% endblock %}

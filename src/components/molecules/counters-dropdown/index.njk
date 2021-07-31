@@ -13,8 +13,10 @@
           type="button"
           aria-expanded="{% if expanded %}true{% else %}false{% endif %}"
           aria-controls="{{ list_wrap_id }}"
-          {% if value %}value="{{ placeholder }}"{% endif %}
-          {% if placeholder %}data-placeholder="{{ placeholder }}"{% endif %}
+          {% if placeholder %}
+            value="{{ placeholder }}"
+            data-placeholder="{{ placeholder }}"
+          {% endif %}
           {% if disabled %}disabled{% endif %}
         >
        {{ arrow_expand(class='counters-dropdown__icon', width=12, height=8) }}

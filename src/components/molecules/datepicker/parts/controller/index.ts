@@ -9,7 +9,6 @@ class Controller implements Namespace.Interface {
     pipe(action.type, H.switchCases([
       ['TURN_NEXT', this.model.turnToNext],
       ['TURN_PREV', this.model.turnToPrev],
-      ['RESET_SELECTED', this.model.resetSelected],
       ['SET_SELECTED', () => pipe(action as Namespace.SetSelected, H.prop('dates'), this.model.setSelected)],
     ], F.constVoid));
 

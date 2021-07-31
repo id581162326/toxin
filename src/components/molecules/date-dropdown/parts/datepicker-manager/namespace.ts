@@ -1,8 +1,10 @@
+import {Option} from 'fp-ts/Option';
+
 namespace DatepickerManager {
   export interface Props {
-    selected?: [Date, Date],
-    onSelect: (dates?: [Date, Date]) => void,
+    onSelect: (dates: Option<[Date, Date]>) => void,
     onSelectionEnd: () => void,
+    selected?: [Date, Date],
     autoApply?: true
   }
 }

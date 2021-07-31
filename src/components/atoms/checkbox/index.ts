@@ -4,13 +4,7 @@ import * as O from 'fp-ts/Option';
 
 import Namespace from './namespace';
 
-class Checkbox implements Namespace.Interface {
-  public readonly setDisabled = (disabled: boolean) => {
-    pipe(this.checkbox, O.map(pipe('disabled', disabled ? H.setAttribute : H.removeAttribute)));
-
-    return (this);
-  };
-
+class Checkbox {
   constructor(private readonly wrap: HTMLElement, private readonly props: Namespace.Props) {
     this.initCheckbox();
   }

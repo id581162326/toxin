@@ -1,3 +1,5 @@
+import {Option} from 'fp-ts/Option';
+
 namespace View {
   export interface Day {
     selected: boolean,
@@ -17,15 +19,10 @@ namespace View {
 
   export type SelectionType = 'active' | 'inactive';
 
-  export type DateRange = {
-    startDate: Date | null,
-    endDate: Date | null
-  }
-
   export interface Props {
     onTurnNext: () => void,
     onTurnPrev: () => void,
-    onSelect: (dates: [Date, Date]) => void,
+    onSelect: (dates: Option<[Date, Date]>) => void,
     onSelectionEnd: () => void
   }
 

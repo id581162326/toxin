@@ -1,5 +1,6 @@
 import {pipe} from 'fp-ts/function';
 import * as H from 'globals/helpers';
+import {Option} from 'fp-ts/Option';
 
 import Namespace from './namespace';
 import DropdownManager from './parts/dropdown-manager';
@@ -34,7 +35,7 @@ class DateDropdown implements Namespace.Interface {
   private readonly datepickerManager: InstanceType<typeof DatepickerManager>;
   private readonly fieldManager: InstanceType<typeof FieldManager>;
 
-  private readonly handleSelect = (dates?: [Date, Date]) => {
+  private readonly handleSelect = (dates: Option<[Date, Date]>) => {
     this.fieldManager.updateValue(dates);
     this.props.onChange(dates);
   };

@@ -1,6 +1,8 @@
+import {Option} from 'fp-ts/Option';
+
 namespace DateDropdown {
   export interface Props {
-    onChange: (dates?: [Date, Date]) => void,
+    onChange: (dates: Option<[Date, Date]>) => void,
     selected?: [Date, Date],
     autoApply?: true
   }

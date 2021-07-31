@@ -3,7 +3,7 @@
 {% from 'molecules/datepicker/index.njk' import datepicker %}
 
 {% macro date_dropdown(label, disabled, expanded) %}
-  {% set datepickerWrapId = 'date-dropdown__datepicker-wrap' | uniqid %}
+  {% set datepicker_wrap_id = 'date-dropdown__datepicker-wrap' | uniqid %}
 
   <div class="date-dropdown js-date-dropdown {% if expanded %}date-dropdown_expanded{% endif %}">
     <label class="date-dropdown__field">
@@ -15,7 +15,7 @@
           type="button"
           value="ДД.ММ - ДД.ММ"
           aria-expanded="{% if expanded %}true{% else %}false{% endif %}"
-          aria-controls="{{ datepickerWrapId }}"
+          aria-controls="{{ datepicker_wrap_id }}"
           data-placeholder="ДД.ММ - ДД.ММ"
           {% if disabled %}disabled{% endif %}
         >
@@ -24,7 +24,7 @@
     </label>
 
     <div class="date-dropdown__view-port">
-      <div class="date-dropdown__datepicker js-date-dropdown__datepicker" role="region" id="{{ datepickerWrapId }}">
+      <div class="date-dropdown__datepicker js-date-dropdown__datepicker" role="region" id="{{ datepicker_wrap_id }}">
         {{ datepicker() }}
       </div>
     </div>
@@ -32,7 +32,7 @@
 {% endmacro %}
 
 {% macro date_dropdown_twin(labelFrom, labelTo, disabled, expanded) %}
-  {% set datepickerWrapId = 'date-dropdown__datepicker-wrap' | uniqid %}
+  {% set datepicker_wrap_id = 'date-dropdown__datepicker-wrap' | uniqid %}
 
   <div class="date-dropdown date-dropdown_is_twin js-date-dropdown {% if expanded %}date-dropdown_expanded{% endif %}">
     <label class="date-dropdown__field">
@@ -44,7 +44,7 @@
           type="button"
           value="ДД.ММ.ГГГГ"
           aria-expanded="{% if expanded %}true{% else %}false{% endif %}"
-          aria-controls="{{ datepickerWrapId }}"
+          aria-controls="{{ datepicker_wrap_id }}"
           data-placeholder="ДД.ММ.ГГГГ"
           {% if disabled %}disabled{% endif %}
         >
@@ -61,7 +61,7 @@
           type="button"
           value="ДД.ММ.ГГГГ"
           aria-expanded="{% if expanded %}true{% else %}false{% endif %}"
-          aria-controls="{{ datepickerWrapId }}"
+          aria-controls="{{ datepicker_wrap_id }}"
           data-placeholder="ДД.ММ.ГГГГ"
           {% if disabled %}disabled{% endif %}
         >
@@ -70,7 +70,7 @@
     </label>
 
     <div class="date-dropdown__view-port">
-      <div class="date-dropdown__datepicker js-date-dropdown__datepicker" id="{{ datepickerWrapId }}">
+      <div class="date-dropdown__datepicker js-date-dropdown__datepicker" id="{{ datepicker_wrap_id }}">
         {{ datepicker() }}
       </div>
     </div>

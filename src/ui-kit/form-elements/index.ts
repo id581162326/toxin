@@ -17,6 +17,7 @@ import ExpandableCheckboxes from 'molecules/expandable-checkboxes';
 import DateDropdown from 'molecules/date-dropdown';
 import Pagination from 'molecules/pagination';
 import CheckboxGroup from 'molecules/checkbox-group';
+import Review from 'molecules/review';
 
 import './style.css';
 
@@ -64,4 +65,5 @@ init(['.js-form-elements__pagination', Pagination]);
 init(['.js-form-elements__range-slider', RangeSlider, {
   range: [0, 16000], initials: [5000, 10000],
   margin: 1000, onChange: H.trace
-}])
+}]);
+init(['.js-form-elements__review', Review, {onLikeChange: H.trace}]);

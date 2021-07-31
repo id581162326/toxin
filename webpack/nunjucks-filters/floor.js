@@ -1,3 +1,3 @@
-module.exports = function floor(value) {
+module.exports = function (value) {
   return (Math.floor(value));
 };

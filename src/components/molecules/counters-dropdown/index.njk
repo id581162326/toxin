@@ -1,7 +1,7 @@
 {% from 'assets/icons/index.njk' import arrow_expand %}
 
 {% macro counters_dropdown(placeholder=" ", disabled, label, expanded) %}
-  {% set listWrapId = 'counters-dropdown__list-wrap' | uniqid %}
+  {% set list_wrap_id = 'counters-dropdown__list-wrap' | uniqid %}
 
   <div class="counters-dropdown js-counters-dropdown {% if expanded %}counters-dropdown_expanded{% endif %}">
     <label class="counters-dropdown__field">
@@ -12,7 +12,7 @@
           class="counters-dropdown__button js-counters-dropdown__button"
           type="button"
           aria-expanded="{% if expanded %}true{% else %}false{% endif %}"
-          aria-controls="{{ listWrapId }}"
+          aria-controls="{{ list_wrap_id }}"
           {% if value %}value="{{ placeholder }}"{% endif %}
           {% if placeholder %}data-placeholder="{{ placeholder }}"{% endif %}
           {% if disabled %}disabled{% endif %}
@@ -22,7 +22,7 @@
     </label>
 
     <div class="counters-dropdown__list-viewport">
-      <div class="counters-dropdown__list-wrap js-counters-dropdown__list-wrap" id="{{ listWrapId }}"></div>
+      <div class="counters-dropdown__list-wrap js-counters-dropdown__list-wrap" id="{{ list_wrap_id }}"></div>
     </div>
   </div>
 {% endmacro %}

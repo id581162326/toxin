@@ -1,9 +1,11 @@
 {% macro radio_group(label, hidden_label, name, disabled, group) %}
-  {% set radioGroupLabelId = 'radio-group__label' | uniqid %}
+  {% set radio_group_label_id = 'radio-group__label' | uniqid %}
 
   <div class="radio-group">
-    <span class="radio-group__label{% if hidden_label %}radio-group__label_hidden{% endif %}" id="{{ radioGroupLabelId }}">{{ label }}</span>
-    <div class="radio-group__items" role="radiogroup" aria-labelledby="{{ radioGroupLabelId }}">
+    <span class="radio-group__label{% if hidden_label %}radio-group__label_hidden{% endif %}" id="{{ radio_group_label_id }}">
+      {{ label }}
+    </span>
+    <div class="radio-group__items" role="radiogroup" aria-labelledby="{{ radio_group_label_id }}">
       {% for radio in group %}
         <label class="radio-group__input-wrap">
           <input

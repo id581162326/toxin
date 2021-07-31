@@ -1,5 +1,7 @@
 .form-elements {
   position: relative;
+  display: grid;
+  row-gap: 40px;
   width: 100%;
   max-width: 1380px;
   margin: 0 auto;

@@ -1,10 +1,13 @@
 {% from 'atoms/checkbox/index.njk' import checkbox %}
 
 {% macro checkbox_group(label, hidden_label, group) %}
-  {% set checkboxGroupLabelId = 'checkbox-group__label' | uniqid %}
+  {% set checkbox_group_label_id = 'checkbox-group__label' | uniqid %}
+
   <div class="checkbox-group">
-    <span class="checkbox-group__label{% if hidden_label %} checkbox-group__label_hidden{% endif %}" id="{{ checkboxGroupLabelId }}">{{ label }}</span>
-    <ul class="checkbox-group__list js-checkbox-group" aria-labelledby="{{ checkboxGroupLabelId }}">
+    <span class="checkbox-group__label{% if hidden_label %} checkbox-group__label_hidden{% endif %}" id="{{ checkbox_group_label_id }}">
+      {{ label }}
+    </span>
+    <ul class="checkbox-group__list js-checkbox-group" aria-labelledby="{{ checkbox_group_label_id }}">
       {% for item in group %}
         <li class="js-checkbox-group__item">
           {{ checkbox(checked=item.checked, label=item.label, name=item.name, description=item.description) }}

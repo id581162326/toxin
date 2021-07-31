@@ -1,16 +1,16 @@
 {% from 'assets/icons/index.njk' import check_mark %}
 
 {% macro checkbox(name, appearance='checkbox', label, description, checked, disabled) %}
-  {% set checkboxLabelId = 'checkbox__label' | uniqid %}
-  {% set checkboxDescId = 'checkbox__description' | uniqid %}
+  {% set checkbox_label_id = 'checkbox__label' | uniqid %}
+  {% set checkbox_desc_id = 'checkbox__description' | uniqid %}
 
   <label class="checkbox checkbox_appearance_{{ appearance }} {% if description %}checkbox_with_description{% endif %}">
     <input
       class="checkbox__input js-checkbox__input"
       name="{{ name }}"
       type="checkbox"
-      aria-labelledby="{{ checkboxLabelId }}"
-      {% if description %}aria-describedby="{{ checkboxDescId }}" {% endif %}
+      aria-labelledby="{{ checkbox_label_id }}"
+      {% if description %}aria-describedby="{{ checkbox_desc_id }}" {% endif %}
       {% if checked %}checked{% endif %}
       {% if disabled %}disabled{% endif %}
     >
@@ -21,7 +21,7 @@
       <span class="checkbox__inner-circle"></span>
       {% endif %}
     </span>
-    <span class="checkbox__label" id="{{ checkboxLabelId }}">{{ label }}</span>
-    {% if description %}<span class="checkbox__description" id="{{ checkboxDescId }}">{{ description }}</span>{% endif %}
+    <span class="checkbox__label" id="{{ checkbox_label_id }}">{{ label }}</span>
+    {% if description %}<span class="checkbox__description" id="{{ checkbox_desc_id }}">{{ description }}</span>{% endif %}
   </label>
 {% endmacro %}

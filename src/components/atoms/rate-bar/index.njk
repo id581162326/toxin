@@ -9,29 +9,29 @@
     { value: 5, active: rate===5, label: 'Пять звёзд' }
   ] %}
 
-  {% set rateBarInputId = 'rate-bar__input' | uniqid %}
-  {% set rateBarLabelId = 'rate-bar__label' | uniqid %}
+  {% set rate_bar_input_id = 'rate-bar__input' | uniqid %}
+  {% set rate_bar_label_id = 'rate-bar__label' | uniqid %}
 
   <span class="rate-bar{% if interactive %} rate-bar_interactive{% endif %}">
     {% if interactive %}
-      <span class="rate-bar__label{% if hidden_label %} rate-bar__label_hidden{% endif %}" id="{{ rateBarLabelId }}">{{ label }}</span>
+      <span class="rate-bar__label{% if hidden_label %} rate-bar__label_hidden{% endif %}" id="{{ rate_bar_label_id }}">{{ label }}</span>
     {% endif %}
 
-    <span class="rate-bar__items" {% if interactive %}role="radiogroup" aria-labelledby="{{ rateBarLabelId }}"{% endif %}>
+    <span class="rate-bar__items" {% if interactive %}role="radiogroup" aria-labelledby="{{ rate_bar_label_id }}"{% endif %}>
     {% if not interactive %}<span class="rate-bar__title">Рейтинг: {{ stars[rate - 1].label }} из пяти</span>{% endif %}
       {% for item in stars %}
         {% if interactive %}
           <input
             class="rate-bar__input js-rate-bar__input"
             type="radio"
-            id="{{ rateBarInputId }}-{{ item.value }}"
+            id="{{ rate_bar_input_id }}-{{ item.value }}"
             name="{{ name }}"
             value="{{ item.value }}"
             {% if rate===item.value %}checked{% endif %}
             {% if disabled %}disabled{% endif %}
             {% if disabled %}aria-hidden="true"{% endif %}
         >
-          <label class="rate-bar__mark" for="{{ rateBarInputId }}-{{ item.value }}">
+          <label class="rate-bar__mark" for="{{ rate_bar_input_id }}-{{ item.value }}">
             <span class="rate-bar__item-label">{{ item.label }}</span>
             {{ star_filled(class='rate-bar__icon-filled', width=20, height=18, gradient=true) }}
               {{ star_shaped(class='rate-bar__icon-shaped', width=20, height=18, gradient=true) }}

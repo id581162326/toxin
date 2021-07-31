@@ -1,23 +1,23 @@
 {%  from 'assets/icons/index.njk' import favorite_filled, favorite_shaped %}
 
 {% macro like_button(name, active, count) %}
-  {% set likeLabelId = 'like-button__label' | uniqid %}
-  {% set likeDescId = 'like-button__count' | uniqid %}
+  {% set like_label_id = 'like-button__label' | uniqid %}
+  {% set like_desc_id = 'like-button__count' | uniqid %}
 
   <label class="like-button">
     <input
       class="like-button__input js-like-button__input"
       type="checkbox"
       name="{{ name }}"
-      aria-labelledby="{{ likeLabelId }}"
-      aria-describedby="{{ likeDescId }}"
+      aria-labelledby="{{ like_label_id }}"
+      aria-describedby="{{ like_desc_id }}"
       {% if active %}checked{% endif %}
     >
     <span class="like-button__mark">
       {{ favorite_filled(class='like-button__icon-filled', width=10, height=8, gradient=true) }}
       {{ favorite_shaped(class='like-button__icon-shaped', width=10, height=8) }}
-      <span class="like-button__counter js-like-button__counter" id="{{ likeDescId }}">{{ count }}</span>
+      <span class="like-button__counter js-like-button__counter" id="{{ like_desc_id }}">{{ count }}</span>
     </span>
-    <span class="like-button__label" id="{{ likeLabelId }}">Оценить</span>
+    <span class="like-button__label" id="{{ like_label_id }}">Оценить</span>
   </label>
 {% endmacro %}

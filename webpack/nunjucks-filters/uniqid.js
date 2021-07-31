@@ -1,5 +1,5 @@
 const uniqid = require('uniqid');
 
-module.exports = function addUniqId(x) {
+module.exports = function (x) {
   return (`${x}-${uniqid()}`);
 };

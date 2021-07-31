@@ -18,6 +18,7 @@
 {% from 'molecules/counters-dropdown/index.njk' import counters_dropdown %}
 {% from 'molecules/expandable-checkboxes/index.njk' import expandable_checkboxes %}
 {% from 'molecules/date-dropdown/index.njk' import date_dropdown, date_dropdown_twin %}
+{% from 'molecules/review/index.njk' import review %}
 
 {% block content %}
   <div class="form-elements js-form-elements">
@@ -165,6 +166,21 @@
       <div class="form-elements__range-slider js-form-elements__range-slider">
         {{ range_slider(label='range slider') }}
       </div>
+    </div>
+    
+    <div class="form-elements__review js-form-elements__review">
+      {% set reviews = 'mocks/reviews/index.json' | from %}
+
+      {{ review(
+        id=reviews[0].id,
+        firstname=reviews[0].firstname,
+        surname=reviews[0].surname,
+        time_utc=reviews[0].time_utc,
+        text=reviews[0].text,
+        likes=reviews[0].likes,
+        liked=reviews[0].liked,
+        avatar_url=reviews[0].avatar_url | from
+      ) }}
     </div>
   </div>
 {% endblock %}

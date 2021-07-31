@@ -1,10 +1,10 @@
 {% from 'assets/icons/index.njk' import arrow_back, arrow_forward %}
 
 {% macro pagination(total) %}
-  {% set paginationTitleId = 'pagination__label' | uniqid %}
+  {% set pagination_title_id = 'pagination__label' | uniqid %}
   {% set amount = total / 12 | floor %}
 
-  <nav class="pagination js-pagination" aria-labelledby="{{ paginationTitleId }}">
+  <nav class="pagination js-pagination" aria-labelledby="{{ pagination_title_id }}">
     <ul class="pagination__list">
       <li class="pagination__item pagination__item_is_nav js-pagination__nav-item">
         <a class="pagination__link js-pagination__nav-link">
@@ -37,7 +37,7 @@
       </li>
     </ul>
 
-    <span class="pagination__title" id="{{ paginationTitleId }}">
+    <span class="pagination__title" id="{{ pagination_title_id }}">
       1 – 12 из {% if total > 100 %}100+{% else %}{{ total }}{% endif %} вариантов аренды
     </span>
   </nav>

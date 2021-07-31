@@ -1,9 +1,11 @@
 {% macro bullet_list(label, hidden_label, list) %}
-  {% set bulletListLabelId = 'bullet-list__label' | uniqid %}
+  {% set bullet_list_label_id = 'bullet-list__label' | uniqid %}
 
   <div class="bullet-list">
-    <span class="bullet-list__label{% if hidden_label %} bullet-list__label_hidden{% endif %}" id="{{ bulletListLabelId }}">{{ label }}</span>
-    <ul class="bullet-list__items" aria-labelledby="{{ bulletListLabelId }}">
+    <span class="bullet-list__label{% if hidden_label %} bullet-list__label_hidden{% endif %}" id="{{ bullet_list_label_id }}">
+      {{ label }}
+    </span>
+    <ul class="bullet-list__items" aria-labelledby="{{ bullet_list_label_id }}">
       {% for item in list %}
         <li class="bullet-list__item">
           <span class="bullet-list__text">{{ item }}</span>

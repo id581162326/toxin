@@ -1,0 +1,42 @@
+.review {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  width: max-content;
+  gap: 10px;
+}
+
+.review__avatar {
+  grid-row: 1/2;
+  border: 2px solid white;
+  border-radius: 50%;
+  filter: drop-shadow(0px 10px 20px rgba(var(--dark-rgb), 0.1));
+}
+
+.review__header {
+  grid-column: 2;
+  display: grid;
+  grid-auto-rows: max-content;
+  align-content: center;
+}
+
+.review__name {
+  font: 14px/22px var(--font-bold);
+  color: rgba(var(--dark-rgb), .75);
+}
+
+.review__time {
+  font: 14px/22px var(--font-regular);
+  color: rgba(var(--dark-rgb), .75);
+}
+
+.review__like-btn {
+  justify-self: end;
+  padding-top: 2px;
+}
+
+.review__text {
+  grid-column: 2;
+  max-width: 653px;
+  margin: 0;
+  font: 14px/24px rgba(var(--dark-rgb), .75);
+}

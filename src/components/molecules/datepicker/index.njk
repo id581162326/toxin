@@ -2,7 +2,7 @@
 {% from 'atoms/button/index.njk' import button %}
 
 {% macro datepicker() %}
-  {% set dateDropdownHeadingId = 'datepicker__heading' | uniqid %}
+  {% set datepicker_heading_id = 'datepicker__heading' | uniqid %}
 
   <div class="datepicker js-datepicker">
     <div class="datepicker__nav">
@@ -16,9 +16,9 @@
     </div>
 
     <div class="datepicker__calendar">
-      <span class="datepicker__heading js-datepicker__heading" id="{{ dateDropdownHeadingId }}"></span>
+      <span class="datepicker__heading js-datepicker__heading" id="{{ datepicker_heading_id }}"></span>
 
-      <div class="datepicker__grid js-datepicker__grid" tabindex="0" role="grid" aria-labelledby="{{ dateDropdownHeadingId }}"></div>
+      <div class="datepicker__grid js-datepicker__grid" tabindex="0" role="grid" aria-labelledby="{{ datepicker_heading_id }}"></div>
     </div>
   </div>
 {% endmacro %}

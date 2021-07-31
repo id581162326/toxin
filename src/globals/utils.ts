@@ -1,13 +1,14 @@
 export type Plural = { one: string, few: string, many: string };
 
 export const plurals: Record<string, Plural> = {
-  'adults': {one: 'Взрослый', few: 'Взрослых', many: 'Взрослых'},
-  'children': {one: 'Ребенок', few: 'Детей', many: 'Детей'},
-  'guest': {one: 'Гость', few: 'Гостя', many: 'Гостей'},
-  'babies': {one: 'Младенец', few: 'Младенцев', many: 'Младенцев'},
-  'rooms': {one: 'Комната', few: 'Комнаты', many: 'Комнат'},
-  'beds': {one: 'Кровать', few: 'Кровати', many: 'Кроватей'},
-  'bathrooms': {one: 'Ванная комната', few: 'Ванных камнаты', many: 'Ванных комнат'}
+  'adults': {one: 'взрослый', few: 'взрослых', many: 'взрослых'},
+  'children': {one: 'ребенок', few: 'детей', many: 'детей'},
+  'guest': {one: 'гость', few: 'гостя', many: 'гостей'},
+  'babies': {one: 'младенец', few: 'младенцев', many: 'младенцев'},
+  'rooms': {one: 'комната', few: 'комнаты', many: 'комнат'},
+  'beds': {one: 'кровать', few: 'кровати', many: 'кроватей'},
+  'bathrooms': {one: 'ванная комната', few: 'ванных камнаты', many: 'ванных комнат'},
+  'days': {one: 'день', few: 'дня', many: 'дней'}
 };
 
 export const monthNames = [

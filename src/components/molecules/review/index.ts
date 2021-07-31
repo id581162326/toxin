@@ -1,10 +1,11 @@
-import Namespace from './namespace';
 import {pipe} from 'fp-ts/function';
-
 import * as H from 'globals/helpers';
 import * as O from 'fp-ts/Option';
 import {plurals} from 'globals/utils';
+
 import LikeButton from 'atoms/like-button';
+
+import Namespace from './namespace';
 
 class Review {
   constructor(private readonly wrap: HTMLElement, private readonly props: Namespace.Props) {
@@ -13,7 +14,6 @@ class Review {
   }
 
   private readonly likeBtnWrap = pipe(this.wrap, H.querySelector<HTMLDivElement>('.js-review__like-btn'));
-
   private readonly timeEl = pipe(this.wrap, H.querySelector<HTMLTimeElement>('.js-review__time'));
 
   private readonly initTime = () => pipe(this.timeEl, O.map((el) => pipe(

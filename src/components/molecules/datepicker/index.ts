@@ -1,3 +1,6 @@
+import * as O from 'fp-ts/Option';
+import {Option} from 'fp-ts/Option';
+
 import View from './parts/view';
 import Model from './parts/model';
 import Controller from './parts/controller';
@@ -6,7 +9,7 @@ import Namespace from './namespace';
 
 class Datepicker implements Namespace.Interface {
   public readonly reset = () => {
-    this.controller.dispatch({type: 'RESET_SELECTED'});
+    this.controller.dispatch({type: 'SET_SELECTED', dates: O.none});
 
     return (this);
   };
@@ -28,7 +31,7 @@ class Datepicker implements Namespace.Interface {
 
   private readonly handleTurnNext = () => this.controller.dispatch({type: 'TURN_NEXT'});
   private readonly handleTurnPrev = () => this.controller.dispatch({type: 'TURN_PREV'});
-  private readonly handleSelect = (dates: [Date, Date]) => this.controller.dispatch({type: 'SET_SELECTED', dates});
+  private readonly handleSelect = (dates: Option<[Date, Date]>) => this.controller.dispatch({type: 'SET_SELECTED', dates});
 }
 
 export default Datepicker;

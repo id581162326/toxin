@@ -7,20 +7,8 @@ import DropdownManager from './parts/dropdown-manager';
 import FieldManager from './parts/field-manager';
 import CountersManager from './parts/counters-manager';
 
-class CountersDropdown implements Namespace.Interface {
-  public readonly setExpanded = (expanded: boolean) => {
-    this.dropdownManager.setExpanded(expanded);
-
-    return (this);
-  };
-
-  public readonly setDisabled = (disabled: boolean) => {
-    this.fieldManager.setDisabled(disabled);
-
-    return (this);
-  };
-
-  constructor(wrap: HTMLElement, private readonly props: Namespace.Props) {
+class CountersDropdown {
+  constructor(private readonly wrap: HTMLElement, private readonly props: Namespace.Props) {
     this.fieldManager = pipe(FieldManager, H.instance(wrap));
     this.dropdownManager = pipe(DropdownManager, H.instance(wrap));
     this.countersManager = pipe(CountersManager, H.instance(wrap, {
@@ -48,7 +36,7 @@ class CountersDropdown implements Namespace.Interface {
 
   private readonly handleApply = () => {
     this.dropdownManager.setExpanded(false);
-  }
+  };
 }
 
 

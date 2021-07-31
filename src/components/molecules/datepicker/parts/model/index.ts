@@ -1,11 +1,12 @@
+import {Ordering} from 'fp-ts/Ordering';
+import * as O from 'fp-ts/Option';
+import {Option} from 'fp-ts/Option';
+import {today} from 'globals/utils';
+import * as F from 'fp-ts/function';
+import {flow, pipe} from 'fp-ts/function';
 import * as A from 'fp-ts/Array';
 import * as D from 'fp-ts/Date';
-import * as F from 'fp-ts/function';
-import {pipe} from 'fp-ts/function';
-import * as O from 'fp-ts/Option';
 import * as H from 'globals/helpers';
-import {today} from 'globals/utils';
-import {Ordering} from 'fp-ts/Ordering';
 
 import Namespace from './namespace';
 
@@ -28,15 +29,10 @@ class Model implements Namespace.Interface {
     return (this);
   };
 
-  public readonly resetSelected = () => {
-    this.updateState({selected: undefined});
-    this.props.onSelect(this.state.selected);
-
-    return (this);
-  };
-
-  public readonly setSelected = (selected: [Date, Date]) => {
-    this.updateState({selected: pipe(selected, A.map(this.normalizeSelected), A.sort(D.Ord)) as [Date, Date]});
+  public readonly setSelected = (selected: Option<[Date, Date]>) => {
+    this.updateState({
+      selected: pipe(selected, O.map(flow(A.map(this.normalizeSelected), A.sort(D.Ord)))) as Option<[Date, Date]>
+    });
     this.props.onSelect(this.state.selected);
 
     return (this);
@@ -50,7 +46,7 @@ class Model implements Namespace.Interface {
   };
 
   constructor(private readonly props: Namespace.Props) {
-    pipe(props.selected, O.fromNullable, O.map(this.setSelected));
+    this.props.onSelect(this.state.selected);
   }
 
   private readonly listeners: Array<Namespace.Listener> = [];
@@ -58,7 +54,7 @@ class Model implements Namespace.Interface {
   private state: Namespace.State = {
     year: new Date().getFullYear(),
     month: new Date().getMonth(),
-    selected: this.props.selected
+    selected: O.fromNullable(this.props.selected)
   };
 
   private readonly updateState = (state: Partial<Namespace.State>) => {
@@ -74,7 +70,7 @@ class Model implements Namespace.Interface {
   private readonly compareDates = (...orderings: Array<Ordering>) => (x: Date) => (y: Date) => {
     const comparison = H.compare(D.Ord)(x)(y);
 
-    return (pipe(orderings, A.reduce(false, (acc, ordering) => acc || comparison === ordering)))
+    return (pipe(orderings, A.reduce(false, (acc, ordering) => acc || comparison === ordering)));
   };
 
   private readonly dateGte = this.compareDates(1, 0);
@@ -84,17 +80,17 @@ class Model implements Namespace.Interface {
   private readonly dateLt = this.compareDates(-1);
 
   private readonly dateInRange = (date: Date) => pipe(
-    this.state.selected, O.fromNullable, O.map(([startDate, endDate]) => pipe(true, H.switchCases([
+    this.state.selected, O.map(([startDate, endDate]) => pipe(true, H.switchCases([
       [this.dateGte(startDate)(date) && this.dateLte(endDate)(date), F.constTrue]
     ], F.constFalse))), O.getOrElse(F.constFalse)
   );
 
   private readonly datesAreEquals = H.equals(D.Eq);
 
-  private readonly dateIsStart = (date: Date) => pipe(this.state.selected, O.fromNullable, O.map(
+  private readonly dateIsStart = (date: Date) => pipe(this.state.selected, O.map(
     ([startDate, _]) => this.datesAreEquals(startDate, date)), O.getOrElse(F.constFalse));
 
-  private readonly dateIsEnd = (date: Date) => pipe(this.state.selected, O.fromNullable, O.map(
+  private readonly dateIsEnd = (date: Date) => pipe(this.state.selected, O.map(
     ([_, endDate]) => this.datesAreEquals(endDate, date)), O.getOrElse(F.constFalse));
 
   private readonly normalizeSelected = (date: Date) => this.dateLt(today)(date) ? today : date;

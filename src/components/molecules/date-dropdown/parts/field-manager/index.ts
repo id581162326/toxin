@@ -1,7 +1,10 @@
-import Namespace from './namespace';
-import {pipe} from 'fp-ts/function';
+import * as O from 'fp-ts/Option';
+import {Option} from 'fp-ts/Option';
+import {flow, pipe} from 'fp-ts/function';
 import * as H from 'globals/helpers';
 import * as A from 'fp-ts/Array';
+
+import Namespace from './namespace';
 
 class FieldManager implements Namespace.Interface {
   public readonly setDisabled = (disabled: boolean) => {
@@ -10,7 +13,7 @@ class FieldManager implements Namespace.Interface {
     return (this);
   };
 
-  public readonly updateValue = (dates?: [Date, Date]) => {
+  public readonly updateValue = (dates: Option<[Date, Date]>) => {
     A.size(this.fields) === 2 ? pipe(
       dates,
       this.getRangeValues,
@@ -29,15 +32,14 @@ class FieldManager implements Namespace.Interface {
 
   private readonly fields = pipe(this.wrap, H.querySelectorAll<HTMLInputElement>('.js-date-dropdown__button'));
 
-  private readonly getRangeValues = (dates?: [Date, Date]) => dates
-    ? pipe(dates, A.map(new Intl.DateTimeFormat('ru').format))
-    : ['ДД.ММ.ГГГГ', 'ДД.ММ.ГГГГ'];
+  private readonly getRangeValues = (dates: Option<[Date, Date]>) => pipe(dates, O.fold(
+    () => ['ДД.ММ.ГГГГ', 'ДД.ММ.ГГГГ'], A.map(new Intl.DateTimeFormat('ru').format)
+  ));
 
-  private readonly getSingleValue = (dates?: [Date, Date]) => dates ? pipe(
-    dates,
-    A.map(new Intl.DateTimeFormat('ru', {day: 'numeric', month: 'short'}).format),
-    H.join(' - ')
-  ) : 'ДД.ММ - ДД.ММ';
+  private readonly getSingleValue = (dates: Option<[Date, Date]>) => pipe(dates, O.fold(
+    () => 'ДД.ММ - ДД.ММ',
+    flow(A.map(new Intl.DateTimeFormat('ru', {day: 'numeric', month: 'short'}).format), H.join(' - '))
+  ));
 }
 
 export default FieldManager;

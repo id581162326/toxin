@@ -20,6 +20,7 @@ import CheckboxGroup from 'molecules/checkbox-group';
 import Review from 'molecules/review';
 
 import './style.css';
+import SearchRoom from 'organisms/search-room';
 
 type InitTuple<Class extends { new(wrap: HTMLElement, ...params: any[]): any }> = [
   string, Class, ...(Class extends { new(wrap: HTMLElement, ...params: infer Params): any } ? Params : never)
@@ -67,3 +68,4 @@ init(['.js-form-elements__range-slider', RangeSlider, {
   margin: 1000, onChange: H.trace
 }]);
 init(['.js-form-elements__review', Review, {onLikeChange: H.trace}]);
+init(['.js-form-elements__search-room', SearchRoom, {onSubmit: H.trace}]);

@@ -1,0 +1,24 @@
+.search-room {
+  display: grid;
+  row-gap: 20px;
+  width: 100%;
+  max-width: 380px;
+  padding: 40px 30px;
+  background: white;
+  border: rgba(0, 0, 0, .12);
+  border-radius: 4px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, .2);
+}
+
+/* title */
+
+.search-room__title {
+  font: 24px/29px var(--font-bold);
+  color: var(--dark-color);
+}
+
+/* submit button */
+
+.search-room__submit-btn {
+  padding-top: 10px;
+}

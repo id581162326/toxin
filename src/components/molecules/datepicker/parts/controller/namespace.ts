@@ -1,3 +1,5 @@
+import {Option} from 'fp-ts/Option';
+
 import Model from '../model/namespace';
 import View from '../view/namespace';
 
@@ -6,11 +8,9 @@ namespace Controller {
 
   export interface TurnPrev {type: 'TURN_PREV'}
 
-  export interface ResetSelected {type: 'RESET_SELECTED'}
+  export interface SetSelected {type: 'SET_SELECTED', dates: Option<[Date, Date]>}
 
-  export interface SetSelected {type: 'SET_SELECTED', dates: [Date, Date]}
-
-  export type Actions = TurnNext | TurnPrev | SetSelected | ResetSelected;
+  export type Actions = TurnNext | TurnPrev | SetSelected;
 
   export interface View extends View.Interface {
   }

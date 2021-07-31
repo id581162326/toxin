@@ -10,11 +10,6 @@ namespace CountersDropdown {
     onChange: (countersData: Record<string, number>) => void,
     autoApply?: true
   }
-
-  export interface Interface {
-    setDisabled: (disabled: boolean) => this,
-    setExpanded: (expanded: boolean) => this
-  }
 }
 
 export default CountersDropdown;

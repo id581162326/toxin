@@ -6,12 +6,6 @@ import * as O from 'fp-ts/Option';
 import Namespace from './namespace';
 
 class FieldManager implements Namespace.Interface {
-  public readonly setDisabled = (disabled: boolean) => {
-    pipe(this.field, O.map(pipe('disabled', disabled ? H.setAttribute : H.removeAttribute)));
-
-    return (this);
-  };
-
   public readonly updateValue = (countersData: Namespace.CountersData) => {
     const value = pipe(countersData, this.sumCountersData, this.getValue);
 
@@ -33,12 +27,6 @@ class FieldManager implements Namespace.Interface {
   ), O.getOrElse(() => ' '));
 
   private readonly initFieldTitleSideEffect = () => pipe(window, H.addEventListener('load', this.handleWindowLoad));
-
-  private readonly handleWindowLoad = () => {
-    pipe(this.field, O.map(flow(H.prop('value'), this.setFieldTitle)));
-
-    H.removeEventListener('load', this.handleWindowLoad)(window);
-  };
 
   private readonly getFieldSizeInChar = () => pipe(
     this.field,
@@ -77,6 +65,12 @@ class FieldManager implements Namespace.Interface {
       ) : H.ident)]
     )
   );
+
+  private readonly handleWindowLoad = () => {
+    pipe(this.field, O.map(flow(H.prop('value'), this.setFieldTitle)));
+
+    H.removeEventListener('load', this.handleWindowLoad)(window);
+  };
 }
 
 export default FieldManager;

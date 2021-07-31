@@ -31,15 +31,15 @@ class SubscribeField {
     Button, H.instance(wrap, {onClick: this.submitValue})
   )));
 
-  private readonly submitValue = () => pipe(this.value, this.validateValue(this.value) ? this.props.onSubmit : H.ident);
+  private readonly submitValue = () => pipe(this.value, this.validateValue() ? this.props.onSubmit : H.ident);
 
-  private readonly validateValue = (value: string) => pipe(true, H.switchCases([
-    [!H.test(emailRegexp)(value), () => {
+  private readonly validateValue = () => pipe(true, H.switchCases([
+    [!H.test(emailRegexp)(this.value), () => {
       this.setFieldValid(false);
 
       return false;
     }],
-    [value.length === 0, () => {
+    [this.value.length === 0, () => {
       this.setFieldValid(false);
 
       return false;

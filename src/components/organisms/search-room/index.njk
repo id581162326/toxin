@@ -1,0 +1,21 @@
+{% from 'assets/icons/index.njk' import arrow_forward %}
+{% from 'atoms/button/index.njk' import button %}
+{% from 'molecules/date-dropdown/index.njk' import date_dropdown_twin %}
+{% from 'molecules/counters-dropdown/index.njk' import counters_dropdown %}
+
+{% macro search_room() %}
+  {% set search_room_title_id = 'search-room__title' | uniqid %}
+
+  <div class="search-room" role="form" aria-labelledby="{{ search_room_title_id }}">
+    <span class="search-room__title" id="{{ search_room_title_id }}">Найдем номера под ваши пожелания</span>
+    <div class="search-room__date-dropdown js-search-room__date-dropdown">
+      {{ date_dropdown_twin(labelFrom='Прибытие', labelTo='Выезд') }}
+    </div>
+    <div class="search-room__counters-dropdown js-search-room__counters-dropdown">
+      {{ counters_dropdown(label='Гости', placeholder='Сколько гостей') }}
+    </div>
+    <div class="search-room__submit-btn js-search-room__submit-btn">
+      {{ button(appearance='primary', icon=arrow_forward, label='подобрать номер', type='submit') }}
+    </div>
+  </div>
+{% endmacro %}

@@ -1,6 +1,15 @@
 {% from 'assets/icons/index.njk' import star_filled, star_shaped %}
 
-{% macro rate_bar(label, hidden_label, name, rate=1, interactive) %}
+{% macro rate_bar(props) %}
+  {% set rate_bar_input_id = 'rate-bar__input' | uniqid %}
+  {% set rate_bar_label_id = 'rate-bar__label' | uniqid %}
+
+  {% set label = props.label %}
+  {% set hidden_label = props.hidden_label %}
+  {% set name = props.name %}
+  {% set rate = props.rate %}
+  {% set interactive = props.interactive %}
+
   {% set stars = [
     { value: 1, active: rate===1, label: 'Одна звезда' },
     { value: 2, active: rate===2, label: 'Две звезды' },
@@ -8,9 +17,6 @@
     { value: 4, active: rate===4, label: 'Четыре звезды' },
     { value: 5, active: rate===5, label: 'Пять звёзд' }
   ] %}
-
-  {% set rate_bar_input_id = 'rate-bar__input' | uniqid %}
-  {% set rate_bar_label_id = 'rate-bar__label' | uniqid %}
 
   <span class="rate-bar{% if interactive %} rate-bar_interactive{% endif %}">
     {% if interactive %}
@@ -33,16 +39,16 @@
         >
           <label class="rate-bar__mark" for="{{ rate_bar_input_id }}-{{ item.value }}">
             <span class="rate-bar__item-label">{{ item.label }}</span>
-            {{ star_filled(class='rate-bar__icon-filled', width=20, height=18, gradient=true) }}
-              {{ star_shaped(class='rate-bar__icon-shaped', width=20, height=18, gradient=true) }}
+            {{ star_filled({class: 'rate-bar__icon-filled', width: 20, height: 18, gradient: true}) }}
+            {{ star_shaped({class: 'rate-bar__icon-shaped', width: 20, height: 18, gradient: true}) }}
           </label>
         {% else %}
           <span class="rate-bar__mark">
             <span class="rate-bar__item-label">{{ item.label }}</span>
             {% if item.value <= rate %}
-              {{ star_filled(class='rate-bar__icon-filled', width=20, height=18, gradient=true) }}
+              {{ star_filled({class: 'rate-bar__icon-filled', width: 20, height: 18, gradient: true}) }}
             {% else %}
-              {{ star_shaped(class='rate-bar__icon-shaped', width=20, height=18, gradient=true) }}
+              {{ star_shaped({class: 'rate-bar__icon-shaped', width: 20, height: 18, gradient: true}) }}
             {% endif %}
           </span>
         {% endif %}

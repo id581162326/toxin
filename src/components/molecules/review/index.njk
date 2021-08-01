@@ -1,6 +1,15 @@
 {% from 'atoms/like-button/index.njk' import like_button %}
 
-{% macro review(id, firstname, surname, time_utc, text, likes, liked, avatar_url) %}
+{% macro review(props) %}
+  {% set id = props.id %}
+  {% set firstname = props.firstname %}
+  {% set surname = props.surname %}
+  {% set time_utc = props.time_utc %}
+  {% set text = props.text %}
+  {% set likes = props.likes %}
+  {% set liked = props.liked %}
+  {% set avatar_url = props.avatar_url %}
+
   <article class="review" aria-label="Отзыв пользователя: {{ firstname }} {{ surname }}">
     <img class="review__avatar" src="{{ avatar_url }}" alt="{{ firstname }} {{ surname }}" width="48" height="48">
     <div class="review__header">
@@ -8,7 +17,7 @@
       <time class="review__time js-review__time" datetime="{{ time_utc }}">time</time>
     </div>
     <div class="review__like-btn js-review__like-btn">
-      {{ like_button(active=liked, count=likes, name='like-' + id) }}
+      {{ like_button({active: liked, count: likes, name: 'like-' + id}) }}
     </div>
     <p class="review__text">{{ text }}</p>
   </article>

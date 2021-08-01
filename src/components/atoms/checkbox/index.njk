@@ -1,8 +1,15 @@
 {% from 'assets/icons/index.njk' import check_mark %}
 
-{% macro checkbox(name, appearance='checkbox', label, description, checked, disabled) %}
+{% macro checkbox(props) %}
   {% set checkbox_label_id = 'checkbox__label' | uniqid %}
   {% set checkbox_desc_id = 'checkbox__description' | uniqid %}
+
+  {% set name = props.name %}
+  {% set appearance = props.appearance %}
+  {% set label = props.label %}
+  {% set description = props.description %}
+  {% set checked = props.checked %}
+  {% set disabled = props.disabled %}
 
   <label class="checkbox checkbox_appearance_{{ appearance }} {% if description %}checkbox_with_description{% endif %}">
     <input
@@ -16,7 +23,7 @@
     >
     <span class="checkbox__mark">
       {% if appearance==='checkbox' %}
-      {{ check_mark(class='checkbox__check-icon', width=10, height=8, gradient=true) }}
+      {{ check_mark({class: 'checkbox__check-icon', width: 10, height: 8, gradient: true}) }}
       {% elseif appearance==='toggle' %}
       <span class="checkbox__inner-circle"></span>
       {% endif %}

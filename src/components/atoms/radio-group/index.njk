@@ -1,25 +1,31 @@
-{% macro radio_group(label, hidden_label, name, disabled, group) %}
+{% macro radio_group(props) %}
   {% set radio_group_label_id = 'radio-group__label' | uniqid %}
+
+  {% set label = props.label %}
+  {% set hidden_label = props.hidden_label %}
+  {% set name = props.name %}
+  {% set disabled = props.disabled %}
+  {% set group = props.group %}
 
   <div class="radio-group">
     <span class="radio-group__label{% if hidden_label %} radio-group__label_hidden{% endif %}" id="{{ radio_group_label_id }}">
       {{ label }}
     </span>
     <div class="radio-group__items" role="radiogroup" aria-labelledby="{{ radio_group_label_id }}">
-      {% for radio in group %}
+      {% for item in group %}
         <label class="radio-group__input-wrap">
           <input
             class="radio-group__input js-radio-group__input"
             type="radio"
             name="{{ name }}"
-            value="{{ radio.value }}"
-            {% if radio.checked %}checked{% endif %}
+            value="{{ item.value }}"
+            {% if item.checked %}checked{% endif %}
             {% if disabled %}disabled{% endif %}
           >
           <span class="radio-group__mark">
           <span class="radio-group__inner-circle"></span>
         </span>
-          <span class="radio-group__item-label">{{ radio.label }}</span>
+          <span class="radio-group__item-label">{{ item.label }}</span>
         </label>
       {% endfor %}
     </div>

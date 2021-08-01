@@ -1,7 +1,12 @@
 {% from 'assets/icons/index.njk' import arrow_expand %}
 
-{% macro counters_dropdown(placeholder=" ", disabled, label, expanded) %}
+{% macro counters_dropdown(props) %}
   {% set list_wrap_id = 'counters-dropdown__list-wrap' | uniqid %}
+
+  {% set placeholder = props.placeholder %}
+  {% set disabled = props.disabled %}
+  {% set label = props.label %}
+  {% set expanded = props.expanded %}
 
   <div class="counters-dropdown js-counters-dropdown {% if expanded %}counters-dropdown_expanded{% endif %}">
     <label class="counters-dropdown__field">
@@ -19,7 +24,7 @@
           {% endif %}
           {% if disabled %}disabled{% endif %}
         >
-       {{ arrow_expand(class='counters-dropdown__icon', width=12, height=8) }}
+       {{ arrow_expand({class: 'counters-dropdown__icon', width: 12, height: 8}) }}
       </span>
     </label>
 

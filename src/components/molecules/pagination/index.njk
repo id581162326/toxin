@@ -9,7 +9,7 @@
       <li class="pagination__item pagination__item_is_nav js-pagination__nav-item">
         <a class="pagination__link js-pagination__nav-link">
           <span class="pagination__label">Назад</span>
-          {{ arrow_back(class='pagination__icon', width=18, height=18) }}
+          {{ arrow_back({class: 'pagination__icon', width: 18, height: 18}) }}
         </a>
       </li>
       {% for item in range(0, amount) %}
@@ -32,7 +32,7 @@
       <li class="pagination__item pagination__item_is_nav js-pagination__nav-item">
         <a class="pagination__link js-pagination__nav-link">
           <span class="pagination__label">Вперед</span>
-          {{ arrow_forward(class='pagination__icon', width=18, height=18) }}
+          {{ arrow_forward({class: 'pagination__icon', width: 18, height: 18}) }}
         </a>
       </li>
     </ul>

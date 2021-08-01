@@ -1,4 +1,12 @@
-{% macro button(type='button', appearance='primary', icon, icon_with_gradient, label, href, disabled) %}
+{% macro button(props) %}
+  {% set type = props.type %}
+  {% set appearance = props.appearance %}
+  {% set icon = props.icon %}
+  {% set icon_with_gradient = props.icon_with_gradient %}
+  {% set label = props.label %}
+  {% set href = props.href %}
+  {% set disabled = props.disabled %}
+
   {% if href %}
     <a
       class="button button_appearance_{{ appearance }} {% if icon and appearance !== 'link' %}button_with_icon{% endif %}"
@@ -6,19 +14,19 @@
     >
       {% if appearance !== 'link' %}<span class="button__overlay"></span>{% endif %}
       <span class="button__label js-button__label">{{ label }}</span>
-      {% if icon and appearance !== 'link' %}{{ icon(class='button__icon', width=18, height=18, gradient=appearance==='secondary') }}{% endif %}
+      {% if icon and appearance !== 'link' %}{{ icon({class: 'button__icon', width: 18, height: 18, gradient: appearance === 'secondary'}) }}{% endif %}
     </a>
   {% else %}
     <button
       class="button js-button button_appearance_{{ appearance }} {% if icon and appearance !== 'link' %}button_with_icon{% endif %}"
-      type="{{ type }}"
+      type="{% if type %}{{ type }}{% else %}button{% endif %}"
     >
       {% if appearance!=='link' and appearance!=='icon' %}<span class="button__overlay"></span>{% endif %}
       <span class="button__label {% if appearance==='icon' %}button__label_hidden{% endif %} js-button__label">{{ label }}</span>
       {% if icon and appearance!=='link' and appearance!=='icon' %}
-        {{ icon(class='button__icon', width=18, height=18, gradient=appearance==='secondary') }}
+        {{ icon({class: 'button__icon', width: 18, height: 18, gradient: appearance === 'secondary'}) }}
       {% elseif icon and appearance!=='link' %}
-        {{ icon(class='button__icon', width=18, height=18, gradient=icon_with_gradient) }}
+        {{ icon({class: 'button__icon', width: 18, height: 18, gradient: icon_with_gradient}) }}
       {% endif %}
     </button>
   {% endif %}

@@ -1,4 +1,8 @@
-{% macro arrow_expand(width, height, class) %}
+{% macro arrow_expand(props) %}
+  {% set width = props.width %}
+  {% set height = props.height %}
+  {% set class = props.class %}
+
   <svg
     {% if class %}class="{{ class }}"{% endif %}
     width="{{ width }}"
@@ -12,7 +16,12 @@
   </svg>
 {% endmacro %}
 
-{% macro arrow_forward(class, width, height, gradient) %}
+{% macro arrow_forward(props) %}
+  {% set width = props.width %}
+  {% set height = props.height %}
+  {% set class = props.class %}
+  {% set gradient = props.gradient %}
+
   {% set first_gradient_id = 'gradient' | uniqid %}
 
   <svg
@@ -39,7 +48,11 @@
   </svg>
 {% endmacro %}
 
-{% macro arrow_back(class, width, height) %}
+{% macro arrow_back(props) %}
+  {% set width = props.width %}
+  {% set height = props.height %}
+  {% set class = props.class %}
+
   <svg
     {% if class %}class="{{ class }}"{% endif %}
     width="{{ width }}"
@@ -55,7 +68,12 @@
   </svg>
 {% endmacro %}
 
-{% macro check_mark(class, width, height, gradient) %}
+{% macro check_mark(props) %}
+  {% set width = props.width %}
+  {% set height = props.height %}
+  {% set class = props.class %}
+  {% set gradient = props.gradient %}
+
   {% set first_gradient_id = 'gradient' | uniqid %}
   {% set second_gradient_id = 'gradient' | uniqid %}
 
@@ -94,7 +112,12 @@
   </svg>
 {% endmacro %}
 
-{% macro favorite_filled(class, width, height, gradient) %}
+{% macro favorite_filled(props) %}
+  {% set width = props.width %}
+  {% set height = props.height %}
+  {% set class = props.class %}
+  {% set gradient = props.gradient %}
+
   {% set first_gradient_id = 'gradient' | uniqid %}
 
   <svg
@@ -118,7 +141,11 @@
   </svg>
 {% endmacro %}
 
-{% macro favorite_shaped(class, width, height) %}
+{% macro favorite_shaped(props) %}
+  {% set width = props.width %}
+  {% set height = props.height %}
+  {% set class = props.class %}
+
   <svg
     {% if class %}class="{{ class }}"{% endif %}
     width="{{ width }}"
@@ -133,7 +160,12 @@
   </svg>
 {% endmacro %}
 
-{% macro star_filled(class, width, height, gradient) %}
+{% macro star_filled(props) %}
+  {% set width = props.width %}
+  {% set height = props.height %}
+  {% set class = props.class %}
+  {% set gradient = props.gradient %}
+
   {% set first_gradient_id = 'gradient' | uniqid %}
 
   <svg
@@ -157,7 +189,12 @@
   </svg>
 {% endmacro %}
 
-{% macro star_shaped(class, width, height, gradient) %}
+{% macro star_shaped(props) %}
+  {% set width = props.width %}
+  {% set height = props.height %}
+  {% set class = props.class %}
+  {% set gradient = props.gradient %}
+
   {% set first_gradient_id = 'gradient' | uniqid %}
 
   <svg

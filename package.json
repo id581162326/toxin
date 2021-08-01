@@ -52,7 +52,6 @@
     "html-webpack-harddisk-plugin": "^2.0.0",
     "html-webpack-plugin": "^5.3.1",
     "mini-css-extract-plugin": "^1.6.0",
-    "nouislider": "^15.2.0",
     "nunjucks": "^3.2.3",
     "postcss-apply": "^0.12.0",
     "postcss-loader": "^6.1.0",
@@ -70,6 +69,7 @@
   "dependencies": {
     "fp-ts": "^2.11.0",
     "imask": "^6.1.0",
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "nouislider": "^15.2.0"
   }
 }

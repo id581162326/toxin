@@ -2,14 +2,17 @@
 {% from 'atoms/button/index.njk' import button %}
 {% from 'atoms/text-field/index.njk' import text_field %}
 
-{% macro subscribe_field(label, hidden_label) %}
+{% macro subscribe_field(props) %}
+  {% set label = props.label %}
+  {% set hidden_label = props.hidden_label %}
+
   <div class="subscribe-field js-subscribe-field" role="form">
     <div class="subscribe-field__input js-subscribe-field__input">
-      {{ text_field(name='email', type='email', label=label, hidden_label=hidden_label, required=true, placeholder='Email') }}
+      {{ text_field({name: 'email', type: 'email', label: label, hidden_label: hidden_label, required: true, placeholder: 'Email'}) }}
     </div>
 
     <div class="subscribe-field__submit-btn js-subscribe-field__submit-btn" type="submit">
-      {{ button(appearance='icon', icon=arrow_forward, icon_with_gradient=true, label='отправить', type='submit') }}
+      {{ button({appearance: 'icon', icon: arrow_forward, icon_with_gradient: true, label: 'отправить', type: 'submit'}) }}
     </div>
   </div>
 {% endmacro %}

@@ -1,8 +1,12 @@
 {%  from 'assets/icons/index.njk' import favorite_filled, favorite_shaped %}
 
-{% macro like_button(name, active, count) %}
+{% macro like_button(props) %}
   {% set like_label_id = 'like-button__label' | uniqid %}
   {% set like_desc_id = 'like-button__count' | uniqid %}
+
+  {% set name = props.name %}
+  {% set active = props.active %}
+  {% set count = props.count %}
 
   <label class="like-button">
     <input
@@ -14,8 +18,8 @@
       {% if active %}checked{% endif %}
     >
     <span class="like-button__mark">
-      {{ favorite_filled(class='like-button__icon-filled', width=10, height=8, gradient=true) }}
-      {{ favorite_shaped(class='like-button__icon-shaped', width=10, height=8) }}
+      {{ favorite_filled({class: 'like-button__icon-filled', width: 10, height: 8, gradient: true}) }}
+      {{ favorite_shaped({class: 'like-button__icon-shaped', width: 10, height: 8}) }}
       <span class="like-button__counter js-like-button__counter" id="{{ like_desc_id }}">{{ count }}</span>
     </span>
     <span class="like-button__label" id="{{ like_label_id }}">Оценить</span>

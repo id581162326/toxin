@@ -1,5 +1,7 @@
-{% macro bullet_list(label, hidden_label, list) %}
+{% macro bullet_list(props) %}
   {% set bullet_list_label_id = 'bullet-list__label' | uniqid %}
+  {% set label = props.label %}
+  {% set list = props.list %}
 
   <div class="bullet-list">
     <span class="bullet-list__label{% if hidden_label %} bullet-list__label_hidden{% endif %}" id="{{ bullet_list_label_id }}">

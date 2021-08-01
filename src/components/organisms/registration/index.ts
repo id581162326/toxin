@@ -19,8 +19,7 @@ class Registration {
     this.initCheckbox();
   }
 
-  private registrationData: Namespace.RegistrationData = {
-  };
+  private registrationData: Namespace.RegistrationData = {};
 
   private readonly submitBtn: Option<InstanceType<typeof Button>> = O.none;
   private readonly fields;

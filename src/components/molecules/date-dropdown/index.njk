@@ -2,8 +2,12 @@
 {% from 'atoms/button/index.njk' import button %}
 {% from 'molecules/datepicker/index.njk' import datepicker %}
 
-{% macro date_dropdown(label, disabled, expanded) %}
+{% macro date_dropdown(props) %}
   {% set datepicker_wrap_id = 'date-dropdown__datepicker-wrap' | uniqid %}
+
+  {% set label = props.label %}
+  {% set disabled = props.disabled %}
+  {% set expanded = props.expanded %}
 
   <div class="date-dropdown js-date-dropdown {% if expanded %}date-dropdown_expanded{% endif %}">
     <label class="date-dropdown__field">
@@ -19,7 +23,7 @@
           data-placeholder="ДД.ММ - ДД.ММ"
           {% if disabled %}disabled{% endif %}
         >
-        {{ arrow_expand(class='date-dropdown__icon', width=12, height=8) }}
+        {{ arrow_expand({class: 'date-dropdown__icon', width: 12, height: 8}) }}
       </span>
     </label>
 
@@ -31,8 +35,13 @@
   </div>
 {% endmacro %}
 
-{% macro date_dropdown_twin(labelFrom, labelTo, disabled, expanded) %}
+{% macro date_dropdown_twin(props) %}
   {% set datepicker_wrap_id = 'date-dropdown__datepicker-wrap' | uniqid %}
+
+  {% set label_from = props.label_from %}
+  {% set label_to = props.label_to %}
+  {% set disabled = props.disabled %}
+  {% set expanded = props.expanded %}
 
   <div class="date-dropdown date-dropdown_is_twin js-date-dropdown {% if expanded %}date-dropdown_expanded{% endif %}">
     <label class="date-dropdown__field">
@@ -48,7 +57,7 @@
           data-placeholder="ДД.ММ.ГГГГ"
           {% if disabled %}disabled{% endif %}
         >
-        {{ arrow_expand(class='date-dropdown__icon', width=12, height=8) }}
+        {{ arrow_expand({class: 'date-dropdown__icon', width: 12, height: 8}) }}
       </span>
     </label>
 
@@ -65,7 +74,7 @@
           data-placeholder="ДД.ММ.ГГГГ"
           {% if disabled %}disabled{% endif %}
         >
-        {{ arrow_expand(class='date-dropdown__icon', width=12, height=8) }}
+        {{ arrow_expand({class: 'date-dropdown__icon', width: 12, height: 8}) }}
       </span>
     </label>
 

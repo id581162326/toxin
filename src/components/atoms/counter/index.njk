@@ -1,5 +1,11 @@
-{% macro counter(label, name, value=0, min=0, max) %}
+{% macro counter(props) %}
   {% set counter_label_id = 'counter__input' | uniqid  %}
+
+  {% set label = props.label %}
+  {% set name = props.name %}
+  {% set value = props.value %}
+  {% set min = props.min %}
+  {% set max = props.max %}
 
   <div class="counter js-counter">
     <label class="counter__label" for="{{ counter_label_id }}">{{ label }}</label>

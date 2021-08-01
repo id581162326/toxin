@@ -1,4 +1,13 @@
-{% macro text_field(name, type='text', value, placeholder, label, hidden_label, disabled, required, autofocus) %}
+{% macro text_field(props) %}
+  {% set name = props.name %}
+  {% set type = props.type %}
+  {% set value = props.value %}
+  {% set placeholder = props.placeholder %}
+  {% set label = props.label %}
+  {% set hidden_label = props.hidden_label %}
+  {% set disabled = props.disabled %}
+  {% set required = props.required %}
+
   <label class="text-field js-text-field">
     {% if label %}<span class="text-field__label{% if hidden_label %} text-field__label_hidden{% endif %}">{{ label }}</span>{% endif %}
 

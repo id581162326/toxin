@@ -41,99 +41,101 @@
     <div class="form-elements__column">
       <div class="form-elements__field js-form-elements__field">
         <span class="form-elements__field-desc">default</span>
-        {{ text_field(name='email', label='text-field', type='email', placeholder='Email') }}
+        {{ text_field({name: 'email', label: 'text-field', type: 'email', placeholder: 'Email'}) }}
       </div>
 
       <div class="form-elements__field js-form-elements__field">
         <span class="form-elements__field-desc">hover/focus</span>
-        {{ text_field(name='text-field', label='text-field', value='This is pretty aswesome', autofocus=true) }}
+        {{ text_field({name: 'text-field', type: 'text', label: 'text-field', value: 'This is pretty aswesome', placeholder: ' '}) }}
       </div>
 
       <div class="form-elements__dropdown js-form-elements__dropdown_theme_guests">
-        {{ counters_dropdown(placeholder='Сколько гостей', label='dropdown') }}
+        {{ counters_dropdown({placeholder: 'Сколько гостей', label: 'dropdown'}) }}
       </div>
 
       <div class="form-elements__dropdown js-form-elements__dropdown_theme_apartment">
-        {{ counters_dropdown(placeholder='Конфигурация номера', label='dropdown') }}
+        {{ counters_dropdown({placeholder: 'Конфигурация номера', label: 'dropdown'}) }}
       </div>
 
       <div class="form-elements__button form-elements__button_size_small js-form-elements__button">
-        {{ button(label='Click me', appearance='primary') }}
+        {{ button({label: 'Click me', appearance: 'primary'}) }}
       </div>
 
       <div class="form-elements__button form-elements__button_size_small js-form-elements__button">
-        {{ button(label='Click me', appearance='secondary') }}
+        {{ button({label: 'Click me', appearance: 'secondary'}) }}
       </div>
 
       <div class="form-elements__button form-elements__button_size_content js-form-elements__button">
-        {{ button(label='Click me', appearance='link', href='/') }}
+        {{ button({label: 'Click me', appearance: 'link', href: '/'}) }}
       </div>
 
       <div class="form-elements__button form-elements__button_size_big js-form-elements__button">
-        {{ button(label='Перейти к оплате', appearance='primary', icon=arrow_forward) }}
+        {{ button({label: 'Перейти к оплате', appearance: 'primary', icon: arrow_forward}) }}
       </div>
 
       <div class="form-elements__button form-elements__button_size_big js-form-elements__button">
-        {{ button(label='Перейти к оплате', appearance='secondary', icon=arrow_forward) }}
+        {{ button({label: 'Перейти к оплате', appearance: 'secondary', icon: arrow_forward}) }}
       </div>
 
       <div class="form-elements__subscribe-field js-form-elements__subscribe-field">
-        {{ subscribe_field(label='Subscribtion text-field') }}
+        {{ subscribe_field({label: 'Subscribtion text-field'}) }}
       </div>
 
       <div class="form-elements__checkbox-group js-form-elements__checkbox-group">
-        {{ checkbox_group(label='checkbox buttons', group=[
+        {{ checkbox_group({label: 'checkbox buttons', group: [
           {name: 'smoking', label: 'Можно курить'},
           {name: 'pets', label: 'Можно с питомцами'},
           {name: 'guests', label: 'Можно пригласить гостей\n(до 10 человек)'}
-        ]) }}
+          ]}) }}
       </div>
 
 
       <div class="form-elements__checkbox-group js-form-elements__checkbox-group">
-        {{ checkbox_group(label='rich checkbox buttons', group=[
+        {{ checkbox_group({label: 'rich checkbox buttons', group: [
           {name: 'wide-corridor', label: 'Широкий коридор', description: 'Ширина коридоров в номере не менее 91 см.'},
           {name: 'disabled-assistance', label: 'Помощник для инвалидов', description: 'На 1 этаже вас встретит специалист  и проводит до номера.'}
-        ]) }}
+          ]}) }}
       </div>
 
       <div class="form-elements__radio-group js-form-elements__radio-group">
-        {{ radio_group(name='gender', label='radio buttons', group=[
-          {value: 'male', label: 'Мужчина', checked: true},
-          {value: 'female', label: 'Женщина'}
-        ]) }}
+        {{ radio_group({name: 'gender-1', label: 'Radio button', group: [
+          {label: 'Мужчина', value: 'male', checked: true},
+          {label: 'Женщина', value: 'female'}
+        ]}) }}
       </div>
 
       <div class="form-elements__toggle js-form-elements__checkbox">
-        {{ checkbox(name='special-offers', appearance='toggle', label='Получать спецпредложения') }}
+        {{ checkbox({name: 'special-offers', appearance: 'toggle', label: 'Получать спецпредложения'}) }}
       </div>
 
       <div class="form-elements__toggle js-form-elements__checkbox">
-        {{ checkbox(name='special-offers', appearance='toggle', checked=true, label='Получать спецпредложения') }}
+        {{ checkbox({name: 'special-offers', appearance: 'toggle', checked: true, label: 'Получать спецпредложения'}) }}
       </div>
 
       <div class="form-elements__like-button js-form-elements__like-button">
-        {{ like_button(name='like-button', count=0) }}
+        {{ like_button({name: 'like-button', count: 0}) }}
       </div>
 
       <div class="form-elements__like-button js-form-elements__like-button">
-        {{ like_button(name='like-button', count=13, active=true) }}
+        {{ like_button({name: 'like-button', count: 13, active: true}) }}
       </div>
 
       <div class="form-elements__rate-bar js-form-elements__rate-bar">
-        {{ rate_bar(label='rate button', name='rating', rate=4, interactive=true) }}
+        {{ rate_bar({label: 'rate button', name: 'rating', rate: 4, interactive: true}) }}
       </div>
 
       <section class="form-elements__rate-bar">
-        {{ rate_bar(rate=5) }}
+        {{ rate_bar({rate: 5}) }}
       </section>
 
       <div class="form-elements__bullet-list">
-        {{ bullet_list(label='bullet list', list=[
-          'Нельзя с питомцами',
-          'Без вечеринок и мероприятий',
-          'Время прибытия — после 13:00,\nа выезд до 12:00'
-        ]) }}
+        {{ bullet_list({
+          label: 'bullet list', list: [
+            'Нельзя с питомцами',
+            'Без вечеринок и мероприятий',
+            'Время прибытия — после 13:00,\nа выезд до 12:00'
+          ]
+        }) }}
       </div>
 
       {% set expandable_checkboxes_group = [
@@ -146,19 +148,19 @@
       ] %}
 
       <div class="form-elements__single-date-dropdown js-form-elements__single-date-dropdown">
-        {{ date_dropdown(label='filter date dropdown') }}
+        {{ date_dropdown({label: 'filter date dropdown'}) }}
       </div>
 
       <div class="form-elements__twin-date-dropdown js-form-elements__twin-date-dropdown">
-        {{ date_dropdown_twin(labelFrom='date dropdown', labelTo='date dropdown') }}
+        {{ date_dropdown_twin({label_from: 'date dropdown', label_to: 'date dropdown'}) }}
       </div>
 
       <div class="form-elements__expandable-checkboxes js-form-elements__expandable-checkboxes">
-        {{ expandable_checkboxes(label='Expandable checkbox list', group=expandable_checkboxes_group) }}
+        {{ expandable_checkboxes({label: 'Expandable checkbox list', group: expandable_checkboxes_group}) }}
       </div>
 
       <div class="form-elements__expandable-checkboxes js-form-elements__expandable-checkboxes">
-        {{ expandable_checkboxes(label='Expandable checkbox list', expanded=true, group=expandable_checkboxes_group) }}
+        {{ expandable_checkboxes({label: 'Expandable checkbox list', expanded: true, group: expandable_checkboxes_group}) }}
       </div>
 
       <div class="form-elements__pagination js-form-elements__pagination">
@@ -169,20 +171,11 @@
         {{ range_slider(label='range slider') }}
       </div>
     </div>
-    
+
     <div class="form-elements__review js-form-elements__review">
       {% set reviews = 'mocks/reviews/index.json' | from %}
 
-      {{ review(
-        id=reviews[0].id,
-        firstname=reviews[0].firstname,
-        surname=reviews[0].surname,
-        time_utc=reviews[0].time_utc,
-        text=reviews[0].text,
-        likes=reviews[0].likes,
-        liked=reviews[0].liked,
-        avatar_url=reviews[0].avatar_url | from
-      ) }}
+      {{ review(reviews[0] | concat({avatar_url: reviews[0].avatar_url | from})) }}
     </div>
 
     <div class="form-elements__search-room js-form-elements__search-room">

@@ -2,6 +2,7 @@ import {pipe} from 'fp-ts/function';
 import * as O from 'fp-ts/Option';
 import {Option} from 'fp-ts/Option';
 import * as H from 'globals/helpers';
+import * as R from 'fp-ts/Record';
 
 import Datepicker from 'molecules/datepicker';
 
@@ -23,7 +24,7 @@ class DatepickerManager {
     this.sendDates();
   }
 
-  private selectedDates: Option<[Date, Date]> = O.none;
+  private selectedDates: Record<string, Option<[Date, Date]>> = {};
   private readonly datepickerWrap = pipe(this.wrap, H.querySelector<HTMLDivElement>('.js-date-dropdown__datepicker'));
   private readonly applyBtnWrap: Option<HTMLDivElement>;
   private readonly clearBtnWrap: Option<HTMLDivElement>;
@@ -36,6 +37,7 @@ class DatepickerManager {
   }));
 
   private readonly initDatepicker = () => pipe(this.datepickerWrap, O.map((wrap) => pipe(Datepicker, H.instance(wrap, {
+    name: this.props.name,
     selected: this.props.selected,
     onSelect: this.handleDateSelect,
     onSelectionEnd: this.handleSelectionEnd
@@ -46,15 +48,17 @@ class DatepickerManager {
   private readonly initClearBtn = () => pipe(this.clearBtnWrap, O.map(H.addEventListener('click', this.resetDatepicker)));
 
   private readonly setClearBtnVisibility = () => {
-    const isHidden = O.isNone(this.selectedDates);
+    pipe(this.selectedDates, R.map((dates) => {
+      const isHidden = O.isNone(dates);
 
-    pipe(this.clearBtnWrap, O.map(pipe(['date-dropdown__control-btn_is_hidden'], isHidden
-      ? H.addClassList : H.removeClassList)));
-  }
+      pipe(this.clearBtnWrap, O.map(pipe(['date-dropdown__control-btn_is_hidden'], isHidden
+        ? H.addClassList : H.removeClassList)));
+    }));
+  };
 
   private readonly sendDates = () => {
     this.props.onSelect(this.selectedDates);
-  }
+  };
 
   private readonly resetDatepicker = () => {
     pipe(this.datepicker, O.map(H.method('reset')));
@@ -62,8 +66,8 @@ class DatepickerManager {
     this.sendDates();
   };
 
-  private readonly handleDateSelect = (dates: Option<[Date, Date]>) => {
-    this.selectedDates = dates;
+  private readonly handleDateSelect = (data: Record<string, Option<[Date, Date]>>) => {
+    this.selectedDates = {...this.selectedDates, ...data};
 
     if (document.readyState === 'complete' && this.props.autoApply) {
       this.sendDates();
@@ -77,12 +81,12 @@ class DatepickerManager {
     if (document.readyState === 'complete' && this.props.autoApply) {
       this.props.onSelectionEnd();
     }
-  }
+  };
 
   private readonly handleApply = () => {
     this.sendDates();
     this.props.onSelectionEnd();
-  }
+  };
 }
 
 export default DatepickerManager;

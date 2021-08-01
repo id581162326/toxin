@@ -69,6 +69,7 @@
   },
   "dependencies": {
     "fp-ts": "^2.11.0",
+    "imask": "^6.1.0",
     "normalize.css": "^8.0.1"
   }
 }

@@ -54,7 +54,7 @@ export const compare = <Type>(ord: Ord<Type>) => (x: Type) => (y: Type) => ord.c
 
 //
 
-export const equals = <Type>(eq: Eq<Type>) => (x: Type, y: Type) => eq.equals(x, y);
+export const equals = <Type>(eq: Eq<Type>) => (x: Type) => (y: Type) => eq.equals(x, y);
 
 export const not = (x: boolean) => !x;
 
@@ -94,7 +94,7 @@ export const subAdjacent = (idx: number) => (xs: number[]) => {
 
 export const split = (sep: string) => (str: string) => str.split(sep);
 
-export const values = <Obj>(obj: Obj) => Object.values(obj);
+export const values = <Obj>(obj: Obj) => Object.values(obj) as Array<Obj[keyof Obj]>;
 
 export const keys = <Obj>(obj: Obj) => Object.keys(obj);
 

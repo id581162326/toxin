@@ -1,5 +1,7 @@
 module.exports = {
-  position: 'absolute',
+  position: 'fixed',
+  top: '50%',
+  left: '50%',
   clip: 'rect(0 0 0 0)',
   width: '1px',
   height: '1px',

@@ -1,0 +1,53 @@
+{% from 'assets/icons/index.njk' import arrow_forward %}
+{% from 'atoms/button/index.njk' import button %}
+{% from 'atoms/text-field/index.njk' import text_field %}
+{% from 'atoms/radio-group/index.njk' import radio_group %}
+{% from 'atoms/checkbox/index.njk' import checkbox %}
+
+{% macro registration() %}
+  {% set registration_title_id = 'registration__title' | uniqid %}
+  {% set registration_login_data_label_id = 'registration__label' | uniqid %}
+
+  <div class="registration" role="form" aria-labelledby="{{ registration_title_id }}">
+    <span class="registration__title" id="{{ registration_title_id }}">Регистрация аккаунта</span>
+    <div class="registration__fieldset" role="group" aria-label="персональные данные">
+      <div class="js-registration__field">
+        {{ text_field(name='firstname', label='Имя', placeholder='Имя', hidden_label=true, required=true) }}
+      </div>
+      <div class="js-registration__field">
+        {{ text_field(name='surname', label='Фамилия', placeholder='Фамилия', hidden_label=true, required=true) }}
+      </div>
+      <div class="registration__radio-group js-registration__radio-group">
+        {{ radio_group(name='gender', label='Пол', hidden_label=true, group=[
+          {label: 'Мужчина', value: 'male', checked: true},
+          {label: 'Женщина', value: 'female'}
+        ]) }}
+      </div>
+      <div></div>
+      <div class="js-registration__field js-registration__field_with_date-mask">
+        {{ text_field(name='birth-date', label='Дата рождения', placeholder='ДД.ММ.ГГГГ', required=true) }}
+      </div>
+    </div>
+    <span class="registration__label" id="{{ registration_login_data_label_id }}">Данные для входа в сервис</span>
+    <div class="registration__fieldset" role="group" aria-labelledby="{{ registration_login_data_label_id }}">
+      <div class="js-registration__field">
+        {{ text_field(name='email', type='email', label='Электронная почта', hidden_label=true, placeholder='Email', required=true) }}
+      </div>
+      <div class="js-registration__field">
+        {{ text_field(name='password', type='password', label='Пароль', hidden_label=true, placeholder='Пароль', required=true) }}
+      </div>
+      <div class="registration__checkbox js-registration__checkbox">
+        {{ checkbox(appearance='toggle', name='special-offers', label='Получать спецпредложения') }}
+      </div>
+    </div>
+    <div class="registration__submit-btn js-registration__submit-btn">
+      {{ button(type='submit', appearance='primary', label='Перейти к оплате', icon=arrow_forward) }}
+    </div>
+    <div class="registration__footer">
+      <span class="registration__footer-label">Уже есть аккаунт на Toxin</span>
+      <div class="registration__login-link">
+        {{ button(appearance='secondary', label='Войти', href='path/to/login') }}
+      </div>
+    </div>
+  </div>
+{% endmacro %}

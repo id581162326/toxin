@@ -1,13 +1,12 @@
 namespace TextField {
   export interface Props {
-    onChange: (value: string) => void,
+    onChange: (value: Record<string, string>) => void,
     onEnterPress?: () => void,
     dateMask?: true
   }
 
   export interface Interface {
-    focus: () => this,
-    setValid: (valid: boolean) => this,
+    validate: () => boolean,
     setDisabled: (disabled: boolean) => this,
     setValue: (value: string) => this
   }

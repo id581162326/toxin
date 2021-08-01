@@ -21,6 +21,7 @@ import Review from 'molecules/review';
 
 import './style.css';
 import SearchRoom from 'organisms/search-room';
+import Registration from 'organisms/registration';
 
 type InitTuple<Class extends { new(wrap: HTMLElement, ...params: any[]): any }> = [
   string, Class, ...(Class extends { new(wrap: HTMLElement, ...params: infer Params): any } ? Params : never)
@@ -57,11 +58,15 @@ init(['.js-form-elements__like-button', LikeButton, {onChange: H.trace}]);
 init(['.js-form-elements__rate-bar', RateBar, {onChange: H.trace}]);
 init(['.js-form-elements__expandable-checkboxes', ExpandableCheckboxes, {onChange: H.trace}]);
 init(['.js-form-elements__single-date-dropdown', DateDropdown, {
+  name: 'filter-date-dropdown',
   autoApply: true,
   onChange: H.trace,
   selected: [new Date(2021, 6, 20), new Date(2021, 6, 30)]
 }]);
-init(['.js-form-elements__twin-date-dropdown', DateDropdown, {onChange: H.trace}]);
+init(['.js-form-elements__twin-date-dropdown', DateDropdown, {
+  name: 'date-dropdown',
+  onChange: H.trace
+}]);
 init(['.js-form-elements__pagination', Pagination]);
 init(['.js-form-elements__range-slider', RangeSlider, {
   range: [0, 16000], initials: [5000, 10000],
@@ -69,3 +74,4 @@ init(['.js-form-elements__range-slider', RangeSlider, {
 }]);
 init(['.js-form-elements__review', Review, {onLikeChange: H.trace}]);
 init(['.js-form-elements__search-room', SearchRoom, {onSubmit: H.trace}]);
+init(['.js-form-elements__registration', Registration, {onSubmit: H.trace}]);

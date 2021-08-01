@@ -21,7 +21,7 @@ class Datepicker implements Namespace.Interface {
       onSelect: this.handleSelect,
       onSelectionEnd: props.onSelectionEnd
     });
-    this.model = new Model({onSelect: props.onSelect, selected: props.selected});
+    this.model = new Model({onSelect: (dates) => props.onSelect({[props.name]: dates}), selected: props.selected});
     this.controller = new Controller(this.view, this.model);
   }
 

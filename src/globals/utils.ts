@@ -18,6 +18,8 @@ export const monthNames = [
 
 export const emailRegexp = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
+export const dateRegexp = /^(0?[1-9]|[12][0-9]|3[01])[.](0?[1-9]|1[012])[.]\d{4}$/;
+
 export const today = (() => {
   const now = new Date();
 

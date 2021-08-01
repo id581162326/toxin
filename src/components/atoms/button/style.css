@@ -1,15 +1,18 @@
 .button {
   position: relative;
   display: flex;
+  justify-content: center;
   align-items: center;
-  width: var(--button-width, auto);
-  height: 44px;
-  padding: 0 19px 0 21px;
+  width: var(--button-width, 100%);
+  max-width: 320px;
+  height: var(--button-height, 100%);
+  max-height: 44px;
+  padding: 0;
   text-decoration: none;
   border: none;
   border-radius: 22px;
-  background: var(--button-background-gradient, var(--primary-gradient));
-  cursor: pointer;
+  background: var(--button-background, var(--primary-gradient));
+  cursor: var(--button-cursor, pointer);
 
   &:focus-visible {
     @apply --outline;
@@ -22,6 +25,10 @@
   &:active, &:disabled {
     opacity: .5;
   }
+
+  &:disabled {
+    --button-cursor: default;
+  }
 }
 
 .loaded .button {
@@ -29,9 +36,6 @@
 }
 
 .button_with_icon {
-  --button-width: 100%;
-
-  justify-content: center;
 }
 
 .button_appearance_secondary {
@@ -40,12 +44,10 @@
 }
 
 .button_appearance_link {
+  --button-width: max-content;
+  --button-height: auto;
   --button-text-color: var(--primary-color);
-
-  width: max-content;
-  height: auto;
-  padding: 0;
-  background: none;
+  --button-background: none;
 
   &:hover, &:focus-visible, &:active, &:disabled {
     --button-text-color: var(--dark-color);
@@ -53,14 +55,12 @@
 }
 
 .button_appearance_icon {
-  --button-text-color: var(--primary-color);
+  --button-width: max-content;
+  --button-height: auto;
+  --button-background: none;
   --button-overlay-background-color: white;
+  --button-text-color: var(--primary-color);
   --button-icon-position: auto;
-
-  width: max-content;
-  height: auto;
-  padding: 0;
-  background: none;
 
   &:hover, &:focus-visible, &:active, &:disabled {
     --button-text-color: var(--dark-color);

@@ -2,7 +2,7 @@
   {% set radio_group_label_id = 'radio-group__label' | uniqid %}
 
   <div class="radio-group">
-    <span class="radio-group__label{% if hidden_label %}radio-group__label_hidden{% endif %}" id="{{ radio_group_label_id }}">
+    <span class="radio-group__label{% if hidden_label %} radio-group__label_hidden{% endif %}" id="{{ radio_group_label_id }}">
       {{ label }}
     </span>
     <div class="radio-group__items" role="radiogroup" aria-labelledby="{{ radio_group_label_id }}">

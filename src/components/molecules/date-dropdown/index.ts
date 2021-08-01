@@ -1,6 +1,7 @@
 import {pipe} from 'fp-ts/function';
 import * as H from 'globals/helpers';
 import {Option} from 'fp-ts/Option';
+import * as R from 'fp-ts/Record';
 
 import Namespace from './namespace';
 import DropdownManager from './parts/dropdown-manager';
@@ -24,6 +25,7 @@ class DateDropdown implements Namespace.Interface {
     this.fieldManager = pipe(FieldManager, H.instance(wrap));
     this.dropdownManager = pipe(DropdownManager, H.instance(wrap));
     this.datepickerManager = pipe(DatepickerManager, H.instance(wrap, {
+      name: props.name,
       selected: props.selected,
       autoApply: props.autoApply,
       onSelect: this.handleSelect,
@@ -35,9 +37,9 @@ class DateDropdown implements Namespace.Interface {
   private readonly datepickerManager: InstanceType<typeof DatepickerManager>;
   private readonly fieldManager: InstanceType<typeof FieldManager>;
 
-  private readonly handleSelect = (dates: Option<[Date, Date]>) => {
-    this.fieldManager.updateValue(dates);
-    this.props.onChange(dates);
+  private readonly handleSelect = (data: Record<string, Option<[Date, Date]>>) => {
+    pipe(data, R.map(this.fieldManager.updateValue));
+    this.props.onChange(data);
   };
 
   private readonly handleSelectionEnd = () => {

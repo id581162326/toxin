@@ -20,6 +20,7 @@
 {% from 'molecules/date-dropdown/index.njk' import date_dropdown, date_dropdown_twin %}
 {% from 'molecules/review/index.njk' import review %}
 {% from 'organisms/search-room/index.njk' import search_room %}
+{% from 'organisms/registration/index.njk' import registration %}
 
 {% block content %}
   <div class="form-elements js-form-elements">
@@ -40,12 +41,12 @@
     <div class="form-elements__column">
       <div class="form-elements__field js-form-elements__field">
         <span class="form-elements__field-desc">default</span>
-        {{ text_field(label='text-field', type='email', placeholder='Email') }}
+        {{ text_field(name='email', label='text-field', type='email', placeholder='Email') }}
       </div>
 
       <div class="form-elements__field js-form-elements__field">
         <span class="form-elements__field-desc">hover/focus</span>
-        {{ text_field(label='text-field', value='This is pretty aswesome', autofocus=true) }}
+        {{ text_field(name='text-field', label='text-field', value='This is pretty aswesome', autofocus=true) }}
       </div>
 
       <div class="form-elements__dropdown js-form-elements__dropdown_theme_guests">
@@ -56,23 +57,23 @@
         {{ counters_dropdown(placeholder='Конфигурация номера', label='dropdown') }}
       </div>
 
-      <div class="form-elements__button js-form-elements__button">
+      <div class="form-elements__button form-elements__button_size_small js-form-elements__button">
         {{ button(label='Click me', appearance='primary') }}
       </div>
 
-      <div class="form-elements__button js-form-elements__button">
+      <div class="form-elements__button form-elements__button_size_small js-form-elements__button">
         {{ button(label='Click me', appearance='secondary') }}
       </div>
 
-      <div class="form-elements__button js-form-elements__button">
+      <div class="form-elements__button form-elements__button_size_content js-form-elements__button">
         {{ button(label='Click me', appearance='link', href='/') }}
       </div>
 
-      <div class="form-elements__button js-form-elements__button">
+      <div class="form-elements__button form-elements__button_size_big js-form-elements__button">
         {{ button(label='Перейти к оплате', appearance='primary', icon=arrow_forward) }}
       </div>
 
-      <div class="form-elements__button js-form-elements__button">
+      <div class="form-elements__button form-elements__button_size_big js-form-elements__button">
         {{ button(label='Перейти к оплате', appearance='secondary', icon=arrow_forward) }}
       </div>
 
@@ -104,11 +105,11 @@
       </div>
 
       <div class="form-elements__toggle js-form-elements__checkbox">
-        {{ checkbox(name='get-special-requests', appearance='toggle', label='Получать спецпредложения') }}
+        {{ checkbox(name='special-offers', appearance='toggle', label='Получать спецпредложения') }}
       </div>
 
       <div class="form-elements__toggle js-form-elements__checkbox">
-        {{ checkbox(name='get-special-requests', appearance='toggle', checked=true, label='Получать спецпредложения') }}
+        {{ checkbox(name='special-offers', appearance='toggle', checked=true, label='Получать спецпредложения') }}
       </div>
 
       <div class="form-elements__like-button js-form-elements__like-button">
@@ -186,6 +187,10 @@
 
     <div class="form-elements__search-room js-form-elements__search-room">
       {{ search_room() }}
+    </div>
+
+    <div class="form-elements__registration js-form-elements__registration">
+      {{ registration() }}
     </div>
   </div>
 {% endblock %}

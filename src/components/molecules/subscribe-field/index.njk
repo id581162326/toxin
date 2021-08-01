@@ -5,7 +5,7 @@
 {% macro subscribe_field(label, hidden_label) %}
   <div class="subscribe-field js-subscribe-field" role="form">
     <div class="subscribe-field__input js-subscribe-field__input">
-      {{ text_field(type='email', label=label, hidden_label=hidden_label, placeholder='Email') }}
+      {{ text_field(name='email', type='email', label=label, hidden_label=hidden_label, required=true, placeholder='Email') }}
     </div>
 
     <div class="subscribe-field__submit-btn js-subscribe-field__submit-btn" type="submit">

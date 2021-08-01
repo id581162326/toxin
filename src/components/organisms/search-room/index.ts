@@ -3,6 +3,8 @@ import * as H from 'globals/helpers';
 import * as O from 'fp-ts/Option';
 import {Option} from 'fp-ts/Option';
 import {plurals} from 'globals/utils';
+import * as R from 'fp-ts/Record';
+import * as A from 'fp-ts/Array';
 
 import Button from 'atoms/button';
 
@@ -13,16 +15,14 @@ import Namespace from './namespace';
 
 class SearchRoom {
   constructor(private readonly wrap: HTMLElement, private readonly props: Namespace.Props) {
+    this.submitBtn = this.initSubmitBtn();
     this.countersDropdown = this.initCountersDropdown();
     this.dateDropdown = this.initDateDropdown();
-    this.initSubmitBtn();
   }
 
-  private searchData: Namespace.SearchData = {
-    guests: {adults: 0, children: 0, babies: 0},
-    residence_time: O.none
-  };
+  private searchData: Namespace.SearchData = {};
 
+  private readonly submitBtn: Option<InstanceType<typeof Button>> = O.none;
   private readonly countersDropdown: Option<InstanceType<typeof CountersDropdown>> = O.none;
   private readonly dateDropdown: Option<InstanceType<typeof DateDropdown>> = O.none;
 
@@ -43,6 +43,7 @@ class SearchRoom {
 
   private readonly initDateDropdown = () => pipe(this.dateDropdownWrap, O.map((wrap) => new DateDropdown(
     wrap, {
+      name: 'residence-time',
       onChange: this.handleResidenceTimeChange
     }
   )));
@@ -51,13 +52,32 @@ class SearchRoom {
     onClick: this.handleSubmit
   })));
 
-  private readonly setSearchData = (data: Partial<Namespace.SearchData>) => this.searchData = {...this.searchData, ...data};
+  private readonly setSearchData = (data: Namespace.SearchData) => this.searchData = {...this.searchData, ...data};
 
-  private readonly handleGuestsChange = (guests: Record<string, number>) => this.setSearchData({guests});
+  private readonly updateSubmitBtnDisabled = () => {
+    const disabled = !('adults' in this.searchData && 'residence-time' in this.searchData);
+    pipe(this.submitBtn, O.map(H.method('setDisabled', disabled)));
+  };
 
-  private readonly handleResidenceTimeChange = (residence_time: Option<[Date, Date]>) => this.setSearchData({residence_time});
+  private readonly handleGuestsChange = (data: Record<string, number>) => {
+    pipe(data, R.mapWithIndex((key, counter) => counter > 0
+      ? this.setSearchData({[key]: counter})
+      : delete this.searchData[key]
+    ));
+    this.updateSubmitBtnDisabled();
+  };
 
-  private readonly handleSubmit = () => this.props.onSubmit(this.searchData);
+  private readonly handleResidenceTimeChange = (data: Record<string, Option<[Date, Date]>>) => {
+    pipe(data, R.mapWithIndex((key, dates) => O.isSome(dates)
+      ? this.setSearchData({[key]: pipe(dates.value, A.map(new Intl.DateTimeFormat('ru').format), H.join(' - '))})
+      : delete this.searchData[key]
+    ));
+    this.updateSubmitBtnDisabled();
+  };
+
+  private readonly handleSubmit = () => {
+    this.props.onSubmit(this.searchData);
+  };
 }
 
 export default SearchRoom;

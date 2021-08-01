@@ -85,7 +85,7 @@ class Model implements Namespace.Interface {
     ], F.constFalse))), O.getOrElse(F.constFalse)
   );
 
-  private readonly datesAreEquals = H.equals(D.Eq);
+  private readonly datesAreEquals = (x: Date, y: Date) => H.equals(D.Eq)(x)(y);
 
   private readonly dateIsStart = (date: Date) => pipe(this.state.selected, O.map(
     ([startDate, _]) => this.datesAreEquals(startDate, date)), O.getOrElse(F.constFalse));

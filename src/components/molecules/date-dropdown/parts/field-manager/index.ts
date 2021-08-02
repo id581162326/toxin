@@ -33,12 +33,12 @@ class FieldManager implements Namespace.Interface {
   private readonly fields = pipe(this.wrap, H.querySelectorAll<HTMLInputElement>('.js-date-dropdown__button'));
 
   private readonly getRangeValues = (dates: Option<[Date, Date]>) => pipe(dates, O.fold(
-    () => ['ДД.ММ.ГГГГ', 'ДД.ММ.ГГГГ'], A.map(new Intl.DateTimeFormat('ru').format)
+    () => ['ДД.ММ.ГГГГ', 'ДД.ММ.ГГГГ'], A.map(H.dateFormat())
   ));
 
   private readonly getSingleValue = (dates: Option<[Date, Date]>) => pipe(dates, O.fold(
     () => 'ДД.ММ - ДД.ММ',
-    flow(A.map(new Intl.DateTimeFormat('ru', {day: 'numeric', month: 'short'}).format), H.join(' - '))
+    flow(A.map(H.dateFormat({day: 'numeric', month: 'short'})), H.join(' - '))
   ));
 }
 

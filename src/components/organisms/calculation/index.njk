@@ -1,0 +1,78 @@
+{% from 'assets/icons/index.njk' import arrow_forward %}
+{% from 'atoms/button/index.njk' import button %}
+{% from 'atoms/tip/index.njk' import tip %}
+{% from 'molecules/date-dropdown/index.njk' import date_dropdown_twin %}
+{% from 'molecules/counters-dropdown/index.njk' import counters_dropdown %}
+
+{% macro calculation(props) %}
+  {% set number = props.number %}
+  {% set is_luxury = props.is_luxury %}
+  {% set rent_price = props.rent_price %}
+  {% set discount = props.discount %}
+  {% set service_price = props.service_price %}
+  {% set additional_price = props.additional_price %}
+
+  {% set calculation_title_id = 'calculation__title' | uniqid %}
+
+  <div class="calculation" role="form" aria-labelledby="{{ calculation_title_id }}">
+    <div class="calculation__header">
+      <span class="calculation__title" id="{{ calculation_title_id }}">
+        №{{ number }}
+        {% if is_luxury %}<span class="calculation__lux-badge">люкс</span>{% endif %}
+      </span>
+      <span class="calculation__rent">
+        <span class="calculation__rent-price js-calculation__rent-price">{{ rent_price }}</span>
+        <span class="calculation__rent-term">в сутки</span>
+      </span>
+    </div>
+    <div class="calculation__date-dropdown js-calculation__date-dropdown">
+      {{ date_dropdown_twin({label_from: 'Прибытие', label_to: 'Выезд'}) }}
+    </div>
+    <div class="calculation__counters-dropdown js-calculation__counters-dropdown">
+      {{ counters_dropdown({label: 'Гости', placeholder: 'Сколько гостей'}) }}
+    </div>
+    <dl class="calculation__info">
+      <div class="calculation__dl-row">
+        <dt class="calculation__term">
+          <span class="calculation__term-text">
+            <span class="js-calculation__rent-price">{{ rent_price }}</span> x <span class="js-calculation__days"></span>
+          </span>
+        </dt>
+        <dd class="calculation__definition">
+          <span class="js-calculation__sum-price"></span>
+        </dd>
+      </div>
+      <div class="calculation__dl-row">
+        <dt class="calculation__term">
+          <span class="calculation__term-text">
+            Сбор за услуги:{% if discount %} скидка <span class="js-calculation__discount">{{ discount }}</span>{% endif %}
+          </span>
+          {{ tip({label: 'Дополнительная информация', desc: 'Описание'}) }}
+        </dt>
+        <dd class="calculation__definition">
+          <span class="js-calculation__service-price">{{ service_price }}</span>
+        </dd>
+      </div>
+      <div class="calculation__dl-row">
+        <dt class="calculation__term">
+          <span class="calculation__term-text">Сбор за дополнительные услуги</span>
+          {{ tip({label: 'Дополнительная информация', desc: 'Описание'}) }}
+        </dt>
+        <dd class="calculation__definition">
+          <span class="js-calculation__additional-price">{{ additional_price }}</span>
+        </dd>
+      </div>
+      <div class="calculation__dl-row calculation__dl-row_is_total">
+        <dt class="calculation__term">
+          <span class="calculation__term-text">Итого</span>
+        </dt>
+        <dd class="calculation__definition">
+          <span class="js-calculation__total-price"></span>
+        </dd>
+      </div>
+    </dl>
+    <div class="calculation__submit-btn js-calculation__submit-btn">
+      {{ button({type: 'submit', appearance: 'primary', label: 'Забронировать', icon: arrow_forward}) }}
+    </div>
+  </div>
+{% endmacro %}

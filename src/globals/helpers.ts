@@ -38,10 +38,25 @@ export const method = <Instance extends Object, Key extends keyof Instance>(
 export const switchCases = <Case extends [Tag, F.Lazy<Value>], Tag, Value>(cases: Case[], def: F.Lazy<Value>) => (tag: Tag) =>
   pipe(cases, A.findLast(([key]) => key === tag), O.fold<Case, Value>(() => def(), ([_, value]) => value()));
 
-export const pluralize = (
-  plural: Plural
-) => (count: number) => pipe(
+export const pluralize = (plural: Plural) => (count: number) => pipe(
   new Intl.PluralRules('ru'), method('select', count), (rule) => pipe(plural, prop(rule as | 'one' | 'few' | 'many'))
+);
+
+export const dateFormat = (options?: Intl.DateTimeFormatOptions) => new Intl.DateTimeFormat('ru', options).format;
+
+export const currencyFormat = (number: number) => pipe(
+  new Intl.NumberFormat('ru', {
+    style: 'currency',
+    currency: 'RUB',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }), method('formatToParts', number), A.map(({type, value}) => {
+    if (type === 'literal') {
+      return ('');
+    }
+
+    return value;
+  }), join('')
 );
 
 export const test = (regexp: RegExp) => (x: string) => regexp.test(x);
@@ -72,6 +87,8 @@ export const half = (x: number) => div(2)(x);
 
 export const remainder = (x: number) => (y: number) => y % x;
 
+export const toDays = (timestamp: number) => pipe(timestamp, div(1000 * 60 * 60 * 24), Math.trunc);
+
 //
 
 export const nthOrNone = <Type>(n: number, none: Type) => (xs: Type[]) => pipe(xs, A.lookup(n), O.getOrElse(F.constant(none)));
@@ -91,6 +108,14 @@ export const group = <Type>(eq: Eq<Type>): ((xs: Array<Type>) => Array<Array<Typ
 
   return [init, rest];
 });
+
+export const subAdjacent = (idx: number) => (xs: number[]) => {
+  const current = nthOrNone(idx, NaN)(xs);
+
+  const prev = nthOrNone(dec(idx), NaN)(xs);
+
+  return (sub(prev)(current));
+};
 
 //
 

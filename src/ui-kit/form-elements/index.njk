@@ -22,6 +22,7 @@
 {% from 'organisms/search-room/index.njk' import search_room %}
 {% from 'organisms/registration/index.njk' import registration %}
 {% from 'organisms/login/index.njk' import login %}
+{% from 'organisms/calculation/index.njk' import calculation %}
 
 {% block content %}
   <div class="form-elements js-form-elements">
@@ -189,6 +190,10 @@
 
     <div class="form-elements__login js-form-elements__login">
       {{ login() }}
+    </div>
+
+    <div class="form-elements__calculation js-form-elements__calculation">
+      {{ calculation({number: 888, is_luxury: true, rent_price: 9990, discount: 2179, service_price: 0, additional_price: 300}) }}
     </div>
   </div>
 {% endblock %}

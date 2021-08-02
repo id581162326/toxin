@@ -1,0 +1,119 @@
+.calculation {
+  display: grid;
+  row-gap: 20px;
+  width: 100%;
+  max-width: 380px;
+  padding: 40px 30px 30px;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, .12);
+  border-radius: 4px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, .2);
+}
+
+/* header */
+
+.calculation__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+/* title */
+
+.calculation__title {
+  font: 24px/29px var(--font-bold);
+  color: var(--dark-color);
+
+  &:first-letter {
+    margin-right: 2px;
+    font: 14px/17px var(--font-bold);
+  }
+}
+
+/* lux badge */
+
+.calculation__lux-badge {
+  font: 14px/17px var(--font-bold);
+  color: var(--primary-color)
+}
+
+/* rent price */
+
+.calculation__rent-price {
+  font: 14px/18px var(--font-bold);
+  color: rgba(var(--dark-rgb), .5);
+}
+
+/* info */
+
+.calculation__info {
+  display: grid;
+  row-gap: 10px;
+  margin: 0;
+}
+
+/* rent term */
+
+.calculation__rent-term {
+  font: 12px/18px var(--font-regular);
+  color: rgba(var(--dark-rgb), .5);
+}
+
+/* description list row */
+
+.calculation__dl-row {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+}
+
+.calculation__dl-row_is_total {
+  --calculation-desc-text-font: 19px/23px var(--font-bold);
+  --calculation-desc-text-alpha: 1;
+  --calculation-term-text-width: max-content;
+
+  grid-template-columns: max-content 1fr max-content;
+  margin-top: 20px;
+
+  &::before {
+    content: '';
+    grid-column: 2;
+    display: flex;
+    margin: 0 4px 5px;
+    border-bottom: 1px dotted rgba(var(--dark-rgb), .25);
+  }
+}
+
+/* term */
+
+.calculation__term {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  column-gap: 5px;
+}
+
+/* term text */
+
+.calculation__term-text {
+  display: inline-block;
+  width: var(--calculation-term-text-width, 214px);
+  min-height: 24px;
+  font: var(--calculation-desc-text-font, 14px/18px var(--font-regular));
+  color: rgba(var(--dark-rgb), var(--calculation-desc-text-alpha, .75));
+}
+
+/* definition */
+
+.calculation__definition {
+  margin: 0;
+  font: var(--calculation-desc-text-font, 14px/24px var(--font-regular));
+  color: rgba(var(--dark-rgb), var(--calculation-desc-text-alpha, .75));
+  text-align: end;
+}
+
+/* submit button */
+
+.calculation__submit-btn {
+  height: 44px;
+}

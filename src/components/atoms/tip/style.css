@@ -1,0 +1,50 @@
+.tip {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgba(var(--dark-rgb), .25);
+  border-radius: 50%;
+  font: 12px/14px var(--font-bold);
+  color: rgba(var(--dark-rgb), .25);
+  text-align: center;
+  cursor: help;
+
+  &:focus-visible {
+    @apply --outline;
+  }
+
+  &:hover > *, &:focus > *  {
+    --tip-desc-opacity: 1;
+    --tip-desc-z-index: 0;
+  }
+}
+
+/* description */
+
+.tip__desc {
+  --tip-desc-offset: 10px;
+
+  position: absolute;
+  z-index: var(--tip-desc-z-index, -1);
+  bottom: calc(100% + var(--tip-desc-offset));
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, .12);
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  background: white;
+  font: 10px/14px var(--font-regular);
+  color: rgba(var(--dark-rgb), .75);
+  opacity: var(--tip-desc-opacity, 0);
+  cursor: auto;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    height: calc(var(--tip-desc-offset) + 5px);
+  }
+}

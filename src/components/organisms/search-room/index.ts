@@ -16,15 +16,13 @@ import Namespace from './namespace';
 class SearchRoom {
   constructor(private readonly wrap: HTMLElement, private readonly props: Namespace.Props) {
     this.submitBtn = this.initSubmitBtn();
-    this.countersDropdown = this.initCountersDropdown();
-    this.dateDropdown = this.initDateDropdown();
+    this.initCountersDropdown();
+    this.initDateDropdown();
   }
 
   private searchData: Namespace.SearchData = {};
 
   private readonly submitBtn: Option<InstanceType<typeof Button>> = O.none;
-  private readonly countersDropdown: Option<InstanceType<typeof CountersDropdown>> = O.none;
-  private readonly dateDropdown: Option<InstanceType<typeof DateDropdown>> = O.none;
 
   private readonly countersDropdownWrap = pipe(this.wrap, H.querySelector<HTMLDivElement>('.js-search-room__counters-dropdown'));
   private readonly dateDropdownWrap = pipe(this.wrap, H.querySelector<HTMLDivElement>('.js-search-room__date-dropdown'));

@@ -23,6 +23,7 @@ import './style.css';
 import SearchRoom from 'organisms/search-room';
 import Registration from 'organisms/registration';
 import Login from 'organisms/login';
+import Calculation from 'organisms/calculation';
 
 type InitTuple<Class extends { new(wrap: HTMLElement, ...params: any[]): any }> = [
   string, Class, ...(Class extends { new(wrap: HTMLElement, ...params: infer Params): any } ? Params : never)
@@ -78,3 +79,4 @@ init(['.js-form-elements__review', Review, {onLikeChange: H.trace}]);
 init(['.js-form-elements__search-room', SearchRoom, {onSubmit: H.trace}]);
 init(['.js-form-elements__registration', Registration, {onSubmit: H.trace}]);
 init(['.js-form-elements__login', Login, {onSubmit: H.trace}]);
+init(['.js-form-elements__calculation', Calculation, {onSubmit: H.trace}]);

@@ -1,0 +1,11 @@
+{% macro tip(props) %}
+  {% set label = props.label %}
+  {% set desc = props.desc %}
+
+  {% set tip_desc_id = 'tip__desc' | uniqid %}
+
+  <span class="tip" aria-label="{{ label }}" aria-labelledby="{{ tip_desc_id }}" tabindex="0">
+    i
+    <span class="tip__desc" id="{{ tip_desc_id }}">{{ desc }}</span>
+  </span>
+{% endmacro %}

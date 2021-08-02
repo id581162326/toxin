@@ -17,14 +17,12 @@ class Review {
   private readonly timeEl = pipe(this.wrap, H.querySelector<HTMLTimeElement>('.js-review__time'));
 
   private readonly initTime = () => pipe(this.timeEl, O.map((el) => pipe(
-    el.dateTime, Date.parse, H.sub(Date.now()), Math.abs, this.toDays, this.getTimeValue, H.setInnerText
+    el.dateTime, Date.parse, H.sub(Date.now()), Math.abs, H.toDays, this.getTimeValue, H.setInnerText
   )(el)));
 
   private readonly initLikeBtn = () => pipe(this.likeBtnWrap, O.map((wrap) => new LikeButton(
     wrap, {onChange: this.props.onLikeChange}
   )));
-
-  private readonly toDays = (timestamp: number) => pipe(timestamp, H.div(1000 * 60 * 60 * 24), Math.trunc);
 
   private readonly getTimeValue = (days: number) => pipe(true, H.switchCases([
     [days === 0, () => 'Сегодня'],

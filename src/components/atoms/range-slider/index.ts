@@ -48,7 +48,7 @@ class RangeSlider {
     )));
   }))));
 
-  private readonly getFieldValue = (values: Array<string | number>) => pipe(values, A.map((val) => `${val}₽`), H.join(' - '));
+  private readonly getFieldValue = (values: Array<string | number>) => pipe(values, A.map(flow(Number, H.currencyFormat)), H.join(' - '));
 
   private readonly setFieldValue = (values: Array<string | number>) => pipe(
     this.field,

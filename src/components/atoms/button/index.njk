@@ -9,7 +9,7 @@
 
   {% if href %}
     <a
-      class="button button_appearance_{{ appearance }} {% if icon and appearance !== 'link' %}button_with_icon{% endif %}"
+      class="button button_appearance_{{ appearance }}"
       href="{{ href }}"
     >
       {% if appearance !== 'link' %}<span class="button__overlay"></span>{% endif %}

@@ -27,9 +27,9 @@ class SubscribeField {
     onEnterPress: this.submitValue
   })));
 
-  private readonly initButton = () => pipe(this.submitBtnWrap, O.map((wrap) => pipe(
-    Button, H.instance(wrap, {onClick: this.handleSubmit})
-  )));
+  private readonly initButton = () => pipe(this.submitBtnWrap, O.map((wrap) => new Button(wrap, {
+    onClick: this.handleSubmit
+  })));
 
   private readonly submitValue = () => pipe(this.value, this.props.onSubmit);
 

@@ -42,17 +42,17 @@ class CountersManager {
     listWrap.insertAdjacentHTML('afterbegin', template(this.props));
   }));
 
-  private readonly initCounters = () => pipe(this.items, A.map((item) => pipe(
-    Counter, H.instance(item, {onChange: this.handleCounterChange}))
-  ));
+  private readonly initCounters = () => pipe(this.items, A.map((item) => new Counter(item, {
+    onChange: this.handleCounterChange
+  })));
 
-  private readonly initApplyBtn = () => pipe(this.applyBtnWrap, O.map(
-    (wrap) => pipe(Button, H.instance(wrap, {onClick: this.handleApply}))
-  ));
+  private readonly initApplyBtn = () => pipe(this.applyBtnWrap, O.map((wrap) => new Button(wrap, {
+    onClick: this.handleApply
+  })));
 
-  private readonly initClearBtn = () => pipe(this.clearBtnWrap, O.map(
-    (wrap) => pipe(Button, H.instance(wrap, {onClick: this.resetCountersData}))
-  ));
+  private readonly initClearBtn = () => pipe(this.clearBtnWrap, O.map((wrap) => new Button(wrap, {
+    onClick: this.resetCountersData
+  })));
 
   private readonly sendCountersData = () => this.props.onChange(this.countersData);
 
@@ -89,7 +89,7 @@ class CountersManager {
   private readonly handleApply = () => {
     this.sendCountersData();
     this.props.onApply();
-  }
+  };
 }
 
 export default CountersManager;

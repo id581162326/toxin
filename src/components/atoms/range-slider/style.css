@@ -27,6 +27,7 @@
   color: rgba(var(--dark-rgb), .5);
   text-align: end;
   text-transform: uppercase;
+  pointer-events: none;
 }
 
 /* base */
@@ -81,9 +82,13 @@
   border: 2px solid white;
   border-radius: 50%;
   background: var(--secondary-gradient);
+
+  &:focus-visible {
+    @apply --outline;
+  }
 }
 
-/* touch-area */
+/* touch area */
 
 .range-slider__touch-area {
   position: absolute;

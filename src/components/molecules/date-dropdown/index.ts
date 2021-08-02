@@ -1,5 +1,4 @@
 import {pipe} from 'fp-ts/function';
-import * as H from 'globals/helpers';
 import {Option} from 'fp-ts/Option';
 import * as R from 'fp-ts/Record';
 
@@ -22,15 +21,15 @@ class DateDropdown implements Namespace.Interface {
   }
 
   constructor(private readonly wrap: HTMLElement, private readonly props: Namespace.Props) {
-    this.fieldManager = pipe(FieldManager, H.instance(wrap));
-    this.dropdownManager = pipe(DropdownManager, H.instance(wrap));
-    this.datepickerManager = pipe(DatepickerManager, H.instance(wrap, {
+    this.fieldManager = new FieldManager(wrap);
+    this.dropdownManager = new DropdownManager(wrap);
+    this.datepickerManager = new DatepickerManager(wrap, {
       name: props.name,
       selected: props.selected,
       autoApply: props.autoApply,
       onSelect: this.handleSelect,
       onSelectionEnd: this.handleSelectionEnd
-    }));
+    });
   }
 
   private readonly dropdownManager: InstanceType<typeof DropdownManager>;

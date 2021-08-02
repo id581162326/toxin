@@ -1,0 +1,48 @@
+.login {
+  display: grid;
+  row-gap: 10px;
+  width: 100%;
+  max-width: 380px;
+  padding: 40px 30px 32px;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, .12);
+  border-radius: 4px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, .2);
+}
+
+/* title */
+
+.login__title {
+  margin-bottom: 10px;
+  font: 24px/29px var(--font-bold);
+  color: var(--dark-color);
+}
+
+/* submit button */
+
+.login__submit-btn {
+  margin: 10px 0 20px;
+  height: 44px;
+}
+
+/* footer */
+
+.login__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* footer label */
+
+.login__footer-label {
+  font: 14px/18px var(--font-regular);
+  color: black;
+}
+
+/* login link */
+
+.login__registration-link {
+  width: 99px;
+  height: 44px;
+}

@@ -1,8 +1,9 @@
 {% macro range_slider(label) %}
+  {% set range_slider_label_id = 'range-slider__label' | uniqid %}
   <div class="range-slider js-range-slider">
     <label class="range-slider__field-wrap">
-      <span class="range-slider__label">{{ label }}</span>
-      <input class="range-slider__field js-range-slider__field" readonly>
+      <span class="range-slider__label js-range-slider__label" id="{{ range_slider_label_id }}">{{ label }}</span>
+      <input class="range-slider__field js-range-slider__field" readonly tabindex="-1">
     </label>
 
     <div class="range-slider__input js-range-slider__input"></div>

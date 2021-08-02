@@ -1,7 +1,7 @@
 import {pipe} from 'fp-ts/function';
 import * as H from 'globals/helpers';
 import * as A from 'fp-ts/Array';
-import * as O from 'fp-ts/Option'
+import * as O from 'fp-ts/Option';
 
 import Button from 'atoms/button';
 
@@ -18,7 +18,7 @@ class View implements Namespace.Interface {
   };
 
   constructor(private readonly wrap: HTMLElement, private readonly props: Namespace.Props) {
-    this.drawManager = pipe(DrawManager, H.instance(this.wrap, {onDraw: this.initCalendar}));
+    this.drawManager = new DrawManager(this.wrap, {onDraw: this.initCalendar});
 
     this.initPrevBtn();
     this.initNextBtn();
@@ -36,29 +36,27 @@ class View implements Namespace.Interface {
   private readonly initCalendar = (calendar: Namespace.CalendarData['calendar']) => {
     this.initSelectManager(this.selectionType, calendar);
     this.initKeyboardNavigation();
-  }
+  };
 
-  private readonly initSelectManager = (selectionType: Namespace.SelectionType, calendar: Namespace.CalendarData['calendar']) => pipe(
-    SelectManager, H.instance(
-      this.wrap, {
-        selectionType,
-        dates: pipe(calendar, A.flatten, A.map(H.prop('date'))),
-        onSelectionStart: this.handleSelectionStart,
-        onSelectionEnd: this.handleSelectionEnd,
-        onSelectionMove: this.handleSelectionMove
-      }
-    )
+  private readonly initSelectManager = (selectionType: Namespace.SelectionType, calendar: Namespace.CalendarData['calendar']) => new SelectManager(
+    this.wrap, {
+      selectionType,
+      dates: pipe(calendar, A.flatten, A.map(H.prop('date'))),
+      onSelectionStart: this.handleSelectionStart,
+      onSelectionEnd: this.handleSelectionEnd,
+      onSelectionMove: this.handleSelectionMove
+    }
   );
 
-  private readonly initKeyboardNavigation = () => pipe(KeyboardNavigation, H.instance(this.wrap));
+  private readonly initKeyboardNavigation = () => new KeyboardNavigation(this.wrap);
 
-  private readonly initPrevBtn = () => pipe(this.prevBtnWrap, O.map((wrap) => pipe(
-    Button, H.instance(wrap, {onClick: this.handleTurnPrev})
-  )));
+  private readonly initPrevBtn = () => pipe(this.prevBtnWrap, O.map((wrap) => new Button(wrap, {
+    onClick: this.handleTurnPrev
+  })));
 
-  private readonly initNextBtn = () => pipe(this.nextBtnWrap, O.map((wrap) => pipe(
-    Button, H.instance(wrap, {onClick: this.handleTurnNext})
-  )));
+  private readonly initNextBtn = () => pipe(this.nextBtnWrap, O.map((wrap) => new Button(wrap, {
+    onClick: this.handleTurnNext
+  })));
 
   private readonly handleTurnNext = () => {
     this.props.onTurnNext();

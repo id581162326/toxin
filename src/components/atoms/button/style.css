@@ -35,9 +35,6 @@
   transition: opacity .1s ease-in-out;
 }
 
-.button_with_icon {
-}
-
 .button_appearance_secondary {
   --button-text-color: var(--primary-color);
   --button-overlay-background-color: white;
@@ -46,8 +43,8 @@
 .button_appearance_link {
   --button-width: max-content;
   --button-height: auto;
-  --button-text-color: var(--primary-color);
   --button-background: none;
+  --button-text-color: var(--primary-color);
 
   &:hover, &:focus-visible, &:active, &:disabled {
     --button-text-color: var(--dark-color);
@@ -58,7 +55,6 @@
   --button-width: max-content;
   --button-height: auto;
   --button-background: none;
-  --button-overlay-background-color: white;
   --button-text-color: var(--primary-color);
   --button-icon-position: auto;
 

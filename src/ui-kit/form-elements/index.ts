@@ -22,6 +22,7 @@ import Review from 'molecules/review';
 import './style.css';
 import SearchRoom from 'organisms/search-room';
 import Registration from 'organisms/registration';
+import Login from 'organisms/login';
 
 type InitTuple<Class extends { new(wrap: HTMLElement, ...params: any[]): any }> = [
   string, Class, ...(Class extends { new(wrap: HTMLElement, ...params: infer Params): any } ? Params : never)
@@ -69,9 +70,11 @@ init(['.js-form-elements__twin-date-dropdown', DateDropdown, {
 }]);
 init(['.js-form-elements__pagination', Pagination]);
 init(['.js-form-elements__range-slider', RangeSlider, {
+  name: 'range-slider',
   range: [0, 16000], initials: [5000, 10000],
   margin: 1000, onChange: H.trace
 }]);
 init(['.js-form-elements__review', Review, {onLikeChange: H.trace}]);
 init(['.js-form-elements__search-room', SearchRoom, {onSubmit: H.trace}]);
 init(['.js-form-elements__registration', Registration, {onSubmit: H.trace}]);
+init(['.js-form-elements__login', Login, {onSubmit: H.trace}]);

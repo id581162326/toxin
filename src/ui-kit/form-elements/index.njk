@@ -21,6 +21,7 @@
 {% from 'molecules/review/index.njk' import review %}
 {% from 'organisms/search-room/index.njk' import search_room %}
 {% from 'organisms/registration/index.njk' import registration %}
+{% from 'organisms/login/index.njk' import login %}
 
 {% block content %}
   <div class="form-elements js-form-elements">
@@ -184,6 +185,10 @@
 
     <div class="form-elements__registration js-form-elements__registration">
       {{ registration() }}
+    </div>
+
+    <div class="form-elements__login js-form-elements__login">
+      {{ login() }}
     </div>
   </div>
 {% endblock %}

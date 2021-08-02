@@ -16,9 +16,9 @@ class CheckboxGroup {
 
   protected items: Array<HTMLLIElement> = pipe(this.wrap, H.querySelectorAll<HTMLLIElement>('.js-checkbox-group__item'));
 
-  private readonly initCheckboxInstances = () => pipe(this.items, A.map((item) => pipe(Checkbox, H.instance(item, {
+  private readonly initCheckboxInstances = () => pipe(this.items, A.map((item) => new Checkbox(item, {
     onChange: this.handleCheckboxChange
-  }))));
+  })));
 
   private readonly handleCheckboxChange = (data: Namespace.CheckboxesData) => {
     this.checkboxesData = {...this.checkboxesData, ...data};

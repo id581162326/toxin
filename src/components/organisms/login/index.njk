@@ -1,0 +1,26 @@
+{% from 'assets/icons/index.njk' import arrow_forward %}
+{% from 'atoms/button/index.njk' import button %}
+{% from 'atoms/text-field/index.njk' import text_field %}
+
+{% macro login() %}
+  {% set login_title_id = 'login__title' | uniqid %}
+
+  <div class="login" role="form" aria-labelledby="{{ login_title_id }}">
+    <span class="login__title" id="{{ login_title_id }}">Войти</span>
+    <div class="login_field js-login__field">
+      {{ text_field({name: 'email', type: 'email', label: 'Электронная почта', hidden_label: true, placeholder: 'Email', required: true}) }}
+    </div>
+    <div class="login_field js-login__field">
+      {{ text_field({name: 'password', type: 'password', label: 'Пароль', hidden_label: true, placeholder: 'Пароль', required: true}) }}
+    </div>
+    <div class="login__submit-btn js-login__submit-btn">
+      {{ button({type: 'submit', appearance: 'primary', label: 'Войти', icon: arrow_forward}) }}
+    </div>
+    <div class="login__footer">
+      <span class="login__footer-label">Нет аккаунта на Toxin?</span>
+      <div class="login__registration-link js-login__registration-link">
+        {{ button({appearance: 'secondary', label: 'Создать', href: 'path/to/registration'}) }}
+      </div>
+    </div>
+  </div>
+{% endmacro %}

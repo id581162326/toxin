@@ -28,10 +28,6 @@ export const call = <Fn extends { (...args: any[]): ReturnType<Fn> }>(
 
 export const concat = (x: unknown) => (y: unknown) => `${y}${x}`;
 
-export const instance = <Class extends { new(...params: any[]): InstanceType<Class> }>(
-  ...params: Class extends { new(...params: infer Params): any } ? Params : never
-) => (Fn: Class) => new Fn(...params);
-
 export const method = <Instance extends Object, Key extends keyof Instance>(
   key: Instance[Key] extends Function ? Key : never,
   ...args: Instance[Key] extends { (...args: infer Args): any } ? Args : never
@@ -45,7 +41,7 @@ export const switchCases = <Case extends [Tag, F.Lazy<Value>], Tag, Value>(cases
 export const pluralize = (
   plural: Plural
 ) => (count: number) => pipe(
-  Intl.PluralRules, instance('ru'), method('select', count), (rule) => pipe(plural, prop(rule as | 'one' | 'few' | 'many'))
+  new Intl.PluralRules('ru'), method('select', count), (rule) => pipe(plural, prop(rule as | 'one' | 'few' | 'many'))
 );
 
 export const test = (regexp: RegExp) => (x: string) => regexp.test(x);
@@ -72,25 +68,13 @@ export const div = (x: number) => (y: number) => y / x;
 
 export const mult = (x: number) => (y: number) => x * y;
 
-export const negate = (x: number) => mult(x)(-1);
-
 export const half = (x: number) => div(2)(x);
-
-export const percentage = (x: number) => (y: number) => pipe(y, div(x), mult(100));
 
 export const remainder = (x: number) => (y: number) => y % x;
 
 //
 
 export const nthOrNone = <Type>(n: number, none: Type) => (xs: Type[]) => pipe(xs, A.lookup(n), O.getOrElse(F.constant(none)));
-
-export const subAdjacent = (idx: number) => (xs: number[]) => {
-  const current = nthOrNone(idx, NaN)(xs);
-
-  const prev = nthOrNone(dec(idx), NaN)(xs);
-
-  return (sub(prev)(current));
-};
 
 export const split = (sep: string) => (str: string) => str.split(sep);
 
@@ -112,8 +96,6 @@ export const group = <Type>(eq: Eq<Type>): ((xs: Array<Type>) => Array<Array<Typ
 
 export const node = <NodeName extends keyof HTMLElementTagNameMap>(nodeName: NodeName) => document.createElement<NodeName>(nodeName);
 
-export const appendTo = (parent: Node) => <T extends Node>(node: T) => parent.appendChild(node);
-
 export const addClassList = (classList: string[]) => <Node extends Element>(node: Node) => {
   node.classList.add(...classList);
 
@@ -126,25 +108,7 @@ export const removeClassList = (classList: string[]) => <Node extends Element>(n
   return (node);
 };
 
-export const toggleClassName = (className: string) => <Node extends Element>(node: Node) => {
-  node.classList.toggle(className);
-
-  return (node);
-};
-
 export const containsClass = (className: string) => <Node extends Element>(node: Node) => node.classList.contains(className);
-
-export const setInlineStyle = (style: string) => <Node extends HTMLElement>(node: Node) => {
-  node.style.cssText = style;
-
-  return (node);
-};
-
-export const setStyle = <Key extends keyof CSSStyleDeclaration>(key: Key, value: CSSStyleDeclaration[Key]) => <Node extends HTMLElement>(node: Node) => {
-  node.style[key] = value;
-
-  return (node);
-};
 
 export const setInnerText = (text: string) => <Node extends HTMLElement>(node: Node) => {
   node.innerText = text;

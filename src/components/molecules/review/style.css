@@ -5,12 +5,16 @@
   gap: 10px;
 }
 
+/* avatar */
+
 .review__avatar {
   grid-row: 1/2;
   border: 2px solid white;
   border-radius: 50%;
   filter: drop-shadow(0px 10px 20px rgba(var(--dark-rgb), 0.1));
 }
+
+/* header */
 
 .review__header {
   grid-column: 2;
@@ -19,20 +23,28 @@
   align-content: center;
 }
 
+/* name */
+
 .review__name {
   font: 14px/22px var(--font-bold);
   color: rgba(var(--dark-rgb), .75);
 }
+
+/* time */
 
 .review__time {
   font: 14px/22px var(--font-regular);
   color: rgba(var(--dark-rgb), .75);
 }
 
+/* like button */
+
 .review__like-btn {
   justify-self: end;
   padding-top: 2px;
 }
+
+/* text */
 
 .review__text {
   grid-column: 2;

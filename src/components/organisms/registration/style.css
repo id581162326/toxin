@@ -8,6 +8,8 @@
   box-shadow: 0 0 25px rgba(0, 0, 0, .2);
 }
 
+/* title */
+
 .registration__title {
   display: block;
   margin-bottom: 20px;
@@ -15,11 +17,21 @@
   color: var(--dark-color);
 }
 
+/* fieldset */
+
 .registration__fieldset {
   display: grid;
   row-gap: 10px;
   margin-bottom: 20px;
 }
+
+/* radio group */
+
+.registration__radio-group {
+  margin-bottom: 10px;
+}
+
+/* label */
 
 .registration__label {
   display: block;
@@ -29,10 +41,14 @@
   text-transform: uppercase;
 }
 
+/* submit button */
+
 .registration__submit-btn {
   height: 44px;
   margin-bottom: 30px;
 }
+
+/* footer */
 
 .registration__footer {
   display: flex;
@@ -40,10 +56,14 @@
   align-items: center;
 }
 
+/* footer label */
+
 .registration__footer-label {
   font: 14px/18px var(--font-regular);
   color: black;
 }
+
+/* login link */
 
 .registration__login-link {
   width: 99px;

@@ -9,14 +9,14 @@ import CountersManager from './parts/counters-manager';
 
 class CountersDropdown {
   constructor(private readonly wrap: HTMLElement, private readonly props: Namespace.Props) {
-    this.fieldManager = pipe(FieldManager, H.instance(wrap));
-    this.dropdownManager = pipe(DropdownManager, H.instance(wrap));
-    this.countersManager = pipe(CountersManager, H.instance(wrap, {
+    this.fieldManager = new FieldManager(wrap);
+    this.dropdownManager = new DropdownManager(wrap);
+    this.countersManager = new CountersManager(wrap, {
       counters: props.counters,
       autoApply: props.autoApply,
       onChange: this.handleCountersChange,
       onApply: this.handleApply
-    }));
+    });
   }
 
   private readonly dropdownManager: InstanceType<typeof DropdownManager>;

@@ -36,12 +36,12 @@ class DatepickerManager {
     wrap.insertAdjacentHTML('beforeend', controlsTemplate({autoApply}));
   }));
 
-  private readonly initDatepicker = () => pipe(this.datepickerWrap, O.map((wrap) => pipe(Datepicker, H.instance(wrap, {
+  private readonly initDatepicker = () => pipe(this.datepickerWrap, O.map((wrap) => new Datepicker(wrap, {
     name: this.props.name,
     selected: this.props.selected,
     onSelect: this.handleDateSelect,
     onSelectionEnd: this.handleSelectionEnd
-  }))));
+  })));
 
   private readonly initApplyBtn = () => pipe(this.applyBtnWrap, O.map(H.addEventListener('click', this.handleApply)));
 

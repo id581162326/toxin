@@ -1,14 +1,17 @@
 export type Plural = { one: string, few: string, many: string };
 
-export const plurals: Record<string, Plural> = {
-  'adults': {one: 'взрослый', few: 'взрослых', many: 'взрослых'},
+type PluralNameMap = 'adult' | 'children' | 'guest' | 'baby' | 'room' | 'bed' | 'bathroom' | 'day_primary' | 'day_secondary';
+
+export const plurals: Record<PluralNameMap, Plural> = {
+  'adult': {one: 'взрослый', few: 'взрослых', many: 'взрослых'},
   'children': {one: 'ребенок', few: 'детей', many: 'детей'},
   'guest': {one: 'гость', few: 'гостя', many: 'гостей'},
-  'babies': {one: 'младенец', few: 'младенцев', many: 'младенцев'},
-  'rooms': {one: 'комната', few: 'комнаты', many: 'комнат'},
-  'beds': {one: 'кровать', few: 'кровати', many: 'кроватей'},
-  'bathrooms': {one: 'ванная комната', few: 'ванных камнаты', many: 'ванных комнат'},
-  'days': {one: 'день', few: 'дня', many: 'дней'}
+  'baby': {one: 'младенец', few: 'младенцев', many: 'младенцев'},
+  'room': {one: 'комната', few: 'комнаты', many: 'комнат'},
+  'bed': {one: 'кровать', few: 'кровати', many: 'кроватей'},
+  'bathroom': {one: 'ванная комната', few: 'ванных камнаты', many: 'ванных комнат'},
+  'day_primary': {one: 'день', few: 'дня', many: 'дней'},
+  'day_secondary': {one: 'сутки', few: 'суток', many: 'суток'}
 };
 
 export const monthNames = [

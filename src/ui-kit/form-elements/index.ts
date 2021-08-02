@@ -36,17 +36,17 @@ const init = <Class extends { new(wrap: HTMLElement, ...params: any[]): any }>(
 init(['.js-form-elements__field', TextField, {onChange: H.trace}]);
 init(['.js-form-elements__dropdown_theme_guests', CountersDropdown, {
   counters: [
-    {label: 'Взрослые', name: 'adults', value: 0, min: 0, plural: plurals.guest},
-    {label: 'Дети', name: 'children', value: 0, min: 0, plural: plurals.guest},
-    {label: 'Младенцы', name: 'babies', value: 0, min: 0, plural: plurals.babies}
+    {label: 'Взрослые', name: 'adults', value: 0, min: 0, plural: plurals['guest']},
+    {label: 'Дети', name: 'children', value: 0, min: 0, plural: plurals['guest']},
+    {label: 'Младенцы', name: 'babies', value: 0, min: 0, plural: plurals['baby']}
   ],
   onChange: H.trace
 }]);
 init(['.js-form-elements__dropdown_theme_apartment', CountersDropdown, {
   counters: [
-    {label: 'Комнаты', name: 'rooms', value: 1, min: 1, plural: plurals.rooms},
-    {label: 'Кровати', name: 'beds', value: 0, min: 0, plural: plurals.beds},
-    {label: 'Ванные комнаты', name: 'bathrooms', value: 0, min: 0, plural: plurals.bathrooms}
+    {label: 'Комнаты', name: 'rooms', value: 1, min: 1, plural: plurals['room']},
+    {label: 'Кровати', name: 'beds', value: 0, min: 0, plural: plurals['bed']},
+    {label: 'Ванные комнаты', name: 'bathrooms', value: 0, min: 0, plural: plurals['bathroom']}
   ],
   autoApply: true,
   onChange: H.trace

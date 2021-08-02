@@ -71,9 +71,9 @@ class Calculation {
   private readonly initCountersDropdown = () => pipe(this.countersDropdownWrap, O.map((wrap) => new CountersDropdown(
     wrap, {
       counters: [
-        {label: 'Взрослые', name: 'adults', value: 0, min: 0, plural: plurals.guest},
-        {label: 'Дети', name: 'children', value: 0, min: 0, plural: plurals.guest},
-        {label: 'Младенцы', name: 'babies', value: 0, min: 0, plural: plurals.babies}
+        {label: 'Взрослые', name: 'adults', value: 0, min: 0, plural: plurals['guest']},
+        {label: 'Дети', name: 'children', value: 0, min: 0, plural: plurals['guest']},
+        {label: 'Младенцы', name: 'babies', value: 0, min: 0, plural: plurals['baby']}
       ],
       onChange: this.handleGuestsChange
     }
@@ -110,10 +110,10 @@ class Calculation {
 
     this.setCalculationData({'days': days});
 
-    pipe(this.daysEl, O.map(flow(pipe(days, H.toString, H.setInnerText))));
+    pipe(this.daysEl, O.map(flow(pipe(days, (x) => `${x} ${H.pluralize(plurals['day_secondary'])(x)}`, H.setInnerText))));
   };
 
-  private readonly setPriceDataFromEl = (name: Namespace.DataNamesMap) => (el: HTMLSpanElement) => {
+  private readonly setPriceDataFromEl = (name: string) => (el: HTMLSpanElement) => {
     this.setCalculationData({[name]: pipe(el.innerText, Number)});
 
     return (el);
@@ -151,8 +151,6 @@ class Calculation {
     this.updateDays();
     this.updateSumPrice();
     this.updateTotalPrice();
-
-    H.trace(this.calculationData);
   };
 }
 

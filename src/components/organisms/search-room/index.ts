@@ -31,9 +31,9 @@ class SearchRoom {
   private readonly initCountersDropdown = () => pipe(this.countersDropdownWrap, O.map((wrap) => new CountersDropdown(
     wrap, {
       counters: [
-        {label: 'Взрослые', name: 'adults', value: 0, min: 0, plural: plurals.guest},
-        {label: 'Дети', name: 'children', value: 0, min: 0, plural: plurals.guest},
-        {label: 'Младенцы', name: 'babies', value: 0, min: 0, plural: plurals.babies}
+        {label: 'Взрослые', name: 'adults', value: 0, min: 0, plural: plurals['guest']},
+        {label: 'Дети', name: 'children', value: 0, min: 0, plural: plurals['guest']},
+        {label: 'Младенцы', name: 'babies', value: 0, min: 0, plural: plurals['baby']}
       ],
       onChange: this.handleGuestsChange
     }

@@ -27,7 +27,7 @@ class Review {
   private readonly getTimeValue = (days: number) => pipe(true, H.switchCases([
     [days === 0, () => 'Сегодня'],
     [days === 1, () => 'Вчера']
-  ], () => `${days} ${H.pluralize(plurals['days'])(days)} назад`));
+  ], () => `${days} ${H.pluralize(plurals['day_primary'])(days)} назад`));
 }
 
 export default Review;
